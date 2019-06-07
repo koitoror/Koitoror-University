@@ -3,17 +3,17 @@
 from .base import *
 
 DEBUG = False
-ALLOWED_HOSTS += ['http://domain.com']
+ALLOWED_HOSTS += ['http://koitoror-university.tk']
 WSGI_APPLICATION = 'home.wsgi.prod.application'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_name',
-        'USER': 'db_user',
-        'PASSWORD': 'db_password',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'd2vkr549vqnkf0',
+        'USER': 'dxgytuffemacwh',
+        'PASSWORD': '8f6bb7712144ad42df175f55ca7434e482bcaa6d87791ab2bea3a81a280d2908',
+        'HOST': 'ec2-54-83-9-36.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
