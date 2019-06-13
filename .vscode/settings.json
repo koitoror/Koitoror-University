@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "env/bin/python",
+    "python.pythonPath": "/Users/danielkamar/.local/share/virtualenvs/teach-me-django-vyDR7SSp/bin/python",
     "editor.formatOnSave": true,
     "python.linting.pep8Enabled": true,
     "python.linting.pylintPath": "pylint",

@@ -3,7 +3,10 @@
 from .base import *
 
 DEBUG = False
-ALLOWED_HOSTS += ['http://koitoror-university.tk']
+ALLOWED_HOSTS += [
+    'http://koitoror-university.tk',
+    'https://koitoror-university.herokuapp.com'
+]
 WSGI_APPLICATION = 'home.wsgi.prod.application'
 
 DATABASES = {
