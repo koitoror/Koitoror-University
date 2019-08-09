@@ -2,9 +2,12 @@
 
 from .base import *
 
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS += [
+    '127.0.0.1',
     'http://koitoror-university.tk',
+    'https://koitoror-university.tk',
+    'http://koitoror-university.herokuapp.com',
     'https://koitoror-university.herokuapp.com'
 ]
 WSGI_APPLICATION = 'home.wsgi.prod.application'
