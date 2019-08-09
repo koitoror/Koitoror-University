@@ -1,3 +1,3 @@
 release: chmod u+x release.sh && ./release.sh
-web: gunicorn home.wsgi --log-file -
+web: gunicorn home.wsgi.prod --log-file -
 
