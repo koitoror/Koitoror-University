@@ -2,12 +2,13 @@
 
 from .base import *
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS += [
     '127.0.0.1',
     'http://koitoror-university.tk',
     'https://koitoror-university.tk',
     'koitoror-university.tk',
+    'koitoror-university.herokuapp.com',
     'koitoror-university.herokuapp.com',
     'http://koitoror-university.herokuapp.com',
     'https://koitoror-university.herokuapp.com'
