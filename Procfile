@@ -1,2 +1,3 @@
-release: python manage.py migrate api users
+release: chmod u+x release.sh && ./release.sh
 web: gunicorn home.wsgi --log-file -
+
