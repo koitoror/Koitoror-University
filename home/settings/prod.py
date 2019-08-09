@@ -9,6 +9,17 @@ ALLOWED_HOSTS += [
 ]
 WSGI_APPLICATION = 'home.wsgi.prod.application'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'koitoror',
+#         'USER': 'danielkamar',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
