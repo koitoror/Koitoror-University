@@ -41,7 +41,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'home.urls'
 
-X_FRAME_OPTIONS = '*'
+X_FRAME_OPTIONS = 'ALLOWALL'
 
 TEMPLATES = [
     {
