@@ -41,7 +41,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'home.urls'
 
-X_FRAME_OPTIONS = 'ALLOW-FROM koitororuniversity.tk'
+X_FRAME_OPTIONS = '*'
 
 TEMPLATES = [
     {
