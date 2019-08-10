@@ -25,5 +25,5 @@ npm run build
 
 ## Series for this project
 
-[Koitoror University](www.koitororuniversity.tk)
+[Koitoror University](http://www.koitororuniversity.tk)
 
