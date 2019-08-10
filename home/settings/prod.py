@@ -10,7 +10,6 @@ ALLOWED_HOSTS += [
     'https://koitoror-university.tk',
     'koitoror-university.tk',
     'koitoror-university.herokuapp.com',
-    'koitoror-university.herokuapp.com',
     'http://koitoror-university.herokuapp.com',
     'https://koitoror-university.herokuapp.com'
 ]
