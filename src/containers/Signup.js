@@ -25,7 +25,7 @@ class RegistrationForm extends React.Component {
           values.confirm,
           is_student
         );
-        // this.props.history.push("/");
+        this.props.history.push("/");
       }
     });
   };
