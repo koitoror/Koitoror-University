@@ -9,3 +9,5 @@ build
 package-lock.json
 Pipfile
 Pipfile.lock
+.env
+.vscode/
