@@ -1,8 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
 
-// const uri = 'https://koitoror-university.herokuapp.com'
-// const uri = 'http://127.0.0.1:8000'
 import { uri } from './auth'
 
 
