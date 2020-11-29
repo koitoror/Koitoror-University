@@ -9,22 +9,24 @@ const { Header, Content, Footer } = Layout;
 class CustomLayout extends React.Component {
   render() {
     return (
-      <Layout className="layout">
+      <Layout className="layout" id="layout">
         <Header>
           <div className="logo" />
           <Menu
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={["2"]}
-            style={{ lineHeight: "64px" }}
+            style={{ lineHeight: "44px" }}
+            size="small"
           >
             {this.props.isAuthenticated ? (
-              <Menu.Item key="2" onClick={this.props.logout}>
+              <Menu.Item key="2" onClick={this.props.logout} style={{ borderRadius: "25" }}
+              >
                 Logout
               </Menu.Item>
             ) : (
               <Menu.Item key="2">
-                <Link to="/login">Login</Link>
+                <Link to="/login" >Login</Link>
               </Menu.Item>
             )}
           </Menu>
@@ -45,11 +47,12 @@ class CustomLayout extends React.Component {
               </Breadcrumb.Item>
             ) : null}
           </Breadcrumb>
-          <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
+          <div style={{ background: "#fff", padding: 24, minHeight: 280, width: "80vw"}}>
             {this.props.children}
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
+
+        <Footer style={{ textAlign: "center"}}>
           Koitoror Designs ©2019 Created by Koitoror University Technology Department
         </Footer>
       </Layout>

@@ -20,9 +20,9 @@ DATABASES = {
 }
 
 CORS_ORIGIN_WHITELIST = (
-    '127.0.0.1',
-    'localhost',
+    # '127.0.0.1',
+    # 'localhost',
     'localhost:3000',
-    'localhost:8000',
+    # 'localhost:8000',
     'koitoror-university.herokuapp.com'
 )

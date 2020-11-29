@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "react-scripts start",
+    "dev": "cd ./frontend && react-scripts start",
     "build": "cd ./frontend && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

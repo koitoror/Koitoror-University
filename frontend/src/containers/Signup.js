@@ -150,12 +150,14 @@ class RegistrationForm extends React.Component {
             type="primary"
             htmlType="submit"
             style={{ marginRight: "10px" }}
+            shape="round"
           >
             Signup
           </Button>
           Or
           <NavLink style={{ marginRight: "10px" }} to="/login/">
-            login
+          {" "}
+            Login
           </NavLink>
         </FormItem>
       </Form>

@@ -1,0 +1,34 @@
+.ant-input-affix-wrapper {
+  display: flex !important;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+}
+
+#layout {
+  height: 100vh !important;
+  padding: 5vh !important;
+}
+
+.ant-layout-footer {
+  position: fixed;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	padding:10px;
+	max-height: 40px;
+}
+
+.ant-form-item-control-wrapper {
+  max-width: 250px;
+  margin-left: 30px;
+}
+
+.ant-menu-item {
+  float: right;
+  border-radius: 15px 15px 15px;
+}
+
+.ant-layout-header {
+  height: 48px !important;
+}
