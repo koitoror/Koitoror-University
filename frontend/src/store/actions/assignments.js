@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
 
-import { uri } from './auth'
+import { uri } from './url'
 
 
 const getASNTListStart = () => {
@@ -29,6 +29,7 @@ export const getASNTS = token => {
     dispatch(getASNTListStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
+      "Content-Length": "<calculated when request is sent>",
       Authorization: `Token ${token}`
     };
     axios
@@ -69,6 +70,7 @@ export const getASNTSDetail = (token, id) => {
     dispatch(getASNTDetailStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
+      "Content-Length": "<calculated when request is sent>",
       Authorization: `Token ${token}`
     };
     axios
@@ -109,6 +111,7 @@ export const createASNT = (token, asnt) => {
     dispatch(createASNTStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
+      "Content-Length": "<calculated when request is sent>",
       Authorization: `Token ${token}`
     };
     axios

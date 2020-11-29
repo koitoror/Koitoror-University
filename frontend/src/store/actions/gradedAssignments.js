@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
 
-import { uri } from './auth'
+import { uri } from './url'
 
 
 const getGradedASNTListStart = () => {
@@ -29,6 +29,7 @@ export const getGradedASNTS = (username, token) => {
     dispatch(getGradedASNTListStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
+      "Content-Length": "<calculated when request is sent>",
       Authorization: `Token ${token}`
     };
     axios
@@ -48,6 +49,7 @@ export const createGradedASNT = (token, asnt) => {
     //   dispatch(createASNTStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
+      "Content-Length": "<calculated when request is sent>",
       Authorization: `Token ${token}`
     };
     axios

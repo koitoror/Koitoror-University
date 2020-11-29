@@ -2,9 +2,8 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 
 // Backend API URL
-export const uri = 'https://koitoror-university.herokuapp.com'
-// const uri = 'http://127.0.0.1:8000'
-// export const uri = 'http://127.0.0.1:8000'
+import { uri } from './url'
+
 
 export const authStart = () => {
   return {
@@ -45,16 +44,20 @@ export const authLogin = (username, password) => {
   return (dispatch) => {
     dispatch(authStart());
     axios.defaults.headers = {
-      // "Content-Type": "application/json",
+      "Content-Type": "application/json",
       // Authorization: `Token ${token}`,
+      "Content-Length": "<calculated when request is sent>",
       "Access-Control-Allow-Origin": "<origin> | *",
     };
     axios
       .post(`${uri}/rest-auth/login/`, {
-        username: username,
-        password: password,
+        // username: username,
+        // password: password,
+        username,
+        password,
       })
       .then((res) => {
+        console.log(res)
         const user = {
           token: res.data.key,
           username,
@@ -76,8 +79,8 @@ export const authLogin = (username, password) => {
 export const authSignup = (
   username,
   email,
-  password1,
-  password2,
+  password,
+  confirm,
   is_student
 ) => {
   return (dispatch) => {
@@ -85,14 +88,15 @@ export const authSignup = (
     const user = {
       username,
       email,
-      password1,
-      password2,
+      password,
+      confirm,
       is_student,
       is_teacher: !is_student,
     };
     axios.defaults.headers = {
       "Access-Control-Allow-Origin": "<origin> | *",
-      // "Content-Type": "application/json",
+      "Content-Type": "application/json",
+      "Content-Length": "<calculated when request is sent>",
       // Authorization: `Token ${token}`
     };
     axios

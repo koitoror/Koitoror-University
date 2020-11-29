@@ -176,9 +176,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (username, email, password1, password2, is_student) =>
+    onAuth: (username, email, password, confirm, is_student) =>
       dispatch(
-        actions.authSignup(username, email, password1, password2, is_student)
+        actions.authSignup(username, email, password, confirm, is_student)
       )
   };
 };

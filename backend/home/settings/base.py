@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.pa
 
 SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj'
 DEBUG = True
-ALLOWED_HOSTS = ['koitoror-university.herokuapp.com']
+ALLOWED_HOSTS = ['koitoror-university.herokuapp.com', 'kubernetes.docker.internal']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    # 'backend.assignment',
+    'backend.assignment',
     'backend',
     'backend.users'
 ]
@@ -89,6 +89,10 @@ REST_FRAMEWORK = {
 }
 
 CSRF_COOKIE_NAME = "csrftoken"
+# CSRF_COOKIE_SECURE = False
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = False
