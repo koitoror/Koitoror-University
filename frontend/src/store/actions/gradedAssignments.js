@@ -29,7 +29,8 @@ export const getGradedASNTS = (username, token) => {
     dispatch(getGradedASNTListStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
-      "Content-Length": "<calculated when request is sent>",
+      // "Content-Length": "<calculated when request is sent>",
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       Authorization: `Token ${token}`
     };
     axios
@@ -50,6 +51,7 @@ export const createGradedASNT = (token, asnt) => {
     axios.defaults.headers = {
       "Content-Type": "application/json",
       "Content-Length": "<calculated when request is sent>",
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       Authorization: `Token ${token}`
     };
     axios

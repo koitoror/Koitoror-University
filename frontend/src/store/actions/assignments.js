@@ -29,7 +29,8 @@ export const getASNTS = token => {
     dispatch(getASNTListStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
-      "Content-Length": "<calculated when request is sent>",
+      // "Content-Length": "<calculated when request is sent>",
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       Authorization: `Token ${token}`
     };
     axios
@@ -70,7 +71,8 @@ export const getASNTSDetail = (token, id) => {
     dispatch(getASNTDetailStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
-      "Content-Length": "<calculated when request is sent>",
+      // "Content-Length": "<calculated when request is sent>",
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       Authorization: `Token ${token}`
     };
     axios
@@ -111,7 +113,8 @@ export const createASNT = (token, asnt) => {
     dispatch(createASNTStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
-      "Content-Length": "<calculated when request is sent>",
+      // "Content-Length": "<calculated when request is sent>",
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       Authorization: `Token ${token}`
     };
     axios

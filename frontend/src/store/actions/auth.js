@@ -44,15 +44,16 @@ export const authLogin = (username, password) => {
   return (dispatch) => {
     dispatch(authStart());
     axios.defaults.headers = {
+      // "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
       // Authorization: `Token ${token}`,
-      "Content-Length": "<calculated when request is sent>",
+      'Access-Control-Allow-Methods': 'POST',
+      // 'Cache-Control': 'no-cache',
+      // "Content-Length": "<calculated when request is sent>",
       "Access-Control-Allow-Origin": "<origin> | *",
     };
     axios
       .post(`${uri}/rest-auth/login/`, {
-        // username: username,
-        // password: password,
         username,
         password,
       })
@@ -96,7 +97,9 @@ export const authSignup = (
     axios.defaults.headers = {
       "Access-Control-Allow-Origin": "<origin> | *",
       "Content-Type": "application/json",
-      "Content-Length": "<calculated when request is sent>",
+      // "Content-Length": "<calculated when request is sent>",
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
       // Authorization: `Token ${token}`
     };
     axios

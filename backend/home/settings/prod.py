@@ -5,6 +5,9 @@ from .base import *
 DEBUG = True
 ALLOWED_HOSTS += [
     'localhost',
+    'localhost:3000',
+    'localhost:5000',
+    'localhost:8000',
     '127.0.0.1',
     '127.0.0.1:3000',
     '127.0.0.1:5000',
@@ -12,10 +15,11 @@ ALLOWED_HOSTS += [
     'http://koitoror-university.tk',
     'https://koitoror-university.tk',
     'koitoror-university.tk',
-    'koitoror-university.herokuapp.com',
     'http://koitoror-university.herokuapp.com',
-    'https://koitoror-university.herokuapp.com'
+    'https://koitoror-university.herokuapp.com',
+    'koitoror-university.herokuapp.com'
 ]
+
 WSGI_APPLICATION = 'backend.home.wsgi.prod.application'
 
 
