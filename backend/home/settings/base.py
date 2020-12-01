@@ -5,7 +5,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.pa
 # print(BASE_DIR)
 
 SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj'
+
 DEBUG = True
+
 ALLOWED_HOSTS = ['koitoror-university.herokuapp.com', 'kubernetes.docker.internal']
 
 INSTALLED_APPS = [
@@ -20,6 +22,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'corsheaders',
     'rest_auth',
     'rest_auth.registration',
@@ -77,7 +80,8 @@ os.makedirs(STATIC_TMP, exist_ok=True)
 os.makedirs(STATIC_ROOT, exist_ok=True)
 
 
-SITE_ID = 1
+# SITE_ID = 1
+SITE_ID = 2
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
