@@ -79,6 +79,7 @@ STATIC_TMP = os.path.join(BASE_DIR, 'frontend/static')
 os.makedirs(STATIC_TMP, exist_ok=True)
 os.makedirs(STATIC_ROOT, exist_ok=True)
 
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 # SITE_ID = 1
 SITE_ID = 2
