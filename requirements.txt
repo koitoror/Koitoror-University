@@ -10,6 +10,7 @@ django-cors-headers==3.7.0
 django-rest-auth==0.9.5
 django-utils-six==2.0
 djangorestframework==3.12.4
+gunicorn==20.0.4
 idna==2.7
 oauthlib==2.1.0
 psycopg2==2.8.6
