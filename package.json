@@ -31,7 +31,7 @@
     "heroku-postbuild": "cd ./frontend && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "engines": {
-    "node": "10.15.3", 
+    "node": "12.13.0",
     "npm": "6.4.1"
   }
 }
