@@ -4,26 +4,11 @@ from .base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS += [
-    'localhost',
-    'localhost:3000',
-    'localhost:5000',
-    'localhost:8000',
-    '127.0.0.1',
-    '127.0.0.1:3000',
-    '127.0.0.1:5000',
-    '127.0.0.1:8000',
-    'http://koitoror-university.tk',
-    'https://koitoror-university.tk',
-    'koitoror-university.tk',
-    'koitororuniversity.ml',
-    'http://koitoror-university.herokuapp.com',
-    'https://koitoror-university.herokuapp.com',
-    'koitoror-university.herokuapp.com'
-]
+ALLOWED_HOSTS += os.environ.get('ALLOWED_HOSTS_PROD')
+
+CORS_ORIGIN_WHITELIST += os.environ.get('CORS_ORIGIN_WHITELIST')
 
 WSGI_APPLICATION = 'backend.home.wsgi.prod.application'
-
 
 DATABASES = {
     'default': {
@@ -44,5 +29,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

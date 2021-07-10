@@ -2,10 +2,15 @@
 
 from .base import *
 
+# ALLOWED_HOSTS += os.environ.get('ALLOWED_HOSTS_DEV'),
 ALLOWED_HOSTS += [
-    'localhost',
-    '127.0.0.1', 
-    'koitoror-university.herokuapp.com'
+    'localhost:3000',
+    'localhost:5000',
+    'localhost:8000',
+    'kubernetes.docker.internal'
+    '127.0.0.1:3000',
+    '127.0.0.1:5000',
+    '127.0.0.1:8000',
 ]
 
 DEBUG = True
@@ -24,5 +29,4 @@ CORS_ORIGIN_WHITELIST = (
     'localhost',
     'localhost:3000',
     'localhost:8000',
-    'koitoror-university.herokuapp.com'
 )
