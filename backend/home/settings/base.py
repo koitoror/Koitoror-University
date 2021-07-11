@@ -11,9 +11,16 @@ SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost',
     '127.0.0.1',
+    'localhost',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    '127.0.0.1',
+    'localhost',
+    'localhost:3000',
+    'localhost:8000',
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -123,10 +130,3 @@ REST_AUTH_SERIALIZERS = {
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'backend.users.serializers.CustomRegisterSerializer',
 }
-
-CORS_ORIGIN_WHITELIST = (
-    '127.0.0.1',
-    'localhost',
-    'localhost:3000',
-    'localhost:8000',
-)
