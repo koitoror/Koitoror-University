@@ -1,6 +1,10 @@
 {
   "name": "django-react-boilerplate",
   "version": "0.1.0",
+  "engines": {
+    "node": "14.17.0",
+    "npm": "6.14.13" 
+  },
   "private": true,
   "proxy": "https://koitoror-university.herokuapp.com",
   "dependencies": {
@@ -28,9 +32,5 @@
     "eject": "react-scripts eject",
     "postinstall": "npm run build",
     "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
-  },
-  "engines": {
-    "node": "14.17.0",
-    "npm": "6.14.13" 
   }
 }
