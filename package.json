@@ -8,7 +8,7 @@
   "private": true,
   "proxy": "https://koitoror-university.herokuapp.com",
   "dependencies": {
-    "antd": "^4.16.6",
+    "antd": "^3.26.19",
     "axios": ">=0.21.1",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
