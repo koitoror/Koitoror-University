@@ -6,7 +6,8 @@ DEBUG = True
 
 ALLOWED_HOSTS += os.environ.get('ALLOWED_HOSTS_PROD')
 
-CORS_ORIGIN_WHITELIST += os.environ.get('CORS_ORIGIN_WHITELIST')
+CORS_ORIGIN_WHITELIST = os.environ.get('CORS_ORIGIN_WHITELIST')
+# CORS_ORIGIN_WHITELIST += os.environ.get('CORS_ORIGIN_WHITELIST')
 
 WSGI_APPLICATION = 'backend.home.wsgi.prod.application'
 

@@ -15,12 +15,14 @@ ALLOWED_HOSTS = [
     'localhost',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    u'127.0.0.1',
-    u'localhost',
-    u'localhost:3000',
-    u'localhost:8000',
-)
+# CORS_ORIGIN_WHITELIST = (
+#     u'127.0.0.1',
+#     u'localhost',
+#     u'localhost:3000',
+#     u'localhost:8000',
+# )
+
+# CORS_ORIGIN_WHITELIST += os.environ.get('CORS_ORIGIN_WHITELIST')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
