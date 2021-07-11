@@ -24,7 +24,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "cd ./frontend && react-scripts start",
-    "build": "cd ./frontend && npm run build",
+    "postbuild": "cd ./frontend && npm run build",
+    "build": "npm install --prefix frontend && npm run build --prefix frontend",
     "test": "cd ./frontend && react-scripts test --env=jsdom",
     "eject": "cd ./frontend && react-scripts eject",
     "postinstall": "cd ./frontend && npm run build",
