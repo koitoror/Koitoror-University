@@ -123,3 +123,10 @@ REST_AUTH_SERIALIZERS = {
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'backend.users.serializers.CustomRegisterSerializer',
 }
+
+CORS_ORIGIN_WHITELIST = (
+    '127.0.0.1',
+    'localhost',
+    'localhost:3000',
+    'localhost:8000',
+)
