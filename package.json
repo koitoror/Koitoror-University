@@ -34,5 +34,5 @@
     "eject": "cd ./frontend && react-scripts eject",
     "postinstall": "cd ./frontend && npm run build",
     "heroku-postbuild": "cd ./frontend && npm install --only=dev --no-shrinkwrap && npm run build"
-  },
+  }
 }
