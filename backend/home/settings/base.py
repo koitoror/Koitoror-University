@@ -15,10 +15,14 @@ ALLOWED_HOSTS = [
     'localhost',
 ]
 
-CORS_ORIGIN_WHITELIST = (
+# CORS_ORIGIN_WHITELIST = (
+#     u'127.0.0.1',
+#     u'localhost',
+# )
+CORS_ORIGIN_WHITELIST = [
     u'127.0.0.1',
     u'localhost',
-)
+]
 
 # CORS_ORIGIN_WHITELIST += os.environ.get('CORS_ORIGIN_WHITELIST')
 
