@@ -13,6 +13,16 @@ ALLOWED_HOSTS += [
     '127.0.0.1:8000',
 ]
 
+CORS_ORIGIN_WHITELIST += (
+    u'localhost:5000',
+    u'localhost:8000',
+    u'localhost:3000',
+    u'kubernetes.docker.internal',
+    u'127.0.0.1:3000',
+    u'127.0.0.1:5000',
+    u'127.0.0.1:8000',
+)
+
 DEBUG = True
 
 WSGI_APPLICATION = 'backend.home.wsgi.dev.application'
