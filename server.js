@@ -21,16 +21,17 @@ app.post('/api/world', (req, res) => {
 });
 
 if (process.env.NODE_ENV === 'production') {
+
+  // Add a specific route for service-worker.js before the wildcard route:
+  app.get('/service-worker.js', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend/build', 'service-worker.js'));
+  });
+
   // Serve any static files
   // app.use(express.static(path.join(__dirname, 'frontend/staticfiles')));
   // app.use(express.static(__dirname));
   // app.use('/static', express.static(path.join(__dirname, 'frontend')))
   app.use('/static', express.static('frontend'))
-
-  // Add a specific route for service-worker.js before the wildcard route:
-  app.get("/service-worker.js", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend/build", "service-worker.js"));
-  });
 
   // Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
