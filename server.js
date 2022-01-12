@@ -30,8 +30,8 @@ if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   // app.use(express.static(path.join(__dirname, 'frontend/staticfiles')));
   // app.use(express.static(__dirname));
-  // app.use('/static', express.static(path.join(__dirname, 'frontend/build')))
-  app.use('/static', express.static('frontend'))
+  app.use('/static', express.static(path.join(__dirname, 'frontend/build')))
+  // app.use('/static', express.static('frontend'))
 
   // Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
