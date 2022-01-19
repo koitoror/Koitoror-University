@@ -23,11 +23,21 @@ services:
       - SESSION_SECRET=${SESSION_SECRET}
 
   backend-django-app:
+    # image: koitoror-university-backend
     build:
-      context: .
+      # context: .
+      context: ./backend/
     restart: always
     volumes:
+      - ./backend:/backend
+      - ./frontend/build:/frontend/build
       - static-data:/vol/web
+    command: >
+      sh -c "python backend/manage.py wait_for_db &&
+             python backend/manage.py migrate &&
+             python backend/manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 8000:8000
     environment:
       - DB_HOST=db
       - DB_NAME=${DB_NAME}
@@ -53,12 +63,15 @@ services:
 
   proxy:
     build:
-      context: ./proxy
+      context: ./proxy/
     restart: always
     depends_on:
       - backend-django-app
     ports:
-      - 8004:8000
+      - 8008:8080
+      # - 80:8000
+    environment:
+      - APP_HOST=backend-django-app
     volumes:
       - static-data:/vol/static
 

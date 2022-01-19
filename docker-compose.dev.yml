@@ -3,12 +3,16 @@ version: '3.9'
 services:
 
   frontend-react:
-    image: koitoror-university-frontend
+    image: koitoror-university-frontend:2.0.2
+    # image: koitoror-university-frontend
     build:
       context: ./frontend/
       # args:
         # NODE_ENV: development
     command: npm run dev
+    # command: >
+    #   sh -c "npm run postbuild &&
+    #          npm run dev"
     # command: npm start
     ports:
       - 5000:3000 #developoment
@@ -24,33 +28,36 @@ services:
       - SESSION_SECRET=secret
 
   backend-django-app:
+    image: koitoror-university-backend:2.0.3
     # image: koitoror-university-backend
     build:
-      context: .
-      # dockerfile: Dockerfile.dev
+      context: ./backend/
+    volumes:
+      - ./requirements.txt:/requirements.txt
+      - ./backend:/backend
+      - ./frontend/build:/frontend/build
+      - ./data/web:/vol/web
     command: >
       sh -c "python backend/manage.py wait_for_db &&
              python backend/manage.py migrate &&
              python backend/manage.py runserver 0.0.0.0:8000"
     ports:
       - 8000:8000
-    volumes:
-      - ./backend:/backend
-      - ./frontend/:/frontend
-      - ./data/web:/vol/web
     environment:
-      - SECRET_KEY=devsecretkey
-      - DEBUG=1
       - DB_HOST=db
       - DB_NAME=devdb
       - DB_USER=devuser
       - DB_PASS=changeme
+      - SECRET_KEY=devsecretkey
+      - DEBUG=1
 
     depends_on:
       - db
 
   db:
     image: postgres:13-alpine
+    ports:
+      - 5434:5432
     environment:
       - POSTGRES_DB=devdb
       - POSTGRES_USER=devuser
