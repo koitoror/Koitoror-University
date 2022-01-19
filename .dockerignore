@@ -3,7 +3,7 @@ venv
 **/*.pyc
 **/__pycache__
 **/migrations
-# db.sqlite3
+db.sqlite3
 node_modules
 # build
 package-lock.json
