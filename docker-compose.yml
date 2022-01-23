@@ -2,30 +2,27 @@ version: "3.9"
 
 services:
   frontend-react:
-    image: koitoror-university-frontend
+    image: koitoror-university-frontend:2.1.0
     build:
       context: ./frontend/
       # args:
         # NODE_ENV: production
-    # command: npm run dev
     command: npm start
     ports:
-      # - 5000:3000 #developoment
       - 5000:5000 #production
     volumes:
       - ./frontend/:/app
+      # - /app/build
       # - /frontend/node_modules:/app/node_modules
-      - ./:/app
       - /app/node_modules
     environment:
       - NODE_ENV=production
       - REACT_APP_NODE_ENV=production
-      - SESSION_SECRET=${SESSION_SECRET}
+      # - SESSION_SECRET=${SESSION_SECRET}
 
   backend-django-app:
     # image: koitoror-university-backend
     build:
-      # context: .
       context: ./backend/
     restart: always
     volumes:
@@ -74,6 +71,13 @@ services:
       - APP_HOST=backend-django-app
     volumes:
       - static-data:/vol/static
+
+prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+    ports:
+      - "9090:9090"
 
 volumes:
   postgres-data:
