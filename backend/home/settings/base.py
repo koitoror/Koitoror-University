@@ -131,7 +131,7 @@ WHITENOISE_MIMETYPES = {
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static'), os.path.join(BASE_DIR, 'frontend/build'), os.path.join(BASE_DIR, 'frontend/staticfiles')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static'), os.path.join(BASE_DIR, 'frontend/build')]
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static')]
 # STATIC_ROOT = '/vol/web/static'
 # STATIC_TMP = '/vol/web/static'
