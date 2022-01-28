@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Form, Input, Icon, Button, Divider } from "antd";
-import QuestionForm from "./QuestionForm";
+import { Form, Input, Button, Divider } from "antd";
+import Icon from '@ant-design/icons';
+// import QuestionForm from "./QuestionForm";
 import Hoc from "../hoc/hoc";
 import { createASNT } from "../store/actions/assignments";
 
@@ -50,7 +51,6 @@ class AssignmentCreate extends React.Component {
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
     const questions = [];
     for (let i = 0; i < this.state.formCount; i += 1) {
       questions.push(
@@ -63,7 +63,7 @@ class AssignmentCreate extends React.Component {
               onClick={() => this.remove()}
             />
           ) : null}
-          <QuestionForm id={i} {...this.props} />
+          {/* <QuestionForm id={i} {...this.props} /> */}
           <Divider />
         </Hoc>
       );
@@ -71,7 +71,7 @@ class AssignmentCreate extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <h1>Create an assignment</h1>
-        <FormItem label={"Title: "}>
+        {/* <FormItem label={"Title: "}>
           {getFieldDecorator(`title`, {
             validateTrigger: ["onChange", "onBlur"],
             rules: [
@@ -80,7 +80,12 @@ class AssignmentCreate extends React.Component {
                 message: "Please input a title"
               }
             ]
-          })(<Input placeholder="Add a title" />)}
+          })
+        } */}
+        <FormItem name="title" label={"Title: "} validateTrigger={["onChange", "onBlur"]}  rules={[{ required: true, message: "Please input a title"  }]} >
+
+          (<Input placeholder="Add a title" />)
+
         </FormItem>
         {questions}
         <FormItem>
@@ -97,8 +102,6 @@ class AssignmentCreate extends React.Component {
     );
   }
 }
-
-const WrappedAssignmentCreate = Form.create()(AssignmentCreate);
 
 const mapStateToProps = state => {
   return {
@@ -117,4 +120,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WrappedAssignmentCreate);
+)(AssignmentCreate);

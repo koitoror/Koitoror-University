@@ -1,33 +1,33 @@
 {
   "name": "koitoror-university",
-  "version": "0.1.0",
+  "version": "2.1.0",
   "engines": {
-    "node": "14.17.0",
-    "npm": "6.14.13" 
+    "node": "v17.4.0",
+    "npm": "8.3.2"
   },
   "private": true,
   "proxy": "https://koitoror-university.herokuapp.com",
   "dependencies": {
-    "antd": "^3.26.19",
-    "axios": ">=0.21.1",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "heroku": "^7.56.0",
+    "antd": "^4.18.5",
+    "axios": ">=0.25.0",
+    "body-parser": "^1.19.1",
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
     "http": "0.0.0",
     "jwt-decode": "^3.1.2",
-    "nodemon": "^2.0.11",
+    "nodemon": "^2.0.15",
     "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-redux": "^7.2.4",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "redux": "^4.1.0",
-    "redux-thunk": "^2.3.0",
-    "serve": "^12.0.0"
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "^5.0.0",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
+    "serve": "^13.0.2"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "cd ./frontend && node server.js",
     "dev": "cd ./frontend && react-scripts start",
     "postbuild": "cd ./frontend && npm run build",
     "build": "npm install --prefix frontend && npm run build --prefix frontend",
@@ -35,5 +35,16 @@
     "eject": "cd ./frontend && react-scripts eject",
     "postinstall": "cd ./frontend && npm run build",
     "heroku-postbuild": "cd ./frontend && npm install --only=prod --no-shrinkwrap && npm run build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
