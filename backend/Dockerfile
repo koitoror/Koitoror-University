@@ -23,9 +23,9 @@ RUN python -m venv /py && \
     /py/bin/pip cache purge && \
     /py/bin/pip install -r /requirements.txt && \
     # /py/bin/pip install --no-cache-dir -r /requirements.txt && \
-    /py/bin/pip install djangorestframework-jwt && \
-    /py/bin/pip install djangorestframework-simplejwt && \
-    /py/bin/pip install django-rest-auth && \
+    # /py/bin/pip install djangorestframework-jwt && \
+    # /py/bin/pip install djangorestframework-simplejwt && \
+    # /py/bin/pip install django-rest-auth && \
     apk del .tmp-deps && \
     adduser --disabled-password --no-create-home app && \
     mkdir -p /vol/web/static && \
