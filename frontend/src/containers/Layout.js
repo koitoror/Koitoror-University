@@ -1,6 +1,8 @@
 import React from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
-import { Link, withRouter } from "react-router-dom";
+// import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../store/actions/auth";
 
@@ -53,7 +55,7 @@ class CustomLayout extends React.Component {
         </Content>
 
         <Footer style={{ textAlign: "center"}}>
-          Koitoror Designs ©2019 Created by Koitoror University Technology Department
+          Koitoror Designs ©2022 Degem-Ventures
         </Footer>
       </Layout>
     );
@@ -74,9 +76,14 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(
+// export default useNavigate(
+//   connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+//   )(CustomLayout)
+// );
+
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(CustomLayout)
-);
+  )(CustomLayout);
