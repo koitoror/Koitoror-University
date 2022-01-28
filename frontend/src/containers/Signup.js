@@ -1,5 +1,8 @@
 import React from "react";
-import { Form, Input, Icon, Button, Select } from "antd";
+import { Form, Input, Button, Select } from "antd";
+// import Icon from '@ant-design/icons';
+import { UserOutlined, LockOutlined, MailTwoTone } from '@ant-design/icons';
+// import { UserOutlined, LockOutlined, MailFilled, MailOutlined, MailTwoTone } from '@ant-design/icons';
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import * as actions from "../store/actions/auth";
@@ -53,96 +56,67 @@ class RegistrationForm extends React.Component {
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    // const { getFieldDecorator } = this.props.form;
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem>
-          {getFieldDecorator("userName", {
-            rules: [{ required: true, message: "Please input your username!" }]
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="Username"
-            />
-          )}
+      
+          <FormItem name="userName" rules={[{ required: true, message: "Please input your username!"  }]} >
+
+            <Input prefix={<UserOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />} placeholder="Username" />
+
         </FormItem>
 
-        <FormItem>
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                type: "email",
-                message: "The input is not valid E-mail!"
-              },
-              {
-                required: true,
-                message: "Please input your E-mail!"
-              }
-            ]
-          })(
+
+          <FormItem name="email" rules={[
+            {
+              type: "email",
+              message: "The input is not valid E-mail!"
+            },
+            {
+              required: true,
+              message: "Please input your E-mail!"
+            }
+            ]} >
+
             <Input
-              prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
+              // prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
+              prefix={<MailTwoTone className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
               placeholder="Email"
             />
-          )}
+
         </FormItem>
 
-        <FormItem>
-          {getFieldDecorator("password", {
-            rules: [
-              {
-                required: true,
-                message: "Please input your password!"
-              },
-              {
-                validator: this.validateToNextPassword
-              }
-            ]
-          })(
+          <FormItem name="password" rules={[{ required: true, message: "Please input your password!"  }]} >
+
             <Input
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
+              prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
               type="password"
               placeholder="Password"
             />
-          )}
+
         </FormItem>
 
-        <FormItem>
-          {getFieldDecorator("confirm", {
-            rules: [
-              {
-                required: true,
-                message: "Please confirm your password!"
-              },
-              {
-                validator: this.compareToFirstPassword
-              }
-            ]
-          })(
+ 
+          <FormItem name="confirm" rules={[{ required: true, message: "Please confirm your password!"  }]} >
+
+          {/* ( */}
             <Input
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
+              prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
               type="password"
               placeholder="Password"
               onBlur={this.handleConfirmBlur}
             />
-          )}
+          {/* ) */}
+
         </FormItem>
 
-        <FormItem>
-          {getFieldDecorator("userType", {
-            rules: [
-              {
-                required: true,
-                message: "Please select a user!"
-              }
-            ]
-          })(
+          <FormItem name="userType" rules={[{ required: true, message: "Please select a user!"  }]} >
+
             <Select placeholder="Select a user type">
               <Option value="student">Student</Option>
               <Option value="teacher">Teacher</Option>
             </Select>
-          )}
         </FormItem>
 
         <FormItem>
@@ -165,7 +139,6 @@ class RegistrationForm extends React.Component {
   }
 }
 
-const WrappedRegistrationForm = Form.create()(RegistrationForm);
 
 const mapStateToProps = state => {
   return {
@@ -186,4 +159,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WrappedRegistrationForm);
+)(RegistrationForm);
