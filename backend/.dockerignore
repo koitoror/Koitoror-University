@@ -4,11 +4,7 @@ venv
 **/__pycache__
 **/migrations
 db.sqlite3
-node_modules
-# build
-package-lock.json
 Pipfile
 Pipfile.lock
-# .env
 .vscode/
 .cache/
