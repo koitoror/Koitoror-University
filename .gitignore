@@ -11,3 +11,5 @@ Pipfile
 Pipfile.lock
 .env
 .vscode/
+tests
+.devcontainer
