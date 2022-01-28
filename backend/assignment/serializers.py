@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from backend.users.models import User
+from django.contrib.auth.models import User
+
 from .models import Assignment, Question, Choice, GradedAssignment
 
 

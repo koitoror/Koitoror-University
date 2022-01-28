@@ -1,5 +1,5 @@
 from django.db import models
-from backend.users.models import User
+from django.contrib.auth.models import User
 
 
 class Assignment(models.Model):
