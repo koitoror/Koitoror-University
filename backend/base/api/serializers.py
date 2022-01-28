@@ -20,7 +20,7 @@ from django.conf import settings
 
 from django.contrib.auth.models import  User
 import jwt
-from rest_framework_jwt.utils import jwt_payload_handler, jwt_encode_handler
+# from rest_framework_jwt.utils import jwt_payload_handler, jwt_encode_handler
 
 from base.models import Note
 # from base.models import Note, User
