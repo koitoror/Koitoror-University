@@ -46,14 +46,13 @@ export const authLogin = (username, password) => {
     axios.defaults.headers = {
       // "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
-      // Authorization: `Token ${token}`,
       'Access-Control-Allow-Methods': 'POST',
       // 'Cache-Control': 'no-cache',
-      // "Content-Length": "<calculated when request is sent>",
       "Access-Control-Allow-Origin": "<origin> | *",
     };
     axios
-      .post(`${uri}/rest-auth/login/`, {
+      // .post(`${uri}/api/auth/token/`, {
+      .post(`${uri}/api/token/`, {
         username,
         password,
       })
@@ -61,6 +60,7 @@ export const authLogin = (username, password) => {
         console.log(res)
         const user = {
           token: res.data.key,
+          tokens: res.data.tokens,
           username,
           userId: res.data.user,
           is_student: res.data.user_type.is_student,
@@ -97,16 +97,15 @@ export const authSignup = (
     axios.defaults.headers = {
       "Access-Control-Allow-Origin": "<origin> | *",
       "Content-Type": "application/json",
-      // "Content-Length": "<calculated when request is sent>",
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-      // Authorization: `Token ${token}`
     };
     axios
-      .post(`${uri}/registration/`, user)
+      .post(`${uri}/rest-auth/registration/`, user)
       .then((res) => {
         const user = {
-          token: res.data.key,
+          // token: res.data.key,
+          token: res.data.token,
           username,
           userId: res.data.user,
           is_student,
