@@ -11,19 +11,20 @@ COPY frontend/package.json .
 
 
 RUN npm install -g npm@8.3.2
-RUN npm install
-
-# RUN yarn install
-# RUN yarn install --ignore-platform && yarn cache clean
-# RUN yarn install && yarn cache clean
-# RUN yarn install --ignore-platform
-# RUN yarn add jwt-decode
-# RUN yarn add nodemon
 
 # Copy other project files and build
 # COPY . .
 COPY frontend/public public
 COPY frontend/src src
+
+RUN npm install
+
+# RUN yarn install
+# RUN yarn install --ignore-platform
+# RUN yarn install --ignore-platform && yarn cache clean
+# RUN yarn install && yarn cache clean
+
+
 
 # RUN npm run build
 # RUN yarn build
@@ -35,6 +36,6 @@ EXPOSE $PORT
 
 # CMD ["npm", "run", "dev"]
 # CMD ["yarn", "dev"]
+# CMD ["yarn", "run", "dev"]
 # CMD ["yarn", "start"]
 # CMD ["yarn", "run", "start"]
-# CMD ["yarn", "run", "dev"]
