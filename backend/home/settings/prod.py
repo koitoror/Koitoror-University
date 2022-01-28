@@ -1,15 +1,17 @@
 '''Use this for production'''
-
+import os
 from .base import *
 
-DEBUG = True
+DEBUG = False
 
+# ALLOWED_HOSTS += os.environ.get('ALLOWED_HOSTS_PROD')
 ALLOWED_HOSTS += os.environ.get('ALLOWED_HOSTS_PROD').split(',')
+# print('ALLOWED_HOSTS_PROD  ---> ', ALLOWED_HOSTS)
 
-# CORS_ORIGIN_WHITELIST = os.environ.get('CORS_ORIGIN_WHITELIST')
+# CORS_ORIGIN_WHITELIST += os.environ.get('CORS_ORIGIN_WHITELIST')
 CORS_ORIGIN_WHITELIST += os.environ.get('CORS_ORIGIN_WHITELIST').split(',')
 
-WSGI_APPLICATION = 'backend.home.wsgi.prod.application'
+WSGI_APPLICATION = 'home.wsgi.prod.application'
 
 DATABASES = {
     'default': {
@@ -32,5 +34,4 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
