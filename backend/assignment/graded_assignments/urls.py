@@ -1,5 +1,5 @@
 from django.urls import path
-from backend.assignment.views import GradedAssignmentListView, GradedAssignmentCreateView
+from assignment.views import GradedAssignmentListView, GradedAssignmentCreateView
 
 urlpatterns = [
     path('', GradedAssignmentListView.as_view()),

@@ -3,7 +3,7 @@ import sys
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.home.settings.dev")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "home.settings.dev")
 
 DJANGO_PATH =  os.path.join(os.path.abspath(os.path.dirname(__file__)), '..')
 sys.path.append(DJANGO_PATH)
