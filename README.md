@@ -16,7 +16,7 @@ by leveraging the modern web.
 
 > **React**: The frontend has react redux setup for user authentication in the frontend.
 
-## Development workflow
+## Installation & Development workflow
 
 ### VIRTUALENV
 
