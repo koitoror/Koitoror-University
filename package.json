@@ -28,8 +28,8 @@
   "scripts": {
     "start": "cd ./frontend && node server.js",
     "dev": "cd ./frontend && react-scripts start",
-    "postbuild": "cd ./frontend && npm run build",
-    "build": "npm install --prefix frontend && npm run build --prefix frontend",
+    "postbuilder": "cd ./frontend && npm run build",
+    "buildinstaller": "npm install --prefix frontend && npm run build --prefix frontend",
     "test": "cd ./frontend && react-scripts test --env=jsdom",
     "eject": "cd ./frontend && react-scripts eject",
     "heroku-postbuild": "cd ./frontend && npm install --only=prod --no-shrinkwrap && npm run postbuild"
