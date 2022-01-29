@@ -102,7 +102,8 @@ X_FRAME_OPTIONS = 'ALLOWALL'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend/build'), os.path.join(BASE_DIR, 'frontend/build/static'), os.path.join(BASE_DIR, 'frontend/staticfiles')],
+        # 'DIRS': [os.path.join(BASE_DIR, 'frontend/build'), os.path.join(BASE_DIR, 'frontend/build/static'), os.path.join(BASE_DIR, 'frontend/staticfiles')],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend/build'), os.path.join(BASE_DIR, 'frontend/build/static')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
