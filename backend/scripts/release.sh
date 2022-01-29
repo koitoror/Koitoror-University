@@ -2,8 +2,8 @@
 
 set -e
 
-ls -la /vol/
-ls -la /vol/web
+ls -la /frontend/staticfiles/
+ls -la /frontend/build
 
 whoami
 
