@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'assignment',
     'profiles',
     'base.apps.BaseConfig',
+    'home',
 
 ]
 
