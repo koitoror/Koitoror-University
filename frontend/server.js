@@ -26,6 +26,7 @@ if (process.env.NODE_ENV === 'production') {
   // Add a specific route for service-worker.js before the wildcard route:
   app.get('/service-worker.js', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'frontend/build', 'service-worker.js'));
+    // res.sendFile(path.resolve(__dirname, 'data/web/static', 'service-worker.js'));
   });
 
   // Serve any static files
@@ -34,6 +35,7 @@ if (process.env.NODE_ENV === 'production') {
   // Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    // res.sendFile(path.join(__dirname, 'data/web/static', 'index.html'));
   });
 }
 
