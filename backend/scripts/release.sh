@@ -2,8 +2,8 @@
 
 set -e
 
-ls -la /frontend/staticfiles/
-ls -la /frontend/build
+ls -la /app/frontend/staticfiles/
+ls -la /app/frontend/build
 
 whoami
 
