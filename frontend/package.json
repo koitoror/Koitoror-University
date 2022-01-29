@@ -1,6 +1,6 @@
 {
   "name": "koitoror-university",
-  "version": "0.1.0",
+  "version": "2.1.0",
   "engines": {
     "node": "16.4.2",
     "npm": "8.3.2"
