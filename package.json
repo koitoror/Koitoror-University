@@ -32,7 +32,7 @@
     "build": "npm install --prefix frontend && npm run build --prefix frontend",
     "test": "cd ./frontend && react-scripts test --env=jsdom",
     "eject": "cd ./frontend && react-scripts eject",
-    "heroku-postbuild": "cd ./frontend && npm install --only=prod --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd ./frontend && npm install --only=prod --no-shrinkwrap && npm run postbuild"
   },
   "browserslist": {
     "production": [
