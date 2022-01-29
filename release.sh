@@ -14,7 +14,7 @@ echo "Running Release Tasks"
 
 echo "Running Database migrations and migrating the new changes"
 # python backend/manage.py makemigrations account admin assignment auth authtoken contenttypes sessions sites socialaccount
-# python backend/manage.py makemigrations
+python backend/manage.py makemigrations
 python backend/manage.py migrate --noinput
 
 echo "Done.."
