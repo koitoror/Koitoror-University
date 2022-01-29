@@ -30,11 +30,11 @@
   "scripts": {
     "start": "node server.js",
     "dev": "react-scripts start",
-    "postbuild": "react-scripts build",
+    "postbuilder": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "postinstall": "npm run build",
-    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run postbuild"
+    "postinstaller": "npm run build",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run postbuilder"
   },
   "browserslist": {
     "production": [
