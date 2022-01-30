@@ -6,33 +6,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../store/actions/auth";
 
-const { Header, Content, Footer } = Layout;
+const { Sider, Content, Footer } = Layout;
 
 class CustomLayout extends React.Component {
   render() {
     return (
       <Layout className="layout" id="layout">
-        <Header>
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={["2"]}
-            style={{ lineHeight: "44px" }}
-            size="small"
-          >
-            {this.props.isAuthenticated ? (
-              <Menu.Item key="2" onClick={this.props.logout} style={{ borderRadius: "25" }}
-              >
-                Logout
-              </Menu.Item>
-            ) : (
-              <Menu.Item key="2">
-                <Link to="/login" >Login</Link>
-              </Menu.Item>
-            )}
-          </Menu>
-        </Header>
+
         <Content style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>
@@ -53,7 +33,27 @@ class CustomLayout extends React.Component {
             {this.props.children}
           </div>
         </Content>
-
+        <Sider>
+          <div className="logo" />
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={["2"]}
+            style={{ lineHeight: "44px" }}
+            size="small"
+          >
+            {this.props.isAuthenticated ? (
+              <Menu.Item key="2" onClick={this.props.logout} style={{ borderRadius: "25" }}
+              >
+                Logout
+              </Menu.Item>
+            ) : (
+              <Menu.Item key="2">
+                <Link to="/login" >Login</Link>
+              </Menu.Item>
+            )}
+          </Menu>
+        </Sider>
         <Footer style={{ textAlign: "center"}}>
           Koitoror Designs ©2022 Degem-Ventures
         </Footer>
