@@ -30,7 +30,7 @@ export default function Auth() {
             <div className="auth-page" style={{padding: 0}}
             >
                 <Helmet>
-                    <title>SignUp Or SignIn</title>
+                    <title>K.U.-SignUp Or SignIn</title>
                     <meta name="description" content="React App authentication" />
                 </Helmet>
 
