@@ -2,7 +2,7 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 
 // Backend API URL
-import { uri } from './url'
+import { API_HOST as uri } from './api'
 
 
 export const authStart = () => {
@@ -56,6 +56,7 @@ export const authLogin = (username, password) => {
         username,
         password,
       })
+      console.log(username, password)
       .then((res) => {
         console.log(res)
         const user = {

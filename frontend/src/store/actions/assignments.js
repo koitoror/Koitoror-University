@@ -1,7 +1,8 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
 
-import { uri } from './url'
+// Backend API URL
+import { API_HOST as uri } from './api'
 
 
 const getASNTListStart = () => {
