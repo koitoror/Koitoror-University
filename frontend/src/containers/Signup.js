@@ -1,8 +1,8 @@
 import React from "react";
 import { Form, Input, Button, Select } from "antd";
 // import Icon from '@ant-design/icons';
-import { UserOutlined, LockOutlined, MailTwoTone } from '@ant-design/icons';
-// import { UserOutlined, LockOutlined, MailFilled, MailOutlined, MailTwoTone } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+// import { UserOutlined, LockOutlined, MailOutlined, MailFilled, MailTwoTone } from '@ant-design/icons';
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import * as actions from "../store/actions/auth";
@@ -10,36 +10,63 @@ import * as actions from "../store/actions/auth";
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class RegistrationForm extends React.Component {
-  state = {
-    confirmDirty: false
-  };
+// class RegistrationForm extends React.Component {
+//   state = {
+//     confirmDirty: false
+//   };
 
-  handleSubmit = e => {
+export default function RegistrationForm (props) {
+
+  const [state, setState] = useState({
+        confirmDirty: false
+      });
+
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
+    props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         let is_student = false;
         if (values.userType === "student") is_student = true;
-        this.props.onAuth(
+        onAuth(
           values.userName,
           values.email,
           values.password,
           values.confirm,
           is_student
         );
-        this.props.history.push("/");
+        // props.history.push("/")   ;
+        props.history("/")   ;
       }
     });
   };
 
-  handleConfirmBlur = e => {
+  const hooksData = useSelector(state => {
+    console.log(state)
+    return {
+      loading: state.auth.loading,
+      error: state.auth.error
+    };
+  });
+
+  console.log(hooksData)
+
+  const dispatch = useDispatch()
+
+  function onAuth(username, password) {
+    return () => dispatch(actions.authLogin(username, password))
+  };
+
+  function onAuth(username, email, password, confirm, is_student) {
+    return () => dispatch(actionsauthSignup(username, email, password, confirm, is_student))
+  };
+
+  const handleConfirmBlur = e => {
     const value = e.target.value;
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+    setState({ confirmDirty: state.confirmDirty || !!value });
   };
 
   compareToFirstPassword = (rule, value, callback) => {
-    const form = this.props.form;
+    const form = props.form;
     if (value && value !== form.getFieldValue("password")) {
       callback("Two passwords that you enter is inconsistent!");
     } else {
@@ -48,115 +75,116 @@ class RegistrationForm extends React.Component {
   };
 
   validateToNextPassword = (rule, value, callback) => {
-    const form = this.props.form;
-    if (value && this.state.confirmDirty) {
+    const form = props.form;
+    if (value && state.confirmDirty) {
       form.validateFields(["confirm"], { force: true });
     }
     callback();
   };
 
-  render() {
-    // const { getFieldDecorator } = this.props.form;
+  // render() {
+    // const { getFieldDecorator } = props.form;
 
-    return (
-      <Form onSubmit={this.handleSubmit}>
-      
-          <FormItem name="userName" rules={[{ required: true, message: "Please input your username!"  }]} >
+  return (
+    <Form onSubmit={handleSubmit}>
+    
+        <FormItem name="userName" rules={[{ required: true, message: "Please input your username!"  }]} >
 
-            <Input prefix={<UserOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />} placeholder="Username" />
+          <Input prefix={<UserOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />} placeholder="Username" />
 
-        </FormItem>
+      </FormItem>
 
 
-          <FormItem name="email" rules={[
-            {
-              type: "email",
-              message: "The input is not valid E-mail!"
-            },
-            {
-              required: true,
-              message: "Please input your E-mail!"
-            }
-            ]} >
+        <FormItem name="email" rules={[
+          {
+            type: "email",
+            message: "The input is not valid E-mail!"
+          },
+          {
+            required: true,
+            message: "Please input your E-mail!"
+          }
+          ]} >
 
-            <Input
-              // prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
-              prefix={<MailTwoTone className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="Email"
-            />
+          <Input
+            // prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
+            prefix={<MailOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
+            // prefix={<MailTwoTone className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
+            placeholder="Email"
+          />
 
-        </FormItem>
+      </FormItem>
 
-          <FormItem name="password" rules={[{ required: true, message: "Please input your password!"  }]} >
+        <FormItem name="password" rules={[{ required: true, message: "Please input your password!"  }]} >
 
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="password"
-              placeholder="Password"
-            />
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
+            type="password"
+            placeholder="Password"
+          />
 
-        </FormItem>
+      </FormItem>
 
- 
-          <FormItem name="confirm" rules={[{ required: true, message: "Please confirm your password!"  }]} >
 
-          {/* ( */}
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="password"
-              placeholder="Password"
-              onBlur={this.handleConfirmBlur}
-            />
-          {/* ) */}
+        <FormItem name="confirm" rules={[{ required: true, message: "Please confirm your password!"  }]} >
 
-        </FormItem>
+        {/* ( */}
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
+            type="password"
+            placeholder="Password"
+            onBlur={handleConfirmBlur}
+          />
+        {/* ) */}
 
-          <FormItem name="userType" rules={[{ required: true, message: "Please select a user!"  }]} >
+      </FormItem>
 
-            <Select placeholder="Select a user type">
-              <Option value="student">Student</Option>
-              <Option value="teacher">Teacher</Option>
-            </Select>
-        </FormItem>
+        <FormItem name="userType" rules={[{ required: true, message: "Please select a user!"  }]} >
 
-        <FormItem>
-          <Button
-            type="primary"
-            htmlType="submit"
-            style={{ marginRight: "10px" }}
-            shape="round"
-          >
-            Signup
-          </Button>
-          Or
-          <NavLink style={{ marginRight: "10px" }} to="/login/">
-          {" "}
-            Login
-          </NavLink>
-        </FormItem>
-      </Form>
+          <Select placeholder="Select a user type">
+            <Option value="student">Student</Option>
+            <Option value="teacher">Teacher</Option>
+          </Select>
+      </FormItem>
+
+      <FormItem>
+        <Button
+          type="primary"
+          htmlType="submit"
+          style={{ marginRight: "10px" }}
+          shape="round"
+        >
+          Signup
+        </Button>
+        Or
+        <NavLink style={{ marginRight: "10px" }} to="/login/">
+        {" "}
+          Login
+        </NavLink>
+      </FormItem>
+    </Form>
     );
-  }
+  // }
 }
 
 
-const mapStateToProps = state => {
-  return {
-    loading: state.auth.loading,
-    error: state.auth.error
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     loading: state.auth.loading,
+//     error: state.auth.error
+//   };
+// };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onAuth: (username, email, password, confirm, is_student) =>
-      dispatch(
-        actions.authSignup(username, email, password, confirm, is_student)
-      )
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     onAuth: (username, email, password, confirm, is_student) =>
+//       dispatch(
+//         actions.authSignup(username, email, password, confirm, is_student)
+//       )
+//   };
+// };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RegistrationForm);
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(RegistrationForm);

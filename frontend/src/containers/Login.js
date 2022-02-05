@@ -2,9 +2,10 @@ import React from "react";
 // import React, {useContext} from 'react'
 import { Form, Input, Button, Spin } from "antd";
 import Icon from '@ant-design/icons';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-// import { UserOutlined, LockOutlined, Loading3QuartersOutline } from '@ant-design/icons';
-import { connect } from "react-redux";
+import { UserOutlined, LockOutlined, Loading3QuartersOutlined } from '@ant-design/icons';
+// import { UserOutlined, LockOutlined, Loading3QuartersOutlined } from '@ant-design/icons';
+// import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import * as actions from "../store/actions/auth";
@@ -12,94 +13,121 @@ import * as actions from "../store/actions/auth";
 
 const FormItem=Form.Item;
 
-const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />; 
-// const antIcon = <Loading3QuartersOutline style={{ fontSize: 24 }} spin />; 
-// const antIcon = <Icon
-//                   prefix={<Loading3QuartersOutline className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
-//                   placeholder="Email"
-//                   />
+// const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />; 
+// const antIcon = <Loading3QuartersOutlined style={{ fontSize: 24 }} spin />; 
+const antIcon = <Spin
+                  prefix={<Loading3QuartersOutlined 
+                  // className="site-form-item-icon" 
+                  // style={{ color: "rgba(0,0,0,.25)" }} 
+                  style={{ fontSize: 24 }}
+                  />}
+                  />
 
 // let {loginUser} = useContext(AuthContext)
 
-class NormalLoginForm extends React.Component {
-  handleSubmit = e => {
+// class NormalLoginForm extends React.Component {
+
+export default function NormalLoginForm (props) {
+
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.onAuth(values.userName, values.password);
-        this.props.history.push("/");
+        onAuth(values.userName, values.password);
+        // props.history.push("/");
+        // props.history("/");
+        props.navigate("/");
       }
     });
   };
 
-  render() {
-    let errorMessage = null;
-    if (this.props.error) {
-      errorMessage = <p>{this.props.error.message}</p>;
-    }
+  const hooksData = useSelector(state => {
+    console.log(state)
+    return {
+      loading: state.auth.loading,
+      error: state.auth.error
+    };
+  });
 
-    return (
-      <div>
-        {errorMessage}
-        {this.props.loading ? (
-          <Spin indicator={antIcon} />
-        ) : (
-          <Form onSubmit={this.handleSubmit} className="login-form">
-          {/* // <Form onSubmit={loginUser} className="login-form"> */}
-            <FormItem name="username" rules={[{ required: true, message: "Please input your username!"  }]} >
+  const dispatch = useDispatch()
 
-                <Input prefix={<UserOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />} placeholder="Username" />
+  function onAuth(username, password) {
+    return () => dispatch(actions.authLogin(username, password))
+  };
 
-            </FormItem>
-            <FormItem name="password" rules={[{ required: true, message: "Please input your Password!"  }]} >
+  function onAuth(username, email, password, confirm, is_student) {
+    return () => dispatch(actionsauthSignup(username, email, password, confirm, is_student))
+  };
 
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
-                type="password"
-                placeholder="Password"
-              />
-            </FormItem>
-
-            <FormItem>
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{ marginRight: "10px" }}
-                shape="round"
-              >
-                Login
-              </Button>
-              Or
-              <NavLink style={{ marginRight: "10px" }} to="/signup/">
-                {" "}
-                Signup
-              </NavLink>
-            </FormItem>
-          </Form>
-        )}
-      </div>
-    );
+  // render() {
+  let errorMessage = null;
+  if (hooksData.error) {
+    errorMessage = <p>{hooksData.error.message}</p>;
   }
+
+  return (
+    <div>
+      {errorMessage}
+      {hooksData.loading ? (
+        <Spin indicator={antIcon} />
+      ) : (
+        <Form onSubmit={handleSubmit} className="login-form">
+        {/* // <Form onSubmit={loginUser} className="login-form"> */}
+          <FormItem name="username" rules={[{ required: true, message: "Please input your username!"  }]} >
+
+              <Input prefix={<UserOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />} placeholder="Username" />
+
+          </FormItem>
+          <FormItem name="password" rules={[{ required: true, message: "Please input your Password!"  }]} >
+
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
+              type="password"
+              placeholder="Password"
+            />
+          </FormItem>
+
+          <FormItem>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ marginRight: "10px" }}
+              shape="round"
+            >
+              Login
+            </Button>
+            Or
+            <NavLink style={{ marginRight: "10px" }} to="/signup/">
+              {" "}
+              Signup
+            </NavLink>
+          </FormItem>
+        </Form>
+      )}
+    </div>
+  );
+  // }
 }
 
-const mapStateToProps = state => {
-  return {
-    loading: state.auth.loading,
-    error: state.auth.error
-  };
-};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onAuth: (username, password) =>
-      dispatch(actions.authLogin(username, password))
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     loading: state.auth.loading,
+//     error: state.auth.error
+//   };
+// };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NormalLoginForm);
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     onAuth: (username, password) =>
+//       dispatch(actions.authLogin(username, password))
+//   };
+// };
+
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(NormalLoginForm);
 
 
 

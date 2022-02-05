@@ -1,45 +1,85 @@
-import React, { Component } from "react";
+// import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { connect } from "react-redux";
-import BaseRouter from "./routes";
+// import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+// CSS Imports
 import "antd/dist/antd.min.css";
 import "./index.css";
 
-
+// Local Imports
+import BaseRouter from "./routes";
 import * as actions from "./store/actions/auth";
-
 import CustomLayout from "./containers/Layout";
 
 
-class App extends Component {
-  componentDidMount() {
-    this.props.onTryAutoSignup();
-  }
+export default function App (props) {
+  
 
-  render() {
-    return (
+  // const profile = useSelector((state) => state.auth.profile);
+  // const accessToken = get(profile, 'accessToken')
+  // const routing = useRoutes(routes(accessToken));
+
+  const hooksData = useSelector(state => {
+    console.log(state)
+    return {
+      isAuthenticated: state.auth.token !== null
+    };
+  });
+
+  const dispatch = useDispatch()
+
+  
+  useEffect(() => {
+    return () => {
+      onTryAutoSignup();
+    };
+  }, []);
+  
+  function onTryAutoSignup() {
+    return () => dispatch(actions.authCheckState())
+  };
+  
+  return (
+    <>
       <Router>
-        <CustomLayout {...this.props}>
+        <CustomLayout {...hooksData}>
           <BaseRouter />
         </CustomLayout>
       </Router>
-    );
-  }
+    </>
+  );
 }
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.auth.token !== null
-  };
-};
+// class App extends Component {
+//   componentDidMount() {
+//     this.props.onTryAutoSignup();
+//   }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onTryAutoSignup: () => dispatch(actions.authCheckState())
-  };
-};
+//   render() {
+//     return (
+//       <Router>
+//         <CustomLayout {...this.props}>
+//           <BaseRouter />
+//         </CustomLayout>
+//       </Router>
+//     );
+//   }
+// }
+// const mapStateToProps = state => {
+//   return {
+//     isAuthenticated: state.auth.token !== null
+//   };
+// };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     onTryAutoSignup: () => dispatch(actions.authCheckState())
+//   };
+// };
+
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(App);
