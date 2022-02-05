@@ -61,33 +61,33 @@ export default function CustomLayout (props) {
                 <Link to="/create">Create</Link>
               </Breadcrumb.Item>
             ) : null}
-            {/* </Breadcrumb>
-            <Breadcrumb> */}
+            </Breadcrumb>
+            <Breadcrumb style={{ 
+                    margin: -42, 
+                    float: 'right' 
+                  }}>
             {props.isAuthenticated ? (
-              // <Breadcrumb.Item>
+              <Breadcrumb.Item>
                 <Button
                   key="2"
                   icon={<LogoutOutlined />}
                   onClick={logout} 
                   style={{ 
-                    borderRadius: 15, 
-                    float: 'right' }}
+                    borderRadius: 15}}
                 > 
                   Logout
                 </Button>
-              // </Breadcrumb.Item>
+              </Breadcrumb.Item>
               
             ) : (
-              // <Breadcrumb.Item>
+              <Breadcrumb.Item>
                 <Button key="2" 
                   icon={<LoginOutlined />} 
-                  style={{ borderRadius: 15, 
-                  float: 'right'
-                }}
+                  style={{ borderRadius: 15}}
                   >
                   <Link to="/login" >Login</Link>
                 </Button>
-              // </Breadcrumb.Item>                
+              </Breadcrumb.Item>                
               )}
           </Breadcrumb>
           {/* <Breadcrumb style={{textAlign: "left"}}> */}
