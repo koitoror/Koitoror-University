@@ -4,6 +4,10 @@ import AuthContext from '../context/AuthContext'
 const HomePage = () => {
     let [notes, setNotes] = useState([])
     let {authTokens, logoutUser} = useContext(AuthContext)
+    // console.log(authTokens.access)
+    const tokens = JSON.parse(localStorage.getItem("authTokens"));
+    let authorization = `Bearer ${tokens.access}`;
+    console.log(authorization)
 
     useEffect(()=> {
         getNotes()
@@ -15,7 +19,10 @@ const HomePage = () => {
             method:'GET',
             headers:{
                 'Content-Type':'application/json',
-                'Authorization':'Bearer ' + String(authTokens.access)
+                'Authorization': authorization,
+                // 'Authorization': `Bearer ${authTokens.access}`
+                // 'Authorization':'Bearer ' + String(authTokens.access)
+                // 'Authorization':'Bearer ' + authTokens.access
             }
         })
         let data = await response.json()
