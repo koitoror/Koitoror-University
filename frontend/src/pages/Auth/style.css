@@ -8,6 +8,7 @@
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+	margin: -20px
 }
 .auth-page .mobile-auth-warpper {
 	padding: 30px 20px;
@@ -40,15 +41,18 @@
 	border-radius: 10px;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
-	overflow: hidden;
+	overflow: visible;
 	width: 992px;
 	max-width: 100%;
-	min-height: 860px;
+	min-height: 700px;
 }
 .auth-page .form-container form {
 	background: #fff;
-	padding: 50px;
-	height: 60%;
+	padding: 50px 30px;
+	/* padding: 0px; */
+	height: 100%;
+	margin: -50px;
+	max-width: 430px;
 }
 .auth-page .form-container form h1 {
 	color: var(--text-color);
@@ -108,6 +112,7 @@
 }
 .auth-page .form-submit-btn {
 	margin-top: 20px;
+	margin-bottom: 50px;
 }
 .auth-page button.ghost {
 	background: transparent;
@@ -199,4 +204,8 @@
 }
 .auth-page .auth-container.right-panel-active .overlay-right {
 	transform: translateX(20%);
+}
+
+.ant-checkbox-input {
+	opacity: 50
 }
