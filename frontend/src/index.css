@@ -32,3 +32,23 @@
 .ant-layout-header {
   height: 48px !important;
 }
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+  
+* {
+box-sizing: border-box;
+}
+
+:root{
+--main-color: #11998e;
+--text-color: #11425D;
+--active: #38ef7d;
+}
+
+code {
+font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
