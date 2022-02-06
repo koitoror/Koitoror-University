@@ -66,7 +66,7 @@ export default function CustomLayout (props) {
                     margin: -42, 
                     float: 'right' 
                   }}>
-            {props.isAuthenticated ? (
+            {!props.isAuthenticated ? (
               <Breadcrumb.Item>
                 <Button
                   key="2"
