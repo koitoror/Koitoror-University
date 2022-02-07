@@ -9,30 +9,32 @@ const radioStyle = {
   lineHeight: "30px"
 };
 
-class Choices extends React.Component {
-  render() {
-    const { questionId } = this.props;
-    const { usersAnswers } = this.props;
-    return (
-      <RadioGroup
-        onChange={(e, qId) => this.props.change(e, questionId)}
-        value={
-          usersAnswers[questionId] !== undefined &&
-          usersAnswers[questionId] !== null
-            ? usersAnswers[questionId]
-            : null
-        }
-      >
-        {this.props.choices.map((c, index) => {
-          return (
-            <Radio style={radioStyle} value={c} key={index}>
-              {c}
-            </Radio>
-          );
-        })}
-      </RadioGroup>
-    );
-  }
+// class Choices extends React.Component {
+const Choices = (props) => {
+
+  // render() {
+  const { questionId } = props;
+  const { usersAnswers } = props;
+  return (
+    <RadioGroup
+      onChange={(e, qId) => props.change(e, questionId)}
+      value={
+        usersAnswers[questionId] !== undefined &&
+        usersAnswers[questionId] !== null
+          ? usersAnswers[questionId]
+          : null
+      }
+    >
+      {props.choices.map((c, index) => {
+        return (
+          <Radio style={radioStyle} value={c} key={index}>
+            {c}
+          </Radio>
+        );
+      })}
+    </RadioGroup>
+  );
+  // }
 }
 
 export default Choices;
