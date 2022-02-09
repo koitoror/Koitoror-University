@@ -7,11 +7,17 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './store/configStore';
+import { AuthProvider } from './context/AuthContext'
 
 const app = (
+
   <Provider store={store}>
     <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-      <App />
+
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+
     </PersistGate>
   </Provider>
 );
