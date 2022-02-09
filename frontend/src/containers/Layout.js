@@ -3,20 +3,21 @@ import { Layout, Menu, Breadcrumb, Button } from "antd";
 import { Link } from "react-router-dom";
 import { HomeOutlined, UserOutlined, LogoutOutlined, LoginOutlined } from '@ant-design/icons';
 // import { Link, useNavigate } from "react-router-dom";
-// import { connect } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
-const { Header, Sider, Content, Footer } = Layout;
+// const { Header, Sider, Content, Footer } = Layout;
+const { Header, Content, Footer } = Layout;
 
 import * as actions from "../store/actions/auth";
+import HeaderComponent from '../components/Header'
 
 
 // class CustomLayout extends React.Component {
 export default function CustomLayout (props) {
   
-  console.log('PROPS  ----> ', props)
+  // console.log('PROPS Layout ----> ', props)
 
   const hooksData = useSelector(state => {
-    console.log(state)
+    // console.log(state)
     return {
       userId: state.auth.userId,
       token: state.auth.token,
@@ -66,14 +67,13 @@ export default function CustomLayout (props) {
                     margin: -42, 
                     float: 'right' 
                   }}>
-            {!props.isAuthenticated ? (
+            {props.isAuthenticated ? (
               <Breadcrumb.Item>
                 <Button
                   key="2"
                   icon={<LogoutOutlined />}
                   onClick={logout} 
-                  style={{ 
-                    borderRadius: 15}}
+                  style={{ borderRadius: 10 }}
                 > 
                   Logout
                 </Button>
@@ -81,9 +81,9 @@ export default function CustomLayout (props) {
               
             ) : (
               <Breadcrumb.Item>
-                <Button key="2" 
+                <Button key="1" 
                   icon={<LoginOutlined />} 
-                  style={{ borderRadius: 15}}
+                  style={{ borderRadius: 10}}
                   >
                   <Link to="/login" >Login</Link>
                 </Button>
@@ -115,7 +115,7 @@ export default function CustomLayout (props) {
           {/* </Breadcrumb> */}
         </Header>
         <Content style={{ padding: "0 50px" }}>
-
+          <HeaderComponent />
 
           <div style={{ background: "#fff", padding: 24, minHeight: 280, width: "80vw" }}>
             {props.children}

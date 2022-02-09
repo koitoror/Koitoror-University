@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     )
     let [loading, setLoading] = useState(true)
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     let loginUser = async (e) => {
         e.preventDefault()
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
-            navigate('/home2')
+            // navigate('/home2')
         } else {
             alert('Something went wrong!')
         }
@@ -69,11 +69,11 @@ export const AuthProvider = ({ children }) => {
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem('authTokens')
-        // navigate('/login2')
-        navigate('/login')
+        // navigate('/login')
     }
 
     let updateToken = async () => {
+        console.log('updated token!')
         let response = await fetch(`${uri}/api/token/refresh/`, {
             method: 'POST',
             headers: {
@@ -99,10 +99,10 @@ export const AuthProvider = ({ children }) => {
     }
 
     let contextData = {
-        user: user,
-        authTokens: authTokens,
-        loginUser: loginUser,
-        logoutUser: logoutUser,
+        user,
+        authTokens,
+        loginUser,
+        logoutUser,
         handleClickSignIn,
         handleClickSignUp,
         switchMode,
@@ -115,13 +115,13 @@ export const AuthProvider = ({ children }) => {
             updateToken()
         }
 
-        let fourMinutes = 1000 * 60 * 4
+        let twentyNineMinutes = 1000 * 60 * 29
 
         let interval = setInterval(() => {
             if (authTokens) {
                 updateToken()
             }
-        }, fourMinutes)
+        }, twentyNineMinutes)
         return () => clearInterval(interval)
     }, [authTokens, loading])
 
