@@ -32,7 +32,7 @@ export const getGradedASNTS = (username, token) => {
       "Content-Type": "application/json",
       // "Content-Length": "<calculated when request is sent>",
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      Authorization: `Token ${token}`
+      Authorization: `Bearer ${token}`
     };
     axios
       .get(`${uri}/graded-assignments/?username=${username}`)
@@ -53,7 +53,7 @@ export const createGradedASNT = (token, asnt) => {
       "Content-Type": "application/json",
       "Content-Length": "<calculated when request is sent>",
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      Authorization: `Token ${token}`
+      Authorization: `Bearer ${token}`
     };
     axios
       .post(`${uri}/graded-assignments/create/`, asnt)

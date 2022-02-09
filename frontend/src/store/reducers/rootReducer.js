@@ -8,8 +8,8 @@ import gradedAssignmentReducer from "./gradedAssignments";
 
 const rootReducer = combineReducers({
   app,
-  auth,
-  auth1: authReducer,
+  // auth,
+  auth: authReducer,
   assignments: assignmentReducer,
   gradedAssignments: gradedAssignmentReducer
 });

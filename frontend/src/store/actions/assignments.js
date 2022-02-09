@@ -32,7 +32,7 @@ export const getASNTS = token => {
       "Content-Type": "application/json",
       // "Content-Length": "<calculated when request is sent>",
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      Authorization: `Token ${token}`
+      Authorization: `Bearer ${token}`
     };
     axios
       // .get("https://koitoror-university.herokuapp.com/assignments/")
@@ -74,7 +74,7 @@ export const getASNTSDetail = (token, id) => {
       "Content-Type": "application/json",
       // "Content-Length": "<calculated when request is sent>",
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      Authorization: `Token ${token}`
+      Authorization: `Bearer ${token}`
     };
     axios
       // .get(`https://koitoror-university.herokuapp.com/assignments/${id}/`)
@@ -116,7 +116,7 @@ export const createASNT = (token, asnt) => {
       "Content-Type": "application/json",
       // "Content-Length": "<calculated when request is sent>",
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      Authorization: `Token ${token}`
+      Authorization: `Bearer ${token}`
     };
     axios
       // .post(`https://koitoror-university.herokuapp.com/assignments/`, asnt)
