@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Input, Button, Select } from "antd";
 // import Icon from '@ant-design/icons';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 // import { UserOutlined, LockOutlined, MailOutlined, MailFilled, MailTwoTone } from '@ant-design/icons';
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import * as actions from "../store/actions/auth";
 
@@ -16,29 +17,10 @@ const Option = Select.Option;
 //   };
 
 export default function RegistrationForm (props) {
-
+  console.log('Registration props', props)
   const [state, setState] = useState({
         confirmDirty: false
       });
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        let is_student = false;
-        if (values.userType === "student") is_student = true;
-        onAuth(
-          values.userName,
-          values.email,
-          values.password,
-          values.confirm,
-          is_student
-        );
-        // props.history.push("/")   ;
-        props.history("/")   ;
-      }
-    });
-  };
 
   const hooksData = useSelector(state => {
     console.log(state)
@@ -60,26 +42,49 @@ export default function RegistrationForm (props) {
     return () => dispatch(actionsauthSignup(username, email, password, confirm, is_student))
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log('Registration_next PROPS ----> ', props)
+
+    props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        let is_student = false;
+        if (values.userType === "student") is_student = true;
+        onAuth(
+          values.userName,
+          values.email,
+          values.password,
+          values.confirm,
+          is_student
+        );
+        // props.history.push("/")   ;
+        props.history("/")   ;
+      }
+    });
+  };
+
   const handleConfirmBlur = e => {
     const value = e.target.value;
     setState({ confirmDirty: state.confirmDirty || !!value });
   };
 
-  compareToFirstPassword = (rule, value, callback) => {
+  // const compareToFirstPassword = (rule, value, callback) => {
+  const compareToFirstPassword = (rule, value) => {
     const form = props.form;
     if (value && value !== form.getFieldValue("password")) {
-      callback("Two passwords that you enter is inconsistent!");
+      Promise.resolve("Two passwords that you enter is inconsistent!");
     } else {
-      callback();
+      Promise.reject();
     }
   };
 
-  validateToNextPassword = (rule, value, callback) => {
+  // const validateToNextPassword = (rule, value, callback) => {
+  const validateToNextPassword = (rule, value) => {
     const form = props.form;
     if (value && state.confirmDirty) {
       form.validateFields(["confirm"], { force: true });
     }
-    callback();
+    Promise.resolve();
   };
 
   // render() {

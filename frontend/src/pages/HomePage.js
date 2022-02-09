@@ -3,7 +3,8 @@ import AuthContext from '../context/AuthContext'
 
 const HomePage = () => {
     let [notes, setNotes] = useState([])
-    let {authTokens, logoutUser} = useContext(AuthContext)
+    // let { authTokens, logoutUser } = useContext(AuthContext)
+    let { logoutUser } = useContext(AuthContext)
     // console.log(authTokens.access)
     const tokens = JSON.parse(localStorage.getItem("authTokens"));
     let authorization = `Bearer ${tokens.access}`;

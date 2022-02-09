@@ -32,7 +32,6 @@ export default function SignUp() {
             setLoading(true)
 
             const res = await api({
-                // url: '/users/signup',
                 url: '/api/signup/',
                 data: payload,
                 method: 'POST'
@@ -45,7 +44,7 @@ export default function SignUp() {
                 localStorage.setItem('authTokens', JSON.stringify(res.data.tokens))
 
                 setShowModal(true);
-                navigate('/home2')
+                navigate('/')
                 form.resetFields()
                 setLoading(false)
                 setChecked(false)
@@ -67,14 +66,16 @@ export default function SignUp() {
         console.log('Failed:', errorInfo);
     };
 
-    const validation = (rule, value, callback) => {
+    // const validation = (rule, value, callback) => {
+    const validation = (rule, value) => {
         if (checked) {
             // return callback()
             return Promise.resolve();
         }
         // return callback("Please agree Terms of Use & Privacy policy")
         return Promise.reject(
-            "Please agree Terms of Use & Privacy policy");
+            "Please agree Terms of Use & Privacy policy"
+            );
         
     };
 

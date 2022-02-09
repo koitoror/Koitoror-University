@@ -1,5 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+// import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Card, Skeleton, message } from "antd";
 import Questions from "./Questions";
 import Choices from "../components/Choices";
@@ -23,7 +24,7 @@ export default function AssignmentDetail(props) {
                                     usersAnswers: {}
                                   });
 
-  const hooksData = useSelector(() => {
+  const hooksData = useSelector(state => {
     // console.log(state)
     return {
       token: state.auth.token,
@@ -33,15 +34,15 @@ export default function AssignmentDetail(props) {
     };
   })
 
-  dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   function getASNTSDetail(token, id) {
     return () => dispatch(getASNTSDetailAction(token, id))
   }
 
   function createGradedASNT(token, asnt) {
-    return () => dispatch(createGradedASNTAction(token, asnt))
-    // return () => dispatch(getASNTSDetail(createGradedASNTAction(token, asnt)))
+    // return () => dispatch(createGradedASNTAction(token, asnt))
+    return () => dispatch(getASNTSDetail(createGradedASNTAction(token, asnt)))
   }
 
   useEffect(() => {
@@ -84,7 +85,7 @@ export default function AssignmentDetail(props) {
   }
 
   // render() {
-  const { currentAssignment } = props;
+  const { currentAssignment } = hooksData;
   const { title } = currentAssignment;
   const { usersAnswers } = state;
   return (

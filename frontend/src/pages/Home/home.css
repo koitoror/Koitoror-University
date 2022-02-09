@@ -15,13 +15,13 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 50px;
+    /* padding: 50px; */
     color: #FFF;
     background-image: linear-gradient(135deg,var(--active) 10%,var(--main-color) 100%);
 }
 .home-page .home-overlay h2 {
     font-family: 'Dancing Script', cursive;
-    font-size: 3.5rem;
+    /* font-size: 3.5rem; */
     margin-bottom: 10vh;
     max-width: 768px;
 }

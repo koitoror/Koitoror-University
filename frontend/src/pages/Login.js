@@ -28,9 +28,11 @@ const antIcon = <Spin
 // class NormalLoginForm extends React.Component {
 
 export default function NormalLoginForm (props) {
-
+  console.log('LOGIN PROPS ----> ', props)
+  
   const handleSubmit = e => {
     e.preventDefault();
+    console.log('LOGIN_next PROPS ----> ', props)
     props.form.validateFields((err, values) => {
       if (!err) {
         onAuth(values.userName, values.password);
@@ -42,7 +44,7 @@ export default function NormalLoginForm (props) {
   };
 
   const hooksData = useSelector(state => {
-    console.log(state)
+    // console.log(state)
     return {
       loading: state.auth.loading,
       error: state.auth.error

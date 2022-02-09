@@ -65,7 +65,7 @@ export default function Auth() {
                             </div>
                         </div>
                     </div>
-                </div> : <div className="mobile-auth-warpper">
+                </div> : <div className="mobile-auth-wrapper">
                     {!isPanelRightActive ? <>
                         <SignIn />
                         <div className="text-center" onClick={switchMode}>Don't have an account? <Link>Sign up now.</Link></div>

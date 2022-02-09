@@ -23,7 +23,13 @@ function SignUpSuccessModal(props) {
                 // subTitle="Now you can sign in to our system."
                 subTitle="Now you can automatically sign in to our system."
                 extra={[
-                    <Button type="primary" shape="round" icon={<LoginOutlined />} key="console" onClick={handleRedirect}>
+                    <Button 
+                        type="primary" 
+                        shape="round" 
+                        icon={<LoginOutlined />} 
+                        key="console" 
+                        onClick={handleRedirect}
+                    >
                         Sign In now
                     </Button>,
                 ]}

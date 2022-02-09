@@ -47,7 +47,8 @@ export default function Profile (props) {
     console.log(state)
     return {
       token: state.auth.token,
-      username: state.auth.username,
+      // username: state.auth.username,
+      username: state.auth.profile.username,
       gradedAssignments: state.gradedAssignments.assignments,
       loading: state.gradedAssignments.loading
     };

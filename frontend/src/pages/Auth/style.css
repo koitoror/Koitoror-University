@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800'); */
 .text-center {
 	text-align: center;
 }
@@ -10,7 +10,7 @@
 	height: 100vh;
 	margin: -20px
 }
-.auth-page .mobile-auth-warpper {
+.auth-page .mobile-auth-wrapper {
 	padding: 30px 20px;
 }
 .auth-page .auth-container h1 {
@@ -103,6 +103,7 @@
 	cursor: pointer;
 	margin: 8px 0;
 	width: 100%;
+	white-space: normal;
 }
 .auth-page button:active {
 	transform: scale(0.95);

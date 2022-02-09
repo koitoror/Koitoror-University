@@ -1,5 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+// import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { List, Skeleton } from "antd";
 import * as actions from "../store/actions/assignments";
