@@ -15,32 +15,34 @@ import CustomLayout from "./containers/Layout";
 
 
 export default function App (props) {
-  
+
 
   // const profile = useSelector((state) => state.auth.profile);
   // const accessToken = get(profile, 'accessToken')
   // const routing = useRoutes(routes(accessToken));
 
   const hooksData = useSelector(state => {
-    console.log(state)
+    // console.log('STATE App  ------>', state.auth.token)
+    // console.log('STATE App  ------>', state.auth)
     return {
-      isAuthenticated: state.auth.token !== null
+      isAuthenticated: state.auth.token !== (null || undefined)
     };
   });
 
+  console.log(hooksData)
+
   const dispatch = useDispatch()
 
-  
   useEffect(() => {
     return () => {
       onTryAutoSignup();
     };
   }, []);
-  
+
   function onTryAutoSignup() {
     return () => dispatch(actions.authCheckState())
   };
-  
+
   return (
     <>
       <Router>
