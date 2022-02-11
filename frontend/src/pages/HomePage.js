@@ -3,10 +3,11 @@ import AuthContext from '../context/AuthContext'
 
 const HomePage = () => {
     let [notes, setNotes] = useState([])
-    // let { authTokens, logoutUser } = useContext(AuthContext)
-    let { logoutUser } = useContext(AuthContext)
+    let { authTokens, logoutUser } = useContext(AuthContext)
+    // let { logoutUser } = useContext(AuthContext)
     // console.log(authTokens.access)
-    const tokens = JSON.parse(localStorage.getItem("authTokens"));
+    const tokens = authTokens
+    // const tokens = JSON.parse(localStorage.getItem("authTokens"));
     let authorization = `Bearer ${tokens.access}`;
     console.log(authorization)
 
@@ -20,7 +21,7 @@ const HomePage = () => {
             method:'GET',
             headers:{
                 'Content-Type':'application/json',
-                'Authorization': authorization,
+                // 'Authorization': authorization,
                 // 'Authorization': `Bearer ${authTokens.access}`
                 // 'Authorization':'Bearer ' + String(authTokens.access)
                 // 'Authorization':'Bearer ' + authTokens.access
@@ -29,8 +30,10 @@ const HomePage = () => {
         let data = await response.json()
 
         if(response.status === 200){
+            console.log(data)
             setNotes(data)
         }else if(response.statusText === 'Unauthorized'){
+            console.log(data)
             logoutUser()
         }
         

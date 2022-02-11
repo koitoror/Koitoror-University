@@ -8,28 +8,28 @@ import { UserOutlined, LockOutlined, Loading3QuartersOutlined } from '@ant-desig
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import * as actions from "../store/actions/auth";
+import * as actions from "../redux/actions/auth";
 // import AuthContext from '../context/AuthContext';
 
-const FormItem=Form.Item;
+const FormItem = Form.Item;
 
 // const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />; 
 // const antIcon = <Loading3QuartersOutlined style={{ fontSize: 24 }} spin />; 
 const antIcon = <Spin
-                  prefix={<Loading3QuartersOutlined 
-                  // className="site-form-item-icon" 
-                  // style={{ color: "rgba(0,0,0,.25)" }} 
-                  style={{ fontSize: 24 }}
-                  />}
-                  />
+  prefix={<Loading3QuartersOutlined
+    // className="site-form-item-icon" 
+    // style={{ color: "rgba(0,0,0,.25)" }} 
+    style={{ fontSize: 24 }}
+  />}
+/>
 
 // let {loginUser} = useContext(AuthContext)
 
 // class NormalLoginForm extends React.Component {
 
-export default function NormalLoginForm (props) {
+export default function NormalLoginForm(props) {
   console.log('LOGIN PROPS ----> ', props)
-  
+
   const handleSubmit = e => {
     e.preventDefault();
     console.log('LOGIN_next PROPS ----> ', props)
@@ -74,13 +74,13 @@ export default function NormalLoginForm (props) {
         <Spin indicator={antIcon} />
       ) : (
         <Form onSubmit={handleSubmit} className="login-form">
-        {/* // <Form onSubmit={loginUser} className="login-form"> */}
-          <FormItem name="username" rules={[{ required: true, message: "Please input your username!"  }]} >
+          {/* // <Form onSubmit={loginUser} className="login-form"> */}
+          <FormItem name="username" rules={[{ required: true, message: "Please input your username!" }]} >
 
-              <Input prefix={<UserOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />} placeholder="Username" />
+            <Input prefix={<UserOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />} placeholder="Username" />
 
           </FormItem>
-          <FormItem name="password" rules={[{ required: true, message: "Please input your Password!"  }]} >
+          <FormItem name="password" rules={[{ required: true, message: "Please input your Password!" }]} >
 
             <Input
               prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}

@@ -4,18 +4,18 @@ import { List, Skeleton } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 
 import Result from "../components/Result";
-import { getGradedASNTS } from "../store/actions/gradedAssignments";
+import { getGradedASNTS } from "../redux/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
 import { useEffect } from "react";
 
 // class Profile extends React.PureComponent {
-  // componentDidMount() {
-  //   if (this.props.token !== undefined && this.props.token !== null) {
-  //     this.props.getGradedASNTS(this.props.username, this.props.token);
-  //   }
-  // }
+// componentDidMount() {
+//   if (this.props.token !== undefined && this.props.token !== null) {
+//     this.props.getGradedASNTS(this.props.username, this.props.token);
+//   }
+// }
 
-export default function Profile (props) {
+export default function Profile(props) {
 
   useEffect(() => {
     return () => {
@@ -46,7 +46,8 @@ export default function Profile (props) {
   const hooksData = useSelector(state => {
     console.log(state)
     return {
-      token: state.auth.token,
+      // token: state.auth.token,
+      token: state.auth.profile.accessToken,
       // username: state.auth.username,
       username: state.auth.profile.username,
       gradedAssignments: state.gradedAssignments.assignments,

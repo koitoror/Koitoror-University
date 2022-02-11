@@ -2,13 +2,13 @@ import React from 'react';
 import { GithubOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Helmet } from "react-helmet";
 import { Button } from 'antd';
-import { actionSignOut } from '../Auth/actions';
+import { actionSignOut } from '../../redux/actions/auth';
 import { useDispatch } from 'react-redux';
 import './home.css';
 
 export default function Home() {
     const dispatch = useDispatch()
-    
+
     const handleSignOut = () => {
         dispatch(actionSignOut())
     }

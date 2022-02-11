@@ -6,7 +6,7 @@ import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 // import { connect } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import * as actions from "../store/actions/auth";
+import * as actions from "../redux/actions/auth";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -16,11 +16,11 @@ const Option = Select.Option;
 //     confirmDirty: false
 //   };
 
-export default function RegistrationForm (props) {
+export default function RegistrationForm(props) {
   console.log('Registration props', props)
   const [state, setState] = useState({
-        confirmDirty: false
-      });
+    confirmDirty: false
+  });
 
   const hooksData = useSelector(state => {
     console.log(state)
@@ -58,7 +58,7 @@ export default function RegistrationForm (props) {
           is_student
         );
         // props.history.push("/")   ;
-        props.history("/")   ;
+        props.history("/");
       }
     });
   };
@@ -88,68 +88,68 @@ export default function RegistrationForm (props) {
   };
 
   // render() {
-    // const { getFieldDecorator } = props.form;
+  // const { getFieldDecorator } = props.form;
 
   return (
     <Form onSubmit={handleSubmit}>
-    
-        <FormItem name="userName" rules={[{ required: true, message: "Please input your username!"  }]} >
 
-          <Input prefix={<UserOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />} placeholder="Username" />
+      <FormItem name="userName" rules={[{ required: true, message: "Please input your username!" }]} >
 
-      </FormItem>
-
-
-        <FormItem name="email" rules={[
-          {
-            type: "email",
-            message: "The input is not valid E-mail!"
-          },
-          {
-            required: true,
-            message: "Please input your E-mail!"
-          }
-          ]} >
-
-          <Input
-            // prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
-            prefix={<MailOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
-            // prefix={<MailTwoTone className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
-            placeholder="Email"
-          />
-
-      </FormItem>
-
-        <FormItem name="password" rules={[{ required: true, message: "Please input your password!"  }]} >
-
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
-            type="password"
-            placeholder="Password"
-          />
+        <Input prefix={<UserOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />} placeholder="Username" />
 
       </FormItem>
 
 
-        <FormItem name="confirm" rules={[{ required: true, message: "Please confirm your password!"  }]} >
+      <FormItem name="email" rules={[
+        {
+          type: "email",
+          message: "The input is not valid E-mail!"
+        },
+        {
+          required: true,
+          message: "Please input your E-mail!"
+        }
+      ]} >
+
+        <Input
+          // prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
+          prefix={<MailOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
+          // prefix={<MailTwoTone className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
+          placeholder="Email"
+        />
+
+      </FormItem>
+
+      <FormItem name="password" rules={[{ required: true, message: "Please input your password!" }]} >
+
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
+          type="password"
+          placeholder="Password"
+        />
+
+      </FormItem>
+
+
+      <FormItem name="confirm" rules={[{ required: true, message: "Please confirm your password!" }]} >
 
         {/* ( */}
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
-            type="password"
-            placeholder="Password"
-            onBlur={handleConfirmBlur}
-          />
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
+          type="password"
+          placeholder="Password"
+          onBlur={handleConfirmBlur}
+        />
         {/* ) */}
 
       </FormItem>
 
-        <FormItem name="userType" rules={[{ required: true, message: "Please select a user!"  }]} >
+      <FormItem name="userType" rules={[{ required: true, message: "Please select a user!" }]} >
 
-          <Select placeholder="Select a user type">
-            <Option value="student">Student</Option>
-            <Option value="teacher">Teacher</Option>
-          </Select>
+        <Select placeholder="Select a user type">
+          <Option value="student">Student</Option>
+          <Option value="teacher">Teacher</Option>
+        </Select>
       </FormItem>
 
       <FormItem>
@@ -163,12 +163,12 @@ export default function RegistrationForm (props) {
         </Button>
         Or
         <NavLink style={{ marginRight: "10px" }} to="/login/">
-        {" "}
+          {" "}
           Login
         </NavLink>
       </FormItem>
     </Form>
-    );
+  );
   // }
 }
 

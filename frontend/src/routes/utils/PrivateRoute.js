@@ -1,15 +1,15 @@
 import { Route, Navigate, Routes, Outlet, useRoutes } from 'react-router-dom'
 import React, { useContext } from 'react'
 import AuthContext from '../../context/AuthContext'
-import { AuthProvider } from '../../context/AuthContext'
+import { AuthContextProvider } from '../../context/AuthContext'
 import { useSelector } from 'react-redux';
 import get from 'lodash/get';
 
 // export default const PrivateRoute = ({ children, ...rest }) => {
 // const PrivateRoute = ({ auth: { isAuthenticated }, children }) => {
 const PrivateRoute = ({ children }) => {
-// const PrivateRoute = ({ children, ...rest }) => {
-// const PrivateRoute = () => {
+    // const PrivateRoute = ({ children, ...rest }) => {
+    // const PrivateRoute = () => {
     //REDUX
     // const profile = useSelector((state) => state.auth.profile);
     // const accessToken = get(profile, 'accessToken');
@@ -18,10 +18,10 @@ const PrivateRoute = ({ children }) => {
     // const isAuthenticated = false;
 
     //CONTEXT
-    let {user} = useContext(AuthContext)
+    let { user } = useContext(AuthContext)
 
     // return( ( !user || !accessToken ) ? <Navigate to="/login" /> : children )
-    return( !user || !accessToken ? <Navigate to="/login" /> : <AuthProvider>children</AuthProvider> )
+    return (!user || !accessToken ? <Navigate to="/login" /> : <AuthContextProvider>children</AuthContextProvider>)
     // return( !user ? <Navigate to="/login" /> : children)
     // return( <Route {...rest} element={!user ? <Navigate to="/login" /> : children} /> */}
     // return( <Route {...rest}> {!user ? <Navigate  to="/login" /> :   children} </Route>
@@ -47,7 +47,7 @@ export const PrivateWrapper = () => {
     // const routing = useRoutes(routes(accessToken));
 
     //CONTEXT
-    let {user} = useContext(AuthContext)
+    let { user } = useContext(AuthContext)
 
     // If authorized, return an outlet that will render child elements
     // If not, return element that will navigate to login page

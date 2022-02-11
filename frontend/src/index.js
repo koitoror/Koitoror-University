@@ -1,25 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
+// import { Provider } from "react-redux";
+// import { PersistGate } from 'redux-persist/integration/react'
+
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
-import { createStore, compose, applyMiddleware, combineReducers } from "redux";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import { PersistGate } from 'redux-persist/integration/react'
-import { persistor, store } from './store/configStore';
-import { AuthProvider } from './context/AuthContext'
+// import { persistor, store } from './redux/store';
+import { AuthReduxProvider } from './redux/store';
+import { AuthContextProvider } from './context/AuthContext'
 
 const app = (
 
-  <Provider store={store}>
-    <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-
-      <AuthProvider>
+  // <Provider store={store}>
+  //   <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+  <AuthReduxProvider>
+      <AuthContextProvider>
         <App />
-      </AuthProvider>
-
-    </PersistGate>
-  </Provider>
+      </AuthContextProvider>
+  </AuthReduxProvider>
+  //   </PersistGate>
+  // </Provider>
 );
 
 ReactDOM.render(app, document.getElementById("root"));

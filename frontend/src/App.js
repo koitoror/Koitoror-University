@@ -10,11 +10,11 @@ import "./index.css";
 
 // Local Imports
 import BaseRouter from "./routes";
-import * as actions from "./store/actions/auth";
+import * as actions from "./redux/actions/auth";
 import CustomLayout from "./containers/Layout";
 
 
-export default function App (props) {
+export default function App(props) {
 
 
   // const profile = useSelector((state) => state.auth.profile);
@@ -22,10 +22,12 @@ export default function App (props) {
   // const routing = useRoutes(routes(accessToken));
 
   const hooksData = useSelector(state => {
-    // console.log('STATE App  ------>', state.auth.token)
-    // console.log('STATE App  ------>', state.auth)
+    // console.log('STATE App auth ------>', state.auth)
+    // console.log('STATE App token ------>', state.auth.token)
+    console.log('STATE App token2 ------>', state.auth.profile.accessToken)
     return {
-      isAuthenticated: state.auth.token !== (null || undefined)
+      // isAuthenticated: state.auth.token !== (null || undefined)
+      isAuthenticated: state.auth.profile.accessToken !== (null || undefined)
     };
   });
 

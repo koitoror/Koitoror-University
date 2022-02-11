@@ -3,16 +3,18 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { List, Skeleton } from "antd";
-import * as actions from "../store/actions/assignments";
+import * as actions from "../redux/actions/assignments";
 import Hoc from "../hoc/hoc";
 
 // class AssignmentList extends React.PureComponent {
-export default function AssignmentList (props) {
+export default function AssignmentList(props) {
 
   const hooksData = useSelector(state => {
-    console.log('STATE AUTH TOKEN ------>', state.auth.token)
+    console.log('STATE ------>', state)
+    // console.log('STATE AUTH TOKEN ------>', state.auth.profile.accessToken)
     return {
-      token: state.auth.token,
+      // token: state.auth.token,
+      token: state.auth.profile.accessToken,
       assignments: state.assignments.assignments,
       loading: state.assignments.loading
     };

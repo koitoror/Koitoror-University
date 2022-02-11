@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Card, Skeleton, message } from "antd";
 import Questions from "./Questions";
 import Choices from "../components/Choices";
-import { getASNTSDetail as getASNTSDetailAction} from "../store/actions/assignments";
-import { createGradedASNT as createGradedASNTAction} from "../store/actions/gradedAssignments";
+import { getASNTSDetail as getASNTSDetailAction } from "../redux/actions/assignments";
+import { createGradedASNT as createGradedASNTAction } from "../redux/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
 
 const cardStyle = {
@@ -19,15 +19,16 @@ export default function AssignmentDetail(props) {
   // state = {
   //   usersAnswers: {}
   // };
-  
+
   const [state, setState] = useState({
-                                    usersAnswers: {}
-                                  });
+    usersAnswers: {}
+  });
 
   const hooksData = useSelector(state => {
     // console.log(state)
     return {
-      token: state.auth.token,
+      // token: state.auth.token,
+      token: state.auth.profile.accessToken,
       currentAssignment: state.assignments.currentAssignment,
       loading: state.assignments.loading,
       username: state.auth.username
@@ -49,7 +50,7 @@ export default function AssignmentDetail(props) {
     if (props.token !== undefined && props.token !== null) {
       getASNTSDetail(props.token, props.match.params.id);
     }
-  
+
   }, [props]);
 
   // componentDidMount() {

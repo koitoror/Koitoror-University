@@ -1,98 +1,107 @@
 import React from "react";
 import { Layout, Menu, Breadcrumb, Button } from "antd";
 import { Link } from "react-router-dom";
-import { HomeOutlined, UserOutlined, LogoutOutlined, LoginOutlined } from '@ant-design/icons';
+import { HomeOutlined, UserOutlined, LogoutOutlined, LoginOutlined, FileAddFilled } from '@ant-design/icons';
 // import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // const { Header, Sider, Content, Footer } = Layout;
 const { Header, Content, Footer } = Layout;
 
-import * as actions from "../store/actions/auth";
+import * as actions from "../redux/actions/auth";
 import HeaderComponent from '../components/Header'
 
 
 // class CustomLayout extends React.Component {
-export default function CustomLayout (props) {
-  
+export default function CustomLayout(props) {
+
   // console.log('PROPS Layout ----> ', props)
 
   const hooksData = useSelector(state => {
     // console.log(state)
     return {
-      userId: state.auth.userId,
-      token: state.auth.token,
-      is_teacher: state.auth.is_teacher
+      // userId: state.auth.userId,
+      userId: state.auth.profile.user_id,
+      // token: state.auth.token,
+      token: state.auth.profile.accessToken,
+      is_teacher: state.auth.profile.is_teacher
     };
   });
-  
+
   // console.log(hooksData)
-  
+
   const dispatch = useDispatch()
 
   function logout() {
-    return () => dispatch(actions.logout())
+    console.log('ACTION TO LOGOUT DISPATCHED')
+    // return () => dispatch(actions.logout())
+    return dispatch(actions.logout())
   };
 
   // render() {
-    return (
-      <Layout 
-        className="layout" 
-        id="layout" 
-        style={{
-          // height: '100vh', 
-          padding: 0, 
-          margin: 0
-        }}
-          >
+  return (
+    <Layout
+      className="layout"
+      id="layout"
+      style={{
+        // height: '100vh', 
+        padding: 0,
+        margin: 0
+      }}
+    >
 
-        <Header>
-          <Breadcrumb style={{ margin: "16px 0" }}>
+      <Header>
+        <Breadcrumb style={{ margin: "16px 0" }}>
+          <Breadcrumb.Item>
+            <HomeOutlined />
+            <Link to="/">Home</Link>
+          </Breadcrumb.Item>
+          {hooksData.token !== (null || undefined) ? (
             <Breadcrumb.Item>
-              <HomeOutlined />
-              <Link to="/">Home</Link>
+              <UserOutlined />
+              <Link to={`/profile/${hooksData.userId}`}>Profile</Link>
             </Breadcrumb.Item>
-            {hooksData.token !== (null || undefined) ? (
-              <Breadcrumb.Item>
-                <UserOutlined />
-                <Link to={`/profile/${hooksData.userId}`}>Profile</Link>
-              </Breadcrumb.Item>
-            ) : null}
-            {hooksData.token !== null && hooksData.is_teacher ? (
-              <Breadcrumb.Item>
-                <Link to="/create">Create</Link>
-              </Breadcrumb.Item>
-            ) : null}
-            </Breadcrumb>
-            <Breadcrumb style={{ 
-                    margin: -42, 
-                    float: 'right' 
-                  }}>
-            {props.isAuthenticated ? (
-              <Breadcrumb.Item>
-                <Button
-                  key="2"
-                  icon={<LogoutOutlined />}
-                  onClick={logout} 
+          ) : null}
+          {hooksData.token !== null && hooksData.is_teacher ? (
+            <Breadcrumb.Item>
+              <FileAddFilled />
+              <Link to="/create">Create</Link>
+            </Breadcrumb.Item>
+          ) : null}
+        </Breadcrumb>
+        <Breadcrumb style={{
+          margin: -42,
+          float: 'right'
+        }}>
+          {props.isAuthenticated ? (
+            <Breadcrumb.Item>
+              <Button
+                key="2"
+                icon={<LogoutOutlined />}
+                onClick={logout}
+                style={{ borderRadius: 10 }}
+              >
+                Logout
+              </Button>
+            </Breadcrumb.Item>
+
+          ) : (
+            <Breadcrumb.Item>
+              <Link to="/login" >
+                <Button key="1"
+                  icon={<LoginOutlined />}
                   style={{ borderRadius: 10 }}
-                > 
-                  Logout
+                >
+
+                  Login
+
                 </Button>
-              </Breadcrumb.Item>
-              
-            ) : (
-              <Breadcrumb.Item>
-                <Button key="1" 
-                  icon={<LoginOutlined />} 
-                  style={{ borderRadius: 10}}
-                  >
-                  <Link to="/login" >Login</Link>
-                </Button>
-              </Breadcrumb.Item>                
-              )}
-          </Breadcrumb>
-          {/* <Breadcrumb style={{textAlign: "left"}}> */}
-          {/* <Breadcrumb> */}
-            {/* <Menu
+              </Link>
+            </Breadcrumb.Item>
+          )}
+        </Breadcrumb>
+        {/* <Breadcrumb style={{textAlign: "left"}}> */}
+        {/* <Breadcrumb> */}
+        {/* <Menu
               // theme="dark"
               // mode="horizontal"
               // defaultSelectedKeys={["2"]}
@@ -100,8 +109,8 @@ export default function CustomLayout (props) {
               // style={{ display: 'flex-end' }}
               // size="small"
             > */}
-              {/* <div className="logo" /> */}
-              {/* {props.isAuthenticated ? (
+        {/* <div className="logo" /> */}
+        {/* {props.isAuthenticated ? (
                 <Breadcrumb.Item key="2" onClick={logout} style={{ borderRadius: "25" }}
                 >
                   Logout
@@ -111,21 +120,21 @@ export default function CustomLayout (props) {
                   <Link to="/login" >Login</Link>
                 </Breadcrumb.Item>
               )} */}
-            {/* </Menu> */}
-          {/* </Breadcrumb> */}
-        </Header>
-        <Content style={{ padding: "0 50px" }}>
-          <HeaderComponent />
+        {/* </Menu> */}
+        {/* </Breadcrumb> */}
+      </Header>
+      <Content style={{ padding: "0 50px" }}>
+        <HeaderComponent />
 
-          <div style={{ background: "#fff", padding: 24, minHeight: 280, width: "80vw" }}>
-            {props.children}
-          </div>
-        </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Koitoror Designs ©2022 Degem-Ventures
-        </Footer>
-      </Layout>
-    );
+        <div style={{ background: "#fff", padding: 24, minHeight: 280, width: "80vw" }}>
+          {props.children}
+        </div>
+      </Content>
+      <Footer style={{ textAlign: "center" }}>
+        Koitoror Designs ©2022 Degem-Ventures
+      </Footer>
+    </Layout>
+  );
   // }
 }
 

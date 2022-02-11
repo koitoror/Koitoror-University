@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom'
 const AuthContext = createContext();
 
 // Backend API URL
-import { API_HOST as uri } from '../store/actions/api';
+import { API_HOST as uri } from '../api/fetch/api';
 
 export default AuthContext
 
-export const AuthProvider = ({ children }) => {
-    
+export const AuthContextProvider = ({ children }) => {
+
     const [isPanelRightActive, setIsPanelRightActive] = useState(false);
 
     const handleClickSignIn = () => {
@@ -25,11 +25,18 @@ export const AuthProvider = ({ children }) => {
         setIsPanelRightActive(!isPanelRightActive)
     }
 
-    let [authTokens, setAuthTokens] = useState(() =>
+    // let [authTokens, setAuthTokens] = useState(() =>
+    //     localStorage.getItem('authTokens')
+    //         ? JSON.parse(localStorage.getItem('authTokens'))
+    //         : null,
+    // )
+
+    let [authTokens, setAuthTokens] = useState(
         localStorage.getItem('authTokens')
             ? JSON.parse(localStorage.getItem('authTokens'))
             : null,
     )
+
     let [user, setUser] = useState(() =>
         localStorage.getItem('authTokens')
             ? jwt_decode(localStorage.getItem('authTokens'))
@@ -59,7 +66,7 @@ export const AuthProvider = ({ children }) => {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
-            // navigate('/home2')
+            // navigate('/')
         } else {
             alert('Something went wrong!')
         }
@@ -79,7 +86,7 @@ export const AuthProvider = ({ children }) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body:JSON.stringify({'refresh':authTokens?.refresh})
+            body: JSON.stringify({ 'refresh': authTokens?.refresh })
             // body: JSON.stringify({ refresh: authTokens && authTokens.refresh }),
         })
 

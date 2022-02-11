@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Result, Button, Modal } from 'antd';
 import { LoginOutlined } from '@ant-design/icons';
-// import { AuthContext } from './index';
-import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
+
+import AuthContext from '../../context/AuthContext';
 
 function SignUpSuccessModal(props) {
     const { setIsPanelRightActive } = useContext(AuthContext);
@@ -12,7 +12,7 @@ function SignUpSuccessModal(props) {
     const handleRedirect = () => {
         props.handleClose();
         setIsPanelRightActive(false);
-        navigate('/home2');
+        navigate('/');
     }
 
     return (

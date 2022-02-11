@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserAddOutlined } from '@ant-design/icons';
-import SocialNetworks from './SocialNetworks';
 import { Typography, message } from 'antd';
 import { Row, Col } from 'antd';
-import SignUpSuccessModal from './SignUpSuccessModal';
-import api from '../../api';
 import { get } from 'lodash';
+
+import SocialNetworks from './SocialNetworks';
+import SignUpSuccessModal from './SignUpSuccessModal';
+import api from '../../api/axios';
 
 const { Title } = Typography;
 

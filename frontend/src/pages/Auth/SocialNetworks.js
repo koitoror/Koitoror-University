@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 // import { GoogleLogin } from 'react-google-login';
 // import FacebookLogin from 'react-facebook-login';
 import { useDispatch } from 'react-redux';
-import api from '../../api';
-import { actionSignInSuccess } from './actions';
-import config from '../../config'
+
+import { actionSignInSuccess } from '../../redux/actions/auth';
+// import config from '../../api/config'
+import api from '../../api/axios';
 
 const SocialNetworks = () => {
     const navigate = useNavigate();
@@ -69,12 +70,12 @@ const SocialNetworks = () => {
                 placement="bottom"
                 color="#db4a39"
                 key="#db4a39">
-                    <div
-                        className="social google"
-                        // onClick={renderProps.onClick}
-                    >
-                        <GooglePlusOutlined />
-                    </div>
+                <div
+                    className="social google"
+                // onClick={renderProps.onClick}
+                >
+                    <GooglePlusOutlined />
+                </div>
             </Tooltip>
 
             <Tooltip
@@ -90,7 +91,7 @@ const SocialNetworks = () => {
                 <div className="social linkedin"><LinkedinOutlined />
                 </div>
             </Tooltip>
-            
+
             <Tooltip
                 title="Amazon"
                 placement="bottom"

@@ -5,7 +5,6 @@ import { Route, Routes } from "react-router-dom";
 // local Imports
 import Hoc from "../hoc/hoc";
 
-// import { AuthProvider } from '../context/AuthContext'
 import PrivateRoute, { PrivateWrapper } from '../routes/utils/PrivateRoute'
 
 import Auth from '../pages/Auth';
@@ -25,7 +24,6 @@ import NotFoundPage from "../pages/NotFoundPage";
 const BaseRouter = () => (
   <Hoc>
 
-    {/* <AuthProvider> */}
       <Routes>
 
         // AUTH ROUTES
@@ -34,8 +32,8 @@ const BaseRouter = () => (
         <Route exact path="/login/" element={<Auth />} />
         <Route exact path="/login1/" element={<Login />} />
         <Route exact path="/login2/" element={<LoginPage />} />
-        {/* <Route exact path="/profile/:user_id" element={<Profile />} /> */}
-        <Route exact path="/profile" element={<Profile />} />
+        <Route exact path="/profile/:user_id" element={<Profile />} />
+        {/* <Route exact path="/profile" element={<Profile />} /> */}
 
 
         // ASSIGNMENTS ROUTES
@@ -47,7 +45,7 @@ const BaseRouter = () => (
         {/* <Route exact path='/home2' element={<PrivateRoute element={HomePage}/>}/> */}
         {/* <Route element={<PrivateWrapper />}> */}
         <Route path="/home1" element={<Home />} />
-        {/* <Route path="/home2" element={<HomePage />} /> */}
+        <Route path="/home2" element={<HomePage />} />
         {/* </Route>  */}
         
 
@@ -56,7 +54,6 @@ const BaseRouter = () => (
         <Route exact element={<NotFoundPage />} />
       
       </Routes>
-    {/* </AuthProvider> */}
   
   </Hoc>
 );
