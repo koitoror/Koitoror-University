@@ -7,7 +7,8 @@ from rest_framework.views import APIView
 from django.contrib.auth.models import User
 
 # from base.models import User
-from base.apps import IsVerifiedUser
+# from base.apps import IsVerifiedUser
+from .exceptions import IsVerifiedUser
 # from core.utils import send_notifications
 from .exceptions import ProfileDoesNotExist
 from .models import CustomFollows

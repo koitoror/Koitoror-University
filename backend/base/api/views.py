@@ -44,7 +44,7 @@ def getRoutes(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def getNotes(request):
     user = request.user
     notes = user.note_set.all()
