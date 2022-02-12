@@ -13,8 +13,8 @@ export default function AssignmentList(props) {
     console.log('STATE ------>', state)
     // console.log('STATE AUTH TOKEN ------>', state.auth.profile.accessToken)
     return {
-      // token: state.auth.token,
-      token: state.auth.profile.accessToken,
+      token: state.auth.token,
+      // token: state.auth.profile.accessToken,
       assignments: state.assignments.assignments,
       loading: state.assignments.loading
     };

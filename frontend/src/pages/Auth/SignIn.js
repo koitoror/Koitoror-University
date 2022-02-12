@@ -6,10 +6,11 @@ import { Typography } from 'antd';
 import get from 'lodash/get';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import jwt_decode from 'jwt-decode'
+// import jwt_decode from 'jwt-decode'
 
-import { actionSignIn, actionSignInSuccess, actionSignInError } from '../../redux/actions/auth';
-import api from '../../api/axios';
+// import { actionSignIn, actionSignInSuccess, actionSignInError, authLogin } from '../../redux/actions/auth';
+import { authLogin } from '../../redux/actions/auth';
+// import api from '../../api/axios';
 
 const { Title } = Typography;
 
@@ -20,60 +21,81 @@ export default function SignIn() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { auth } = useSelector(state => state)
-    const [user, setUser] = useState(() =>
-        localStorage.getItem('authTokens')
-            ? jwt_decode(localStorage.getItem('authTokens'))
-            : null,
-    )
+    console.log('STATE LOGIN', auth)
+    // const [user, setUser] = useState(() =>
+    //     localStorage.getItem('authTokens')
+    //         ? jwt_decode(localStorage.getItem('authTokens'))
+    //         : null,
+    // )
+
     const onFinish = async values => {
-        try {
-            dispatch(actionSignIn())
-            const payload = {
-                username: get(values, 'email', ''),
-                password: get(values, 'password', '')
-            }
 
-            const res = await api({
-                url: '/api/token/',
-                data: payload,
-                method: 'POST'
-            });
-
-            if (res && res.status === 200) {
-                console.log('RES  --->', res)
-
-                // get access token from header
-                // const accessToken = res.headers.authorization;
-                // const accessToken = res.config.headers.Authorization;
-                const accessToken = res.data.access;
-
-                console.log('ACCESS TOKEN  ----> ', accessToken)
-                // console.log(typeof(accessToken))
-                // setUser(jwt_decode(`${accessToken}`))
-                setUser(jwt_decode(accessToken))
-                // console.log('USER  ------> ', user)
-                localStorage.setItem('authTokens', JSON.stringify(res.data))
-
-                // const { username } = user;
-                // console.log('USERNAME  ------> ', username)
-                user.accessToken = accessToken
-
-                // setTimeout(()=>{
-                //     notification.success(
-                //         message="Logged-In Successfully"
-                //     )
-                // }, 1000)
-
-                // update user profile redux and perist
-                dispatch(actionSignInSuccess(user))
-                form.resetFields()
-                navigate('/')
-            }
-        } catch (error) {
-            const errorMessage = get(error, 'error.message', 'Something went wrong!')
-            message.error(errorMessage)
-            dispatch(actionSignInError(error))
+        const payload = {
+            username: get(values, 'username', ''),
+            password: get(values, 'password', '')
         }
+
+        dispatch(authLogin(payload))
+
+        form.resetFields()
+        navigate('/')
+
+        // try {
+        //     // dispatch(actionSignIn())
+        //     const payload = {
+        //         username: get(values, 'email', ''),
+        //         password: get(values, 'password', '')
+        //     }
+
+        //     dispatch(authLogin(payload))
+
+
+        //     form.resetFields()
+        //     navigate('/')
+
+            // const res = await api({
+            //     url: '/api/token/',
+            //     data: payload,
+            //     method: 'POST'
+            // });
+
+            // if (res && res.status === 200) {
+            //     // console.log('RES  --->', res)
+
+            //     // get access token from header
+            //     // const accessToken = res.headers.authorization;
+            //     // const accessToken = res.config.headers.Authorization;
+            //     // const accessToken = res.data.access;
+            //     // console.log('ACCESS TOKEN  ----> ', accessToken)
+
+            //     // console.log(typeof(accessToken))
+            //     // console.log('USER  ------> ', user)
+            //     // localStorage.setItem('authTokens', JSON.stringify(res.data))
+                
+            //     // const { username } = user;
+            //     // console.log('USERNAME  ------> ', username)
+            //     // user.accessToken = accessToken
+            //     user.accessToken = res.data.access;
+            //     // setUser(jwt_decode(`${accessToken}`))
+            //     setUser(jwt_decode(user.accessToken))
+
+            //     // setTimeout(()=>{
+            //     //     notification.success(
+            //     //         message="Logged-In Successfully"
+            //     //     )
+            //     // }, 1000)
+
+            //     // update user profile redux and perist
+            //     dispatch(actionSignInSuccess(user))
+            //     form.resetFields()
+            //     navigate('/')
+            // }
+
+        // } catch (error) {
+        //     const errorMessage = get(error, 'error.message', 'Something went wrong!')
+        //     message.error(errorMessage)
+        //     dispatch(actionSignInError(error))
+        // }
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -99,6 +121,22 @@ export default function SignIn() {
                 <div className="option-text">or use your account</div>
 
                 <Form.Item
+                    name="username"
+                    label="Username"
+                    labelCol={{ span: 24 }}
+                    wrapperCol={{ span: 24 }}
+                    hasFeedback
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your username.',
+                        }
+                    ]}
+                >
+                    <Input placeholder='Username' size="large" />
+                </Form.Item>
+
+                {/* <Form.Item
                     name="email"
                     hasFeedback
                     label="Email address"
@@ -116,7 +154,7 @@ export default function SignIn() {
                 // ]}
                 >
                     <Input placeholder='Email' size="large" />
-                </Form.Item>
+                </Form.Item> */}
 
                 <Form.Item
                     name="password"

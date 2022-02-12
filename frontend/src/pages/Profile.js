@@ -46,8 +46,8 @@ export default function Profile(props) {
   const hooksData = useSelector(state => {
     console.log(state)
     return {
-      // token: state.auth.token,
-      token: state.auth.profile.accessToken,
+      token: state.auth.token,
+      // token: state.auth.profile.accessToken,
       // username: state.auth.username,
       username: state.auth.profile.username,
       gradedAssignments: state.gradedAssignments.assignments,

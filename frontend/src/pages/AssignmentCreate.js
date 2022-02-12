@@ -35,8 +35,8 @@ export default function AssignmentCreate(props) {
     const hooksData = useSelector(state => {
       // console.log('CREATE ASSIGMENT STATE', state)
       return {
-        // token: state.auth.token,
-        token: state.auth.profile.accessToken,
+        token: state.auth.token,
+        // token: state.auth.profile.accessToken,
         // username: state.auth.username,
         username: state.auth.profile.username,
         loading: state.assignments.loading

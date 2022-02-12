@@ -25,23 +25,35 @@ export const AuthContextProvider = ({ children }) => {
         setIsPanelRightActive(!isPanelRightActive)
     }
 
-    // let [authTokens, setAuthTokens] = useState(() =>
-    //     localStorage.getItem('authTokens')
-    //         ? JSON.parse(localStorage.getItem('authTokens'))
-    //         : null,
-    // )
-
-    let [authTokens, setAuthTokens] = useState(
+    let [authTokens, setAuthTokens] = useState(() =>
         localStorage.getItem('authTokens')
             ? JSON.parse(localStorage.getItem('authTokens'))
             : null,
     )
 
-    let [user, setUser] = useState(() =>
-        localStorage.getItem('authTokens')
-            ? jwt_decode(localStorage.getItem('authTokens'))
-            : null,
-    )
+    // let [authTokens, setAuthTokens] = useState(
+    //     localStorage.getItem('authTokens')
+    //         ? JSON.parse(localStorage.getItem('authTokens'))
+    //         : null,
+    // )
+
+    console.log('authTokens', authTokens)
+
+    // let [user, setUser] = useState(() =>
+    //     localStorage.getItem('authTokens')
+    //         ? jwt_decode(localStorage.getItem('authTokens'))
+    //         : null,
+    // )
+
+    
+    let [user, setUser] = useState(
+            localStorage.getItem('authTokens')
+                ? jwt_decode(localStorage.getItem('authTokens'))
+                : null,
+        )
+
+    console.log('user', user)
+
     let [loading, setLoading] = useState(true)
 
     // const navigate = useNavigate()
@@ -96,9 +108,10 @@ export const AuthContextProvider = ({ children }) => {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
-        } else {
-            logoutUser()
-        }
+        } 
+        // else {
+        //     logoutUser()
+        // }
 
         if (loading) {
             setLoading(false)
@@ -131,6 +144,8 @@ export const AuthContextProvider = ({ children }) => {
         }, twentyNineMinutes)
         return () => clearInterval(interval)
     }, [authTokens, loading])
+    // }, [authTokens])
+    // }, [])
 
     return (
         <AuthContext.Provider value={contextData}>

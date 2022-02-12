@@ -22,12 +22,13 @@ export default function App(props) {
   // const routing = useRoutes(routes(accessToken));
 
   const hooksData = useSelector(state => {
+    // console.log('STATE App ------>', state)
     // console.log('STATE App auth ------>', state.auth)
-    // console.log('STATE App token ------>', state.auth.token)
-    console.log('STATE App token2 ------>', state.auth.profile.accessToken)
+    console.log('STATE App token ------>', state.auth.token)
+    // console.log('STATE App token2 ------>', state.auth.profile.accessToken)
     return {
-      // isAuthenticated: state.auth.token !== (null || undefined)
-      isAuthenticated: state.auth.profile.accessToken !== (null || undefined)
+      isAuthenticated: state.auth.token !== null
+      // isAuthenticated: state.auth.profile.accessToken !== (null || undefined)
     };
   });
 

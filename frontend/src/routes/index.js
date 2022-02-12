@@ -10,11 +10,11 @@ import PrivateRoute, { PrivateWrapper } from '../routes/utils/PrivateRoute'
 import Auth from '../pages/Auth';
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
-import LoginPage from '../pages/LoginPage'
+// import LoginPage from '../pages/LoginPage'
 import Profile from "../pages/Profile";
 
 import Home from '../pages/Home';
-import HomePage from '../pages/HomePage'
+// import HomePage from '../pages/HomePage'
 import AssignmentList from "../pages/AssignmentList";
 import AssignmentDetail from "../pages/AssignmentDetail";
 import AssignmentCreate from "../pages/AssignmentCreate";
@@ -31,7 +31,7 @@ const BaseRouter = () => (
         {/* <Route exact path="/auth/" element={<Auth/>} /> */}
         <Route exact path="/login/" element={<Auth />} />
         <Route exact path="/login1/" element={<Login />} />
-        <Route exact path="/login2/" element={<LoginPage />} />
+        {/* <Route exact path="/login2/" element={<LoginPage />} /> */}
         <Route exact path="/profile/:user_id" element={<Profile />} />
         {/* <Route exact path="/profile" element={<Profile />} /> */}
 
@@ -45,7 +45,7 @@ const BaseRouter = () => (
         {/* <Route exact path='/home2' element={<PrivateRoute element={HomePage}/>}/> */}
         {/* <Route element={<PrivateWrapper />}> */}
         <Route path="/home1" element={<Home />} />
-        <Route path="/home2" element={<HomePage />} />
+        {/* <Route path="/home2" element={<HomePage />} /> */}
         {/* </Route>  */}
         
 

@@ -14,15 +14,15 @@ import HeaderComponent from '../components/Header'
 // class CustomLayout extends React.Component {
 export default function CustomLayout(props) {
 
-  // console.log('PROPS Layout ----> ', props)
+  console.log('PROPS Layout ----> ', props)
 
   const hooksData = useSelector(state => {
     // console.log(state)
     return {
       // userId: state.auth.userId,
       userId: state.auth.profile.user_id,
-      // token: state.auth.token,
-      token: state.auth.profile.accessToken,
+      token: state.auth.token,
+      // token: state.auth.profile.accessToken,
       is_teacher: state.auth.profile.is_teacher
     };
   });
@@ -55,7 +55,8 @@ export default function CustomLayout(props) {
             <HomeOutlined />
             <Link to="/">Home</Link>
           </Breadcrumb.Item>
-          {hooksData.token !== (null || undefined) ? (
+          {/* {hooksData.token !== (null || undefined) ? ( */}
+          {hooksData.token !== null ? (
             <Breadcrumb.Item>
               <UserOutlined />
               <Link to={`/profile/${hooksData.userId}`}>Profile</Link>
@@ -124,7 +125,7 @@ export default function CustomLayout(props) {
         {/* </Breadcrumb> */}
       </Header>
       <Content style={{ padding: "0 50px" }}>
-        <HeaderComponent />
+        {/* <HeaderComponent /> */}
 
         <div style={{ background: "#fff", padding: 24, minHeight: 280, width: "80vw" }}>
           {props.children}
