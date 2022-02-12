@@ -140,12 +140,12 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static'), os.path.join(BASE_DIR, 'frontend/build')]
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static')]
-STATIC_ROOT = '/vol/web/static'
-STATIC_TMP = '/vol/web/static'
-MEDIA_ROOT = '/vol/web/media'
+# STATIC_ROOT = '/vol/web/static'
+# STATIC_TMP = '/vol/web/static'
+# MEDIA_ROOT = '/vol/web/media'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'frontend/staticfiles')
-# STATIC_TMP = os.path.join(BASE_DIR, 'frontend/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'frontend/staticfiles')
+STATIC_TMP = os.path.join(BASE_DIR, 'frontend/static')
 
 os.makedirs(STATIC_ROOT, exist_ok=True)
 os.makedirs(STATIC_TMP, exist_ok=True)
