@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.core.validators import RegexValidator, ValidationError
+from django.contrib.auth.models import update_last_login
 
 # from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
 from rest_auth.registration.serializers import RegisterSerializer
@@ -86,13 +87,20 @@ class CreateUserSerializer(ModelSerializer):
         }
     )
 
+    # id = serializers.ModelField(model_field=User._meta.get_field('id'), required=False)
+
     password = serializers.CharField(min_length=8, required=True, write_only=True)
     password2 = serializers.CharField(min_length=8, write_only=True, required=True)
     tokens = serializers.SerializerMethodField()
 
+    is_student = serializers.BooleanField(required=False)
+    is_teacher = serializers.BooleanField(required=False)
+
     class Meta:
         model = User
-        fields = ('id', 'email', 'username', 'password', 'password2', 'tokens')
+        # fields = ('email', 'username', 'password', 'password2', 'tokens', 'is_student', 'is_teacher')
+        fields = ('id', 'email', 'username', 'password', 'password2', 'tokens', 'is_student', 'is_teacher')
+        # fields = ('id', 'email', 'username', 'password', 'password2', 'tokens')
         extra_kwargs = {'password': {'write_only': True}}
 
     def get_tokens(self, user):
@@ -125,16 +133,34 @@ class CreateUserSerializer(ModelSerializer):
 
 
 
-    def create(self, validated_data):
-        password = validated_data.pop('password', None)
-        password2 = validated_data.pop('password2', None)
+    # def create(self, validated_data):
+    # # def save(self, *args, **kwargs):
+    #     password = validated_data.pop('password', None)
+    #     password2 = validated_data.pop('password2', None)
         
-        instance = self.Meta.model(**validated_data)
+    #     instance = self.Meta.model(**validated_data)
 
-        if password is not None:
-            instance.set_password(password)
-        instance.save()
-        return instance
+    #     if password is not None:
+    #         instance.set_password(password)
+    #     instance.save()
+
+    #     # return instance
+    #     self.instance = instance
+    #     return self.instance
+    
+    
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            validated_data['username'],
+            email=validated_data['email'],
+            # first_name=validated_data['first_name'],
+            # last_name=validated_data['last_name'],
+            # is_student=validated_data['is_student'],
+            # is_teacher=validated_data['is_teacher'],
+            password=validated_data['password'])
+
+        return user
+
 
 
 
@@ -222,25 +248,27 @@ class RegisterUserSerializer(RegisterSerializer, TokenObtainPairSerializer, JWTA
 
 
 class CustomRegisterSerializer(RegisterSerializer):
-    # is_student = serializers.BooleanField()
-    # is_teacher = serializers.BooleanField()
+    is_student = serializers.BooleanField(required=False)
+    is_teacher = serializers.BooleanField(required=False)
 
     class Meta:
         model = User
-        # fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
-        fields = ('email', 'username', 'password')
+        fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+        # fields = ('email', 'username', 'password')
 
-    def get_cleaned_data(self):
+    def get_cleaned_data(self, request):
         return {
             'username': self.validated_data.get('username', ''),
             'password': self.validated_data.get('password', ''),
             # 'confirm': self.validated_data.get('confirm', ''),
             'email': self.validated_data.get('email', ''),
-            # 'is_student': self.validated_data.get('is_student', ''),
-            # 'is_teacher': self.validated_data.get('is_teacher', '')
+            'is_student': self.validated_data.get('is_student', ''),
+            'is_teacher': self.validated_data.get('is_teacher', '')
         }
 
     def save(self, request):
+    # def create(self, request):
+
         adapter = get_adapter()
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
