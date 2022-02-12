@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 
 from core.models import TimeStampModel
 
@@ -16,6 +16,10 @@ class Profile(TimeStampModel):
         'first name', max_length=30, blank=True, null=True)
     last_name = models.CharField(
         'last name', max_length=30, blank=True, null=True)
+    is_teacher = models.BooleanField(
+        'is_teacher', default=False, blank=True, null=True)
+    is_student = models.BooleanField(
+        'is_student', default=True, blank=True, null=True)
     birth_date = models.DateField('last name', null=True, blank=True)
     bio = models.TextField('bio', default='', null=True, blank=True)
     city = models.CharField('city', blank=True, null=True,

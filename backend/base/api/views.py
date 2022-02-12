@@ -37,7 +37,8 @@ def getRoutes(request):
     routes = [
         '/api/token',
         '/api/token/refresh',
-        '/api/auth/signup/'
+        '/api/signup/'
+        # '/api/auth/signup/'
     ]
 
     return Response(routes)
@@ -82,10 +83,11 @@ class CreateUserView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = CreateUserSerializer(data = request.data)
         if serializer.is_valid(raise_exception=True):
+        # if serializer.is_valid():
             # serializer.save(request)
             serializer.save()
-            print('SERIALIZER DATA  --------->',serializer.data)
+            # print('SERIALIZER DATA  --------->',serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        print('SERIALIZER ERRORS  --------->',serializer.errors)
+        # print('SERIALIZER ERRORS  --------->',serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
