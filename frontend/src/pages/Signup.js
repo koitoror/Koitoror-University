@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Select } from "antd";
-// import Icon from '@ant-design/icons';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
-// import { UserOutlined, LockOutlined, MailOutlined, MailFilled, MailTwoTone } from '@ant-design/icons';
-// import { connect } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import * as actions from "../redux/actions/auth";
@@ -11,10 +8,6 @@ import * as actions from "../redux/actions/auth";
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-// class RegistrationForm extends React.Component {
-//   state = {
-//     confirmDirty: false
-//   };
 
 export default function RegistrationForm(props) {
   console.log('Registration props', props)
@@ -57,7 +50,6 @@ export default function RegistrationForm(props) {
           values.confirm,
           is_student
         );
-        // props.history.push("/")   ;
         props.history("/");
       }
     });
@@ -68,7 +60,6 @@ export default function RegistrationForm(props) {
     setState({ confirmDirty: state.confirmDirty || !!value });
   };
 
-  // const compareToFirstPassword = (rule, value, callback) => {
   const compareToFirstPassword = (rule, value) => {
     const form = props.form;
     if (value && value !== form.getFieldValue("password")) {
@@ -78,7 +69,6 @@ export default function RegistrationForm(props) {
     }
   };
 
-  // const validateToNextPassword = (rule, value, callback) => {
   const validateToNextPassword = (rule, value) => {
     const form = props.form;
     if (value && state.confirmDirty) {
@@ -87,8 +77,6 @@ export default function RegistrationForm(props) {
     Promise.resolve();
   };
 
-  // render() {
-  // const { getFieldDecorator } = props.form;
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -112,9 +100,7 @@ export default function RegistrationForm(props) {
       ]} >
 
         <Input
-          // prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
           prefix={<MailOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
-          // prefix={<MailTwoTone className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
           placeholder="Email"
         />
 
@@ -133,14 +119,12 @@ export default function RegistrationForm(props) {
 
       <FormItem name="confirm" rules={[{ required: true, message: "Please confirm your password!" }]} >
 
-        {/* ( */}
         <Input
           prefix={<LockOutlined className="site-form-item-icon" style={{ color: "rgba(0,0,0,.25)" }} />}
           type="password"
           placeholder="Password"
           onBlur={handleConfirmBlur}
         />
-        {/* ) */}
 
       </FormItem>
 
@@ -169,27 +153,4 @@ export default function RegistrationForm(props) {
       </FormItem>
     </Form>
   );
-  // }
 }
-
-
-// const mapStateToProps = state => {
-//   return {
-//     loading: state.auth.loading,
-//     error: state.auth.error
-//   };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onAuth: (username, email, password, confirm, is_student) =>
-//       dispatch(
-//         actions.authSignup(username, email, password, confirm, is_student)
-//       )
-//   };
-// };
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(RegistrationForm);

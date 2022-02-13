@@ -27,8 +27,6 @@ const defaultFormItemLayout = {
 };
 
 export default function AssignmentCreate(props) {
-// 
-// const AssignmentCreate = (props) => {
 
     const [formCount, setFormCount] = useState(1);
 
@@ -36,9 +34,7 @@ export default function AssignmentCreate(props) {
       // console.log('CREATE ASSIGMENT STATE', state)
       return {
         token: state.auth.token,
-        // token: state.auth.profile.accessToken,
-        // username: state.auth.username,
-        username: state.auth.profile.username,
+        username: state.auth.username,
         loading: state.assignments.loading
       };
     })
@@ -80,18 +76,14 @@ export default function AssignmentCreate(props) {
         }
 
         const asnt = {
-            // teacher: props.username.email,
             teacher: hooksData.username,
-
             title: values.title,
             questions
         };
 
-        // props.createASNT(asnt);
         createASNT(hooksData.token, asnt);
 
-
-        console.log(asnt);
+        // console.log(asnt);
 
     };
 

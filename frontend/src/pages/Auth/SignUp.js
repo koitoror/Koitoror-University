@@ -4,10 +4,13 @@ import { UserAddOutlined } from '@ant-design/icons';
 import { Typography, message } from 'antd';
 import { Row, Col } from 'antd';
 import { get } from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 import SocialNetworks from './SocialNetworks';
 import SignUpSuccessModal from './SignUpSuccessModal';
 import api from '../../api/axios';
+import { authSignup } from '../../redux/actions/auth';
 
 const { Title } = Typography;
 
@@ -16,46 +19,34 @@ export default function SignUp() {
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
     const [form] = Form.useForm();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { auth } = useSelector(state => state)
+    console.log('STATE LOGIN', auth)
+
 
     const onFinish = async (values) => {
-        try {
-            const payload = {
-                firstName: get(values, 'firstName'),
-                lastName: get(values, 'lastName'),
-                email: get(values, 'email'),
-                username: get(values, 'username'),
-                password: get(values, 'password'),
-                password2: get(values, 'password'),
-                // password2: get(values, 'confirm'),
-            }
-
-            console.log(payload)
-            setLoading(true)
-
-            const res = await api({
-                url: '/api/signup/',
-                data: payload,
-                method: 'POST'
-            });
-
-            if (res && res.status === 201) {
-                console.log('SIGN UP RESULT ---> ', res)
-                const accessToken = res.data.tokens;
-
-                localStorage.setItem('authTokens', JSON.stringify(res.data.tokens))
-
-                setShowModal(true);
-                navigate('/')
-                form.resetFields()
-                setLoading(false)
-                setChecked(false)
-
-            }
-        } catch (error) {
-            const errorMessage = get(error, 'error.message', 'Something went wrong!')
-            message.error(errorMessage)
-            setLoading(false)
+        const payload = {
+            first_name: get(values, 'firstName'),
+            last_name: get(values, 'lastName'),
+            email: get(values, 'email'),
+            username: get(values, 'username'),
+            password: get(values, 'password'),
+            password2: get(values, 'password'),
+            // password2: get(values, 'confirm'),
         }
+
+        console.log(payload)
+        setLoading(true)
+
+        dispatch(authSignup(payload))
+
+        setShowModal(true);
+        form.resetFields()
+        setLoading(false)
+        setChecked(false)
+        // navigate('/')
+
     };
 
     const onCheckboxChange = e => {
@@ -70,10 +61,8 @@ export default function SignUp() {
     // const validation = (rule, value, callback) => {
     const validation = (rule, value) => {
         if (checked) {
-            // return callback()
             return Promise.resolve();
         }
-        // return callback("Please agree Terms of Use & Privacy policy")
         return Promise.reject(
             "Please agree Terms of Use & Privacy policy"
             );
@@ -245,7 +234,8 @@ export default function SignUp() {
                 </Form.Item>
 
                 <Button
-                    loading={loading}
+                    // loading={loading}
+                    loading={auth.loading}
                     type="primary"
                     className="form-submit-btn"
                     htmlType="submit"

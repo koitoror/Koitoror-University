@@ -20,7 +20,6 @@ function SignUpSuccessModal(props) {
             <Result
                 status="success"
                 title="Congratulations! Registration completed successfully!"
-                // subTitle="Now you can sign in to our system."
                 subTitle="Now you can automatically sign in to our system."
                 extra={[
                     <Button 

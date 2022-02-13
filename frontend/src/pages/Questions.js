@@ -3,12 +3,7 @@ import { Steps, Button } from "antd";
 
 const Step = Steps.Step;
 
-// class Questions extends React.Component {
 export default function Questions (props) {
-
-  // state = {
-  //   current: 0
-  // };
 
   const [state, setState] = useState({
     current: 0
@@ -24,7 +19,6 @@ export default function Questions (props) {
     setState({ current });
   }
 
-  // render() {
   const { current } = state;
   const { questions } = props;
   return (
@@ -54,7 +48,4 @@ export default function Questions (props) {
       </div>
     </div>
   );
-  // }
 }
-
-// export default Questions;

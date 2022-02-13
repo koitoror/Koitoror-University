@@ -9,10 +9,8 @@ const radioStyle = {
   lineHeight: "30px"
 };
 
-// class Choices extends React.Component {
 const Choices = (props) => {
 
-  // render() {
   const { questionId } = props;
   const { usersAnswers } = props;
   return (
@@ -34,7 +32,6 @@ const Choices = (props) => {
       })}
     </RadioGroup>
   );
-  // }
 }
 
 export default Choices;

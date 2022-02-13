@@ -35,7 +35,6 @@ export const getASNTS = token => {
       Authorization: `Bearer ${token}`
     };
     axios
-      // .get("https://koitoror-university.herokuapp.com/assignments/")
       .get(`${uri}/assignments/`)
       .then(res => {
         const assignments = res.data;
@@ -77,7 +76,6 @@ export const getASNTSDetail = (token, id) => {
       Authorization: `Bearer ${token}`
     };
     axios
-      // .get(`https://koitoror-university.herokuapp.com/assignments/${id}/`)
       .get(`${uri}/assignments/${id}/`)
       .then(res => {
         const assignment = res.data;
@@ -119,7 +117,6 @@ export const createASNT = (token, asnt) => {
       Authorization: `Bearer ${token}`
     };
     axios
-      // .post(`https://koitoror-university.herokuapp.com/assignments/`, asnt)
       .post(`${uri}/assignments/`, asnt)
       .then(res => {
         dispatch(createASNTSuccess());

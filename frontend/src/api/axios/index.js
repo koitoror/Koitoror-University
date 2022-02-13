@@ -1,7 +1,5 @@
 import axios from 'axios';
 import queryString from 'qs';
-// import get from 'lodash/get';
-// import cookie from 'js-cookie'
 import systemConfig from './config'
 
 const request = axios.create();

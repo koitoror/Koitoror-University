@@ -16,9 +16,8 @@ const initialState = {
 const authStart = (state, action) => {
   console.log('authStart   ---  CHANGING LOADING TO TRUE')
   return updateObject(state, {
-    error: null,
-    // error: false,
-    loading: true
+    loading: true,
+    error: null
   });
 };
 
@@ -44,7 +43,7 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-  console.log('authLogout INVOKED')
+  // console.log('authLogout INVOKED')
   return updateObject(state, {
     token: null,
     loading: false,
@@ -65,10 +64,10 @@ const reducer = (state = initialState, action) => {
     case actionTypes.AUTH_FAIL:
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
-      console.log('authLogout reducer INVOKED')
+      // console.log('authLogout reducer INVOKED')
       return authLogout(state, action);
     case actionTypes.SIGN_IN:
-        console.log('SIGN_IN   ---  CHANGING LOADING TO TRUE')
+        // console.log('SIGN_IN   ---  CHANGING LOADING TO TRUE')
         return {
             ...state,
             loading: true,
@@ -90,7 +89,7 @@ const reducer = (state = initialState, action) => {
             profile: {}
         }
     case actionTypes.SIGN_OUT:
-        console.log('actionSignOut reducer INVOKED')
+        // console.log('actionSignOut reducer INVOKED')
         return {
             token: null,
             loading: false,

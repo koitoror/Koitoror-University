@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { connect } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 import { Card, Skeleton, message } from "antd";
 import Questions from "./Questions";
@@ -13,22 +12,16 @@ const cardStyle = {
   marginBottom: "20px"
 };
 
-// class AssignmentDetail extends React.Component {
 export default function AssignmentDetail(props) {
 
-  // state = {
-  //   usersAnswers: {}
-  // };
 
   const [state, setState] = useState({
     usersAnswers: {}
   });
 
   const hooksData = useSelector(state => {
-    // console.log(state)
     return {
       token: state.auth.token,
-      // token: state.auth.profile.accessToken,
       currentAssignment: state.assignments.currentAssignment,
       loading: state.assignments.loading,
       username: state.auth.username
@@ -47,25 +40,11 @@ export default function AssignmentDetail(props) {
   }
 
   useEffect(() => {
-    if (props.token !== undefined && props.token !== null) {
-      getASNTSDetail(props.token, props.match.params.id);
+    if (hooksData.token !== undefined && hooksData.token !== null) {
+      getASNTSDetail(hooksData.token, hooksData.match.params.id);
     }
 
-  }, [props]);
-
-  // componentDidMount() {
-  //   if (this.props.token !== undefined && this.props.token !== null) {
-  //     this.props.getASNTSDetail(this.props.token, this.props.match.params.id);
-  //   }
-  // }
-
-  // componentWillReceiveProps(newProps) {
-  //   if (newProps.token !== this.props.token) {
-  //     if (newProps.token !== undefined && newProps.token !== null) {
-  //       this.props.getASNTSDetail(newProps.token, this.props.match.params.id);
-  //     }
-  //   }
-  // }
+  }, []);
 
   const onChange = (e, qId) => {
     const { usersAnswers } = state;
@@ -77,15 +56,13 @@ export default function AssignmentDetail(props) {
     message.success("Submitting your assignment!");
     const { usersAnswers } = state;
     const asnt = {
-      username: props.username,
-      asntId: props.currentAssignment.id,
+      username: hooksData.username,
+      asntId: hooksData.currentAssignment.id,
       answers: usersAnswers
     };
-    // props.createGradedASNT(props.token, asnt);
-    createGradedASNT(props.token, asnt);
+    createGradedASNT(hooksData.token, asnt);
   }
 
-  // render() {
   const { currentAssignment } = hooksData;
   const { title } = currentAssignment;
   const { usersAnswers } = state;
@@ -93,7 +70,7 @@ export default function AssignmentDetail(props) {
     <Hoc>
       {Object.keys(currentAssignment).length > 0 ? (
         <Hoc>
-          {props.loading ? (
+          {hooksData.loading ? (
             <Skeleton active />
           ) : (
             <Card title={title}>
@@ -123,26 +100,4 @@ export default function AssignmentDetail(props) {
       ) : null}
     </Hoc>
   );
-  // }
 }
-
-// const mapStateToProps = state => {
-//   return {
-//     token: state.auth.token,
-//     currentAssignment: state.assignments.currentAssignment,
-//     loading: state.assignments.loading,
-//     username: state.auth.username
-//   };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     getASNTSDetail: (token, id) => dispatch(getASNTSDetail(token, id)),
-//     createGradedASNT: (token, asnt) => dispatch(createGradedASNT(token, asnt))
-//   };
-// };
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(AssignmentDetail);

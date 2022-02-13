@@ -1,7 +1,5 @@
-import axios from "axios";
-// import { useSelector } from 'react-redux';
-import React, { useState } from 'react';
-// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import React, { useState } from 'react';
 import jwt_decode from 'jwt-decode';
 
 
@@ -11,9 +9,8 @@ import * as actionTypes from "./actionTypes";
 import { API_HOST as uri } from '../../api/fetch/api'
 
 // API SERVICES
-import {api} from '../../services/Api';
+import {api} from '../../api/services/Api';
 
-// const navigate = useNavigate();
 
 export const authStart = () => {
   return {
@@ -22,7 +19,7 @@ export const authStart = () => {
 };
 
 export const authSuccess = (user) => {
-  console.log('AUTH SUCCESS OLD')
+  // console.log('AUTH SUCCESS OLD')
   localStorage.setItem("authTokens", JSON.stringify(user));
 
   return {
@@ -30,15 +27,6 @@ export const authSuccess = (user) => {
     user,
   };
 };
-
-// export const successMessage = (data) => {
-//   localStorage.setItem('AUTH_TOKEN', data.token);
-
-//   return {
-//     type: AUTH_SUCCESS,
-//     payload: data,
-//   };
-// };
 
 export const authFail = (error) => {
   return {
@@ -49,9 +37,8 @@ export const authFail = (error) => {
 
 export const logout = () => {
   
-  // localStorage.removeItem("user");
   localStorage.removeItem("authTokens");
-  console.log('ACTION TO LOGOUT INVOKED')
+  // console.log('ACTION TO LOGOUT INVOKED')
   return {
     type: actionTypes.AUTH_LOGOUT,
   };
@@ -104,27 +91,58 @@ export const checkAuthTimeout = (expirationTime) => {
 // };
 
 
+export const authLogin = formProps => dispatch => {
 
-export const authLogin = formProps => (dispatch) => {
-  // const navigate = useNavigate();
-
-  // const [user1, setUser] = useState(() =>
-  //       localStorage.getItem('authTokens')
-  //           ? jwt_decode(localStorage.getItem('authTokens'))
-  //           : null,
-  //       )
-  // dispatch(loadingMessage());
   dispatch(authStart());
   dispatch(actionSignIn()) //###
 
   return api.auth.login(formProps)
-    // console.log(formProps)
     .then((response) => {
       console.log('RESPONSE  ----->  ',response)
 
       const profile = jwt_decode(response.data.access)
       const user = {
         token: response.data.access,
+        username: profile.username,
+        userId: profile.user_id,
+        // is_student: profile.user_type.is_student,
+        // is_teacher: profile.user_type.is_teacher,
+        expirationDate: new Date(new Date().getTime() + 3600 * 1000),
+      };
+      dispatch(authSuccess(user));
+      dispatch(actionSignInSuccess(jwt_decode(user.token))) // ###
+      dispatch(checkAuthTimeout(3600));
+
+
+    })
+    .catch((err) => {
+      dispatch(authFail(err));
+
+      dispatch(actionSignInError(err))  //###
+
+      // if (error.response && error.response.data) {
+      //   const { responseErrorsObject } = getResponseErrors(error.response.data);
+      //   dispatch(failureMessage({ errors: responseErrorsObject }));
+      // } else {
+      //   dispatch(failureMessage({ errors: 'Something went wrong when signing you in.' }));
+      // }
+
+    });
+};
+
+export const authSignup = formProps => dispatch => {
+
+  dispatch(authStart());
+  dispatch(actionSignIn()) //###
+
+  return api.auth.signup(formProps)
+    // console.log(formProps)
+    .then((response) => {
+      console.log('RESPONSE  ----->  ',response)
+
+      const profile = jwt_decode(response.data.tokens.access)
+      const user = {
+        token: response.data.tokens.access,
         username: profile.username,
         userId: profile.user_id,
         // is_student: profile.user_type.is_student,
@@ -170,53 +188,51 @@ export const authLogin = formProps => (dispatch) => {
     });
 };
 
-
-
-export const authSignup = (
-  username,
-  email,
-  password,
-  confirm,
-  is_student
-) => {
-  return (dispatch) => {
-    dispatch(authStart());
-    const user = {
-      username,
-      email,
-      password,
-      confirm,
-      is_student,
-      is_teacher: !is_student,
-    };
-    axios.defaults.headers = {
-      "Access-Control-Allow-Origin": "<origin> | *",
-      "Content-Type": "application/json",
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    };
-    axios
-      .post(`${uri}/rest-auth/registration/`, user)
-      .then((res) => {
-        // const user = {
-        //   // token: res.data.key,
-        //   token: res.data.token,
-        //   username,
-        //   userId: res.data.user,
-        //   is_student,
-        //   is_teacher: !is_student,
-        //   expirationDate: new Date(new Date().getTime() + 3600 * 1000),
-        // };
-        const user = res.tokens
-        // localStorage.setItem("user", JSON.stringify(user));
-        dispatch(authSuccess(user));
-        dispatch(checkAuthTimeout(3600));
-      })
-      .catch((err) => {
-        dispatch(authFail(err));
-      });
-  };
-};
+// export const authSignup = (
+//   username,
+//   email,
+//   password,
+//   confirm,
+//   is_student
+// ) => {
+//   return (dispatch) => {
+//     dispatch(authStart());
+//     const user = {
+//       username,
+//       email,
+//       password,
+//       confirm,
+//       is_student,
+//       is_teacher: !is_student,
+//     };
+//     axios.defaults.headers = {
+//       "Access-Control-Allow-Origin": "<origin> | *",
+//       "Content-Type": "application/json",
+//       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+//       'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+//     };
+//     axios
+//       .post(`${uri}/rest-auth/registration/`, user)
+//       .then((res) => {
+//         // const user = {
+//         //   // token: res.data.key,
+//         //   token: res.data.token,
+//         //   username,
+//         //   userId: res.data.user,
+//         //   is_student,
+//         //   is_teacher: !is_student,
+//         //   expirationDate: new Date(new Date().getTime() + 3600 * 1000),
+//         // };
+//         const user = res.tokens
+//         // localStorage.setItem("user", JSON.stringify(user));
+//         dispatch(authSuccess(user));
+//         dispatch(checkAuthTimeout(3600));
+//       })
+//       .catch((err) => {
+//         dispatch(authFail(err));
+//       });
+//   };
+// };
 
 export const authCheckState = () => {
   return (dispatch) => {
@@ -239,7 +255,6 @@ export const authCheckState = () => {
   };
 };
 
-
 export const actionSignIn = () => dispatch => {
     dispatch({ type: actionTypes.SIGN_IN })
 }
@@ -247,7 +262,6 @@ export const actionSignIn = () => dispatch => {
 export const actionSignInSuccess = payload => dispatch => {
     dispatch({ type: actionTypes.SIGN_IN_SUCCESS, payload })
 }
-
 
 export const actionSignInError = error => dispatch => {
     dispatch({ type: actionTypes.SIGN_IN_ERROR, error })
@@ -261,12 +275,11 @@ export const actionFetchUserProfileSuccess = payload => dispatch => {
     dispatch({ type: actionTypes.FETCH_USER_SUCCESS, payload })
 }
 
-
 export const actionFetchUserProfileError = error => dispatch => {
     dispatch({ type: actionTypes.FETCH_USER_ERROR, error })
 }
 
 export const actionSignOut = error => dispatch => {
-    console.log('actionSignOut INVOKED')
+    // console.log('actionSignOut INVOKED')
     dispatch({ type: actionTypes.SIGN_OUT })
 }

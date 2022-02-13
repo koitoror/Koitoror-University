@@ -7,13 +7,10 @@ import get from 'lodash/get';
 
 // export default const PrivateRoute = ({ children, ...rest }) => {
 // const PrivateRoute = ({ auth: { isAuthenticated }, children }) => {
+// const PrivateRoute = ({ children, ...rest }) => {
+// const PrivateRoute = () => {
 const PrivateRoute = ({ children }) => {
-    // const PrivateRoute = ({ children, ...rest }) => {
-    // const PrivateRoute = () => {
     //REDUX
-    // const profile = useSelector((state) => state.auth.profile);
-    // const accessToken = get(profile, 'accessToken');
-    // const routing = useRoutes(routes(accessToken));
     // const isLogged = false;
     // const isAuthenticated = false;
 

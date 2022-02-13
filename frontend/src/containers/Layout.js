@@ -1,28 +1,33 @@
-import React from "react";
-import { Layout, Menu, Breadcrumb, Button } from "antd";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Layout, Breadcrumb, Button } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import { HomeOutlined, UserOutlined, LogoutOutlined, LoginOutlined, FileAddFilled } from '@ant-design/icons';
-// import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-// const { Header, Sider, Content, Footer } = Layout;
 const { Header, Content, Footer } = Layout;
 
 import * as actions from "../redux/actions/auth";
-import HeaderComponent from '../components/Header'
+// import HeaderComponent from '../components/Header'
 
 
-// class CustomLayout extends React.Component {
 export default function CustomLayout(props) {
+  const navigate = useNavigate();
 
   console.log('PROPS Layout ----> ', props)
+
+  // REDIRECT TO HOMEPAGE ON LOGOUT FROM LAYOUT
+  useEffect(() => {
+  if (!props.isAuthenticated) {
+    navigate('/');
+    }
+  
+  }, [props]);
 
   const hooksData = useSelector(state => {
     // console.log(state)
     return {
-      // userId: state.auth.userId,
-      userId: state.auth.profile.user_id,
       token: state.auth.token,
-      // token: state.auth.profile.accessToken,
+      userId: state.auth.userId,
+      // userId: state.auth.profile.user_id,
       is_teacher: state.auth.profile.is_teacher
     };
   });
@@ -33,11 +38,9 @@ export default function CustomLayout(props) {
 
   function logout() {
     console.log('ACTION TO LOGOUT DISPATCHED')
-    // return () => dispatch(actions.logout())
     return dispatch(actions.logout())
   };
 
-  // render() {
   return (
     <Layout
       className="layout"
@@ -100,30 +103,8 @@ export default function CustomLayout(props) {
             </Breadcrumb.Item>
           )}
         </Breadcrumb>
-        {/* <Breadcrumb style={{textAlign: "left"}}> */}
-        {/* <Breadcrumb> */}
-        {/* <Menu
-              // theme="dark"
-              // mode="horizontal"
-              // defaultSelectedKeys={["2"]}
-              // style={{ lineHeight: "44px", display: 'flex-end' }}
-              // style={{ display: 'flex-end' }}
-              // size="small"
-            > */}
-        {/* <div className="logo" /> */}
-        {/* {props.isAuthenticated ? (
-                <Breadcrumb.Item key="2" onClick={logout} style={{ borderRadius: "25" }}
-                >
-                  Logout
-                </Breadcrumb.Item>
-              ) : (
-                <Breadcrumb.Item key="2">
-                  <Link to="/login" >Login</Link>
-                </Breadcrumb.Item>
-              )} */}
-        {/* </Menu> */}
-        {/* </Breadcrumb> */}
       </Header>
+
       <Content style={{ padding: "0 50px" }}>
         {/* <HeaderComponent /> */}
 
@@ -131,39 +112,11 @@ export default function CustomLayout(props) {
           {props.children}
         </div>
       </Content>
+  
       <Footer style={{ textAlign: "center" }}>
         Koitoror Designs ©2022 Degem-Ventures
       </Footer>
+
     </Layout>
   );
-  // }
 }
-
-
-// const mapStateToProps = state => {
-//   return {
-//     userId: state.auth.userId,
-//     token: state.auth.token,
-//     is_teacher: state.auth.is_teacher
-//   };
-// };
-
-
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     logout: () => dispatch(actions.logout())
-//   };
-// };
-
-// export default useNavigate(
-//   connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-//   )(CustomLayout)
-// );
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(CustomLayout);

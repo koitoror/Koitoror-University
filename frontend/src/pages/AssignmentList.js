@@ -6,20 +6,16 @@ import { List, Skeleton } from "antd";
 import * as actions from "../redux/actions/assignments";
 import Hoc from "../hoc/hoc";
 
-// class AssignmentList extends React.PureComponent {
 export default function AssignmentList(props) {
 
   const hooksData = useSelector(state => {
-    console.log('STATE ------>', state)
-    // console.log('STATE AUTH TOKEN ------>', state.auth.profile.accessToken)
+    // console.log('STATE ------>', state)
     return {
       token: state.auth.token,
-      // token: state.auth.profile.accessToken,
       assignments: state.assignments.assignments,
       loading: state.assignments.loading
     };
   });
-
 
   console.log(hooksData)
 
@@ -29,29 +25,15 @@ export default function AssignmentList(props) {
     return () => dispatch(actions.getASNTS(token))
   };
 
-  // componentDidMount() {
-  //   if (this.props.token !== undefined && this.props.token !== null) {
-  //     this.props.getASNTS(this.props.token);
-  //   }
-  // }
-
   useEffect(() => {
-    if (props.token !== undefined && props.token !== null) {
-      getASNTS(props.token);
+    if (hooksData.token !== undefined && hooksData.token !== null) {
+      getASNTS(hooksData.token);
     }
-    // return () => {
-    //   getASNTS(props.token);
-    // };
-  }, [props]);
+    return () => {
+      getASNTS(hooksData.token);
+    };
+  }, []);
 
-
-  // UNSAFE_componentWillReceiveProps(newProps) {
-  //   if (newProps.token !== this.props.token) {
-  //     if (newProps.token !== undefined && newProps.token !== null) {
-  //       this.props.getASNTS(newProps.token);
-  //     }
-  //   }
-  // }
 
   function renderItem(item) {
     return (
@@ -61,7 +43,6 @@ export default function AssignmentList(props) {
     );
   }
 
-  // render() {
   return (
     <Hoc>
       {props.loading ? (
@@ -79,25 +60,4 @@ export default function AssignmentList(props) {
       )}
     </Hoc>
   );
-  // }
 }
-
-// const mapStateToProps = state => {
-//   return {
-//     token: state.auth.token,
-//     assignments: state.assignments.assignments,
-//     loading: state.assignments.loading
-//   };
-// };
-
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     getASNTS: token => dispatch(actions.getASNTS(token))
-//   };
-// };
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(AssignmentList);
