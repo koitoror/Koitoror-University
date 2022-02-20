@@ -1,11 +1,14 @@
 import React from "react";
 // import { Route, Routes, useRoutes, Navigate, } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // local Imports
 import Hoc from "../hoc/hoc";
 
 import PrivateRoute, { PrivateWrapper } from '../routes/utils/PrivateRoute'
+
+import CustomLayout from "../containers/Layout";
 
 import Auth from '../pages/Auth';
 import Signup from "../pages/Signup";
@@ -21,8 +24,22 @@ import AssignmentCreate from "../pages/AssignmentCreate";
 import NotFoundPage from "../pages/NotFoundPage";
 
 
-const BaseRouter = () => (
-  <Hoc>
+const BaseRouter = () => {
+
+  const hooksData = useSelector(state => {
+    // console.log('STATE App ------>', state)
+    // console.log('STATE App auth ------>', state.auth)
+    // console.log('STATE App token ------>', state.auth.token)
+    return {
+      isAuthenticated: state.auth.token !== null
+    };
+  });
+
+  console.log(hooksData)
+
+
+  return (
+    <Hoc>
 
       <Routes>
 
@@ -32,30 +49,35 @@ const BaseRouter = () => (
         <Route exact path="/login/" element={<Auth />} />
         <Route exact path="/login1/" element={<Login />} />
         {/* <Route exact path="/login2/" element={<LoginPage />} /> */}
-        <Route exact path="/profile/:user_id" element={<Profile />} />
-        {/* <Route exact path="/profile" element={<Profile />} /> */}
+
+        // LAYOUT ROUTES
+        <Route element={<CustomLayout {...hooksData} />}>
+          <Route exact path="/profile/:user_id" element={<Profile />} />
+          {/* <Route exact path="/profile" element={<Profile />} /> */}
 
 
-        // ASSIGNMENTS ROUTES
-        <Route exact path="/" element={<AssignmentList />} />
-        <Route exact path="/create/" element={<AssignmentCreate />} />
-        <Route exact path="/assignments/:id" element={<AssignmentDetail />} />
+          // ASSIGNMENTS ROUTES
+          <Route exact path="/" element={<AssignmentList />} />
+          <Route exact path="/create/" element={<AssignmentCreate />} />
+          <Route exact path="/assignments/:id" element={<AssignmentDetail />} />
 
-        // PROTECTED ROUTES
-        {/* <Route exact path='/home2' element={<PrivateRoute element={HomePage}/>}/> */}
-        {/* <Route element={<PrivateWrapper />}> */}
-        <Route path="/home1" element={<Home />} />
-        {/* <Route path="/home2" element={<HomePage />} /> */}
-        {/* </Route>  */}
-        
+          // PROTECTED ROUTES
+          {/* <Route exact path='/home2' element={<PrivateRoute element={HomePage}/>}/> */}
+          {/* <Route element={<PrivateWrapper />}> */}
+          <Route path="/home1" element={<Home />} />
+          {/* <Route path="/home2" element={<HomePage />} /> */}
+          {/* </Route>  */}
+
+        </Route>
 
         // HANDLE NOT FOUND ROUTE
         <Route exact path="/not-found" element={<NotFoundPage />} />
         <Route exact element={<NotFoundPage />} />
-      
+
       </Routes>
-  
-  </Hoc>
-);
+
+    </Hoc>
+  )
+};
 
 export default BaseRouter;

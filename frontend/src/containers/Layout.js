@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Layout, Breadcrumb, Button } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Outlet } from "react-router-dom";
 import { HomeOutlined, UserOutlined, LogoutOutlined, LoginOutlined, FileAddFilled } from '@ant-design/icons';
 import { useSelector, useDispatch } from "react-redux";
 const { Header, Content, Footer } = Layout;
@@ -72,10 +72,12 @@ export default function CustomLayout(props) {
             </Breadcrumb.Item>
           ) : null}
         </Breadcrumb>
-        <Breadcrumb style={{
-          margin: -42,
-          float: 'right'
-        }}>
+        <Breadcrumb 
+          style={{
+            margin: -42,
+            float: 'right'
+          }}
+        >
           {props.isAuthenticated ? (
             <Breadcrumb.Item>
               <Button
@@ -109,7 +111,9 @@ export default function CustomLayout(props) {
         {/* <HeaderComponent /> */}
 
         <div style={{ background: "#fff", padding: 24, minHeight: 280, width: "80vw" }}>
-          {props.children}
+          {/* {props.children} */}
+          <Outlet />
+
         </div>
       </Content>
   

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 
 // CSS Imports
 import "antd/dist/antd.min.css";
@@ -16,16 +17,16 @@ import CustomLayout from "./containers/Layout";
 export default function App(props) {
   console.log('PROPS APP ----> ', props)
 
-  const hooksData = useSelector(state => {
-    // console.log('STATE App ------>', state)
-    // console.log('STATE App auth ------>', state.auth)
-    // console.log('STATE App token ------>', state.auth.token)
-    return {
-      isAuthenticated: state.auth.token !== null
-    };
-  });
+  // const hooksData = useSelector(state => {
+  //   // console.log('STATE App ------>', state)
+  //   // console.log('STATE App auth ------>', state.auth)
+  //   // console.log('STATE App token ------>', state.auth.token)
+  //   return {
+  //     isAuthenticated: state.auth.token !== null
+  //   };
+  // });
 
-  console.log(hooksData)
+  // console.log(hooksData)
 
   const dispatch = useDispatch()
   
@@ -45,9 +46,9 @@ export default function App(props) {
   return (
     <>
       <Router>
-        <CustomLayout {...hooksData}>
+        {/* <CustomLayout {...hooksData}> */}
           <BaseRouter />
-        </CustomLayout>
+        {/* </CustomLayout> */}
       </Router>
     </>
   );
