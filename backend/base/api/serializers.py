@@ -68,6 +68,8 @@ class CreateUserSerializer(ModelSerializer):
             "invalid": errors['username']['invalid']
         }
     )
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
 
     def email_validate(email):
         regex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
@@ -99,13 +101,16 @@ class CreateUserSerializer(ModelSerializer):
     class Meta:
         model = User
         # fields = ('email', 'username', 'password', 'password2', 'tokens', 'is_student', 'is_teacher')
-        fields = ('id', 'email', 'username', 'password', 'password2', 'tokens', 'is_student', 'is_teacher')
+        fields = ('id', 'email', 'first_name', 'last_name', 'username', 'password', 'password2', 'tokens', 'is_student', 'is_teacher')
         # fields = ('id', 'email', 'username', 'password', 'password2', 'tokens')
         extra_kwargs = {'password': {'write_only': True}}
 
     def get_tokens(self, user):
         refresh = RefreshToken.for_user(user)
         refresh['email'] = user.email
+        refresh['username'] = user.username
+        # refresh['first_name'] = user.first_name
+        # refresh['last_name'] = user.last_name
 
         return {
             'refresh': str(refresh),
@@ -153,15 +158,13 @@ class CreateUserSerializer(ModelSerializer):
         user = User.objects.create_user(
             validated_data['username'],
             email=validated_data['email'],
-            # first_name=validated_data['first_name'],
-            # last_name=validated_data['last_name'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
             # is_student=validated_data['is_student'],
             # is_teacher=validated_data['is_teacher'],
             password=validated_data['password'])
 
         return user
-
-
 
 
 # class RegisterUserSerializer(ModelSerializer):

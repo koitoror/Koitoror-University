@@ -1,9 +1,11 @@
-import * as actionTypes from "../actions/actionTypes";
+import * as actionTypes from "../actions/types";
 import { updateObject } from "./utility";
 
 const initialState = {
   token: null,
   username: null,
+  first_name: null,
+  last_name: null,
   is_student: null,
   is_teacher: null,
   userId: null,
@@ -16,7 +18,8 @@ const initialState = {
 const authStart = (state, action) => {
   console.log('authStart   ---  CHANGING LOADING TO TRUE')
   return updateObject(state, {
-    loading: true,
+    // loading: true,
+    token: null,
     error: null
   });
 };
@@ -27,6 +30,8 @@ const authSuccess = (state, action) => {
   return updateObject(state, {
     token: action.user.token,
     username: action.user.username,
+    first_name: action.user.first_name,
+    last_name: action.user.last_name,
     is_student: action.user.is_student,
     is_teacher: action.user.is_teacher,
     userId: action.user.userId,
@@ -50,6 +55,8 @@ const authLogout = (state, action) => {
     error: {},
     profile: {},
     username: null,
+    first_name: null,
+    last_name: null,
     userId: null
 
   });
@@ -70,7 +77,8 @@ const reducer = (state = initialState, action) => {
         // console.log('SIGN_IN   ---  CHANGING LOADING TO TRUE')
         return {
             ...state,
-            loading: true,
+            // loading: true,
+            token: null,
             error: null,
             profile: {}
         }
@@ -96,6 +104,8 @@ const reducer = (state = initialState, action) => {
             error: {},
             profile: {},
             username: null,
+            first_name: null,
+            last_name: null,
             userId: null
 
         }

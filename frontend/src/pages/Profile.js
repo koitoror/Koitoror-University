@@ -13,10 +13,12 @@ export default function Profile(props) {
     // console.log('PROPS Profile ------>', props)
     
     const hooksData = useSelector(state => {
-      // console.log('STATE Profile ------>', state)
+      console.log('STATE Profile ------>', state)
       return {
         token: state.auth.token,
         username: state.auth.username,
+        first_name: state.auth.first_name,
+        last_name: state.auth.last_name,
         gradedAssignments: state.gradedAssignments.assignments,
         loading: state.gradedAssignments.loading
       };
@@ -42,7 +44,9 @@ export default function Profile(props) {
         <Skeleton active />
       ) : (
         <Hoc>
-          <h1>Hi {hooksData.username}</h1>
+          {/* <h1>Hi {hooksData.username}</h1> */}
+          <h1>Hi {hooksData.first_name} </h1>
+          {/* <h1>Hi {hooksData.first_name} {hooksData.last_name}</h1> */}
           <List
             size="large"
             dataSource={hooksData.gradedAssignments}
