@@ -3,7 +3,7 @@
 import jwt_decode from 'jwt-decode';
 
 
-import * as actionTypes from "./actionTypes";
+import * as actionTypes from "./types";
 
 // Backend API URL
 import { API_HOST as uri } from '../../api/fetch/api'
@@ -101,14 +101,20 @@ export const authLogin = formProps => dispatch => {
       console.log('RESPONSE  ----->  ',response)
 
       const profile = jwt_decode(response.data.access)
+      console.log('PROFILE  ------> ', profile)
+
       const user = {
         token: response.data.access,
         username: profile.username,
         userId: profile.user_id,
+        first_name: profile.first_name,
+        last_name: profile.last_name,
         // is_student: profile.user_type.is_student,
         // is_teacher: profile.user_type.is_teacher,
         expirationDate: new Date(new Date().getTime() + 3600 * 1000),
       };
+      console.log('USER ---->  ', user)
+
       dispatch(authSuccess(user));
       dispatch(actionSignInSuccess(jwt_decode(user.token))) // ###
       dispatch(checkAuthTimeout(3600));
@@ -141,8 +147,14 @@ export const authSignup = formProps => dispatch => {
       console.log('RESPONSE  ----->  ',response)
 
       const profile = jwt_decode(response.data.tokens.access)
+      console.log('PROFILE  ------> ', profile)
+
       const user = {
         token: response.data.tokens.access,
+        first_name: response.data.first_name,
+        last_name: response.data.last_name,
+        // first_name: profile.first_name,
+        // last_name: profile.last_name,
         username: profile.username,
         userId: profile.user_id,
         // is_student: profile.user_type.is_student,
@@ -156,10 +168,10 @@ export const authSignup = formProps => dispatch => {
       // const user = response.data
       // user.accessToken = response.data.tokens
       // profile.accessToken = response.data.access
-      // console.log('PROFILE  ------> ', profile)
 
       // localStorage.setItem("authTokens", JSON.stringify(user));
       // dispatch(successMessage(response.data.user));
+      console.log('USER ---->  ', user)
       dispatch(authSuccess(user));
 
       // setUser(jwt_decode(user.access))
@@ -238,7 +250,8 @@ export const authCheckState = () => {
   return (dispatch) => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user === undefined || user === null) {
-      dispatch(f);
+      // dispatch(f);
+      dispatch(logout());
     } else {
       const expirationDate = new Date(user.expirationDate);
       if (expirationDate <= new Date()) {

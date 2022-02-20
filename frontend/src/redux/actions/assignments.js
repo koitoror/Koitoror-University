@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as actionTypes from "./actionTypes";
+import * as actionTypes from "./types";
 
 // Backend API URL
 import { API_HOST as uri } from '../../api/fetch/api'
