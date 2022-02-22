@@ -2,7 +2,8 @@
 import os
 from .base import *
 
-DEBUG = False
+# DEBUG = False
+DEBUG = os.environ.get('DEBUG')
 
 # ALLOWED_HOSTS += os.environ.get('ALLOWED_HOSTS_PROD')
 ALLOWED_HOSTS += os.environ.get('ALLOWED_HOSTS_PROD').split(',')
