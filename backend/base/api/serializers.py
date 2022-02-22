@@ -22,6 +22,8 @@ from django.conf import settings
 from django.contrib.auth.models import  User
 import jwt
 # from rest_framework_jwt.utils import jwt_payload_handler, jwt_encode_handler
+from profiles.models import Profile
+from profiles.serializers import GetCurrentUserProfileSerializer
 
 from base.models import Note
 # from base.models import Note, User
@@ -95,14 +97,14 @@ class CreateUserSerializer(ModelSerializer):
     password2 = serializers.CharField(min_length=8, write_only=True, required=True)
     tokens = serializers.SerializerMethodField()
 
-    is_student = serializers.BooleanField(required=False)
-    is_teacher = serializers.BooleanField(required=False)
+    # is_student = serializers.BooleanField(required=False)
+    # is_teacher = serializers.BooleanField(required=False)
 
     class Meta:
         model = User
         # fields = ('email', 'username', 'password', 'password2', 'tokens', 'is_student', 'is_teacher')
-        fields = ('id', 'email', 'first_name', 'last_name', 'username', 'password', 'password2', 'tokens', 'is_student', 'is_teacher')
-        # fields = ('id', 'email', 'username', 'password', 'password2', 'tokens')
+        # fields = ('id', 'email', 'first_name', 'last_name', 'username', 'password', 'password2', 'tokens', 'is_student', 'is_teacher')
+        fields = ('id', 'email', 'first_name', 'last_name', 'username', 'password', 'password2', 'tokens')
         extra_kwargs = {'password': {'write_only': True}}
 
     def get_tokens(self, user):
@@ -163,7 +165,6 @@ class CreateUserSerializer(ModelSerializer):
             # is_student=validated_data['is_student'],
             # is_teacher=validated_data['is_teacher'],
             password=validated_data['password'])
-
         return user
 
 
@@ -301,4 +302,55 @@ class CustomRegisterSerializer(RegisterSerializer):
 #         }
 
 
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    # token = serializers.SerializerMethodField()
+    user_type = serializers.SerializerMethodField()
 
+
+    # @classmethod
+    # def get_token(cls, user):
+    def get_token(self, user):
+        
+        print('THIS IS THE USER   --->  ---->  ----->', user)
+        print('THIS IS THE USER TYPE   --->  ---->  ----->', type(user) )
+
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username
+        token['first_name'] = user.first_name
+        token['last_name'] = user.last_name
+        token['email'] = user.email
+        # ...
+
+        profile = Profile.objects.get(user_id=user.id)
+        serializer_data = GetCurrentUserProfileSerializer(profile).data
+        is_student = serializer_data.get('is_student')
+        is_teacher = serializer_data.get('is_teacher')
+        token['is_student'] = is_student
+        token['is_teacher'] = is_teacher
+
+        return token
+
+    def get_user_type(self, user):
+    # def get_user_type(self, obj):
+        # token = super().get_token(user)
+
+        profile = Profile.objects.get(
+                user_id=user.id
+            )
+            
+        serializer_data = GetCurrentUserProfileSerializer(profile).data
+            
+        is_student = serializer_data.get('is_student')
+        is_teacher = serializer_data.get('is_teacher')
+        return {
+            'is_student': is_student,
+            'is_teacher': is_teacher
+        }
+
+    class Meta:
+        model = User
+        fields = '__all__'
+        # fields = ('token', 'is_student', 'is_teacher', 'user_type')
+    

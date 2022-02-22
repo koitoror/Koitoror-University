@@ -33,15 +33,20 @@ class GetCurrentUserProfileSerializer(serializers.ModelSerializer):
     # highlights_on_my_articles = serializers.SerializerMethodField()
     # my_follow_count = serializers.SerializerMethodField()
     # my_highlights = serializers.SerializerMethodField()
-    username = serializers.ReadOnlyField(source='get_username')
+    # username = serializers.ReadOnlyField(source='get_username')
     # image_url = serializers.ReadOnlyField(source='get_cloudinary_url')
 
     class Meta:
         model = Profile
 
+        # fields = '__all__'
         fields = (
-            'username', 'first_name', 'last_name', 'bio', 'image', 'image_url',
-            'website', 'city', 'phone', 'country', 
+            # 'username', 'first_name', 'last_name', 'bio', 'image', 'image_url',
+            # 'website', 'city', 'phone', 'country', 
+        
+            'birth_date', 'is_teacher', 'is_student', 'bio',
+            'website', 'phone', 'city', 'country', 
+
             # 'my_highlights', 'highlights_on_my_articles', 'my_follow_count'
             )
 
