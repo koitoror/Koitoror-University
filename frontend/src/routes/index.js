@@ -52,9 +52,9 @@ const BaseRouter = () => {
 
         // LAYOUT ROUTES
         <Route element={<CustomLayout {...hooksData} />}>
+
           <Route exact path="/profile/:user_id" element={<Profile />} />
           {/* <Route exact path="/profile" element={<Profile />} /> */}
-
 
           // ASSIGNMENTS ROUTES
           <Route exact path="/" element={<AssignmentList />} />
@@ -72,7 +72,7 @@ const BaseRouter = () => {
 
         // HANDLE NOT FOUND ROUTE
         <Route exact path="/not-found" element={<NotFoundPage />} />
-        <Route exact element={<NotFoundPage />} />
+        <Route path='*' element={<NotFoundPage />} />
 
       </Routes>
 
