@@ -107,6 +107,8 @@ export const authLogin = formProps => dispatch => {
         userId: profile.user_id,
         first_name: profile.first_name,
         last_name: profile.last_name,
+        is_student: profile.is_student,
+        is_teacher: profile.is_teacher,
         // is_student: profile.user_type.is_student,
         // is_teacher: profile.user_type.is_teacher,
         expirationDate: new Date(new Date().getTime() + 3600 * 1000),
@@ -144,19 +146,21 @@ export const authSignup = formProps => dispatch => {
     .then((response) => {
       console.log('RESPONSE  ----->  ', response)
 
-      const profile = jwt_decode(response.data.tokens.access)
+      const profile = jwt_decode(response.data.user.tokens.access)
       console.log('PROFILE  ------> ', profile)
 
       const user = {
-        token: response.data.tokens.access,
-        first_name: response.data.first_name,
-        last_name: response.data.last_name,
+        token: response.data.user.tokens.access,
+        first_name: response.data.user.first_name,
+        last_name: response.data.user.last_name,
         // first_name: profile.first_name,
         // last_name: profile.last_name,
         username: profile.username,
         userId: profile.user_id,
         // is_student: profile.user_type.is_student,
         // is_teacher: profile.user_type.is_teacher,
+        is_student: response.data.profile.is_student,
+        is_teacher: response.data.profile.is_teacher,
         expirationDate: new Date(new Date().getTime() + 3600 * 1000),
       };
       // const user = {
@@ -246,7 +250,7 @@ export const authSignup = formProps => dispatch => {
 
 export const authCheckState = () => {
   return (dispatch) => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("authTokens"));
     if (user === undefined || user === null) {
       // dispatch(f);
       dispatch(logout());
