@@ -9,18 +9,14 @@ from core.models import TimeStampModel
 
 
 class Profile(TimeStampModel):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # user = models.OneToOneField(
+    #     settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     first_name = models.CharField(
         'first name', max_length=30, blank=True, null=True)
     last_name = models.CharField(
         'last name', max_length=30, blank=True, null=True)
-    is_teacher = models.BooleanField(
-        'is_teacher', default=False, blank=True, null=True)
-    is_student = models.BooleanField(
-        'is_student', default=True, blank=True, null=True)
-    birth_date = models.DateField('last name', null=True, blank=True)
+    birth_date = models.DateField('birth date', null=True, blank=True)
     bio = models.TextField('bio', default='', null=True, blank=True)
     city = models.CharField('city', blank=True, null=True,
                             max_length=100, default='')
@@ -41,6 +37,10 @@ class Profile(TimeStampModel):
                                          'from_profile', 'to_profile'),
                                      related_name="followed_by",
                                      symmetrical=False)
+    is_teacher = models.BooleanField(
+        'is_teacher', default=False, blank=True, null=True)
+    is_student = models.BooleanField(
+        'is_student', default=True, blank=True, null=True)
 
     def __str__(self):
         return self.user.username
