@@ -1,15 +1,13 @@
-// import axios from "axios";
-// import React, { useState } from 'react';
 import jwt_decode from 'jwt-decode';
-
 
 import * as actionTypes from "./types";
 
 // Backend API URL
 import { API_HOST as uri } from '../../api/fetch/api'
-
 // API SERVICES
-import {api} from '../../api/services/Api';
+import { api } from '../../api/services/Api';
+
+// window.jwt_decode = jwt_decode
 
 
 export const authStart = () => {
@@ -36,7 +34,7 @@ export const authFail = (error) => {
 };
 
 export const logout = () => {
-  
+
   localStorage.removeItem("authTokens");
   // console.log('ACTION TO LOGOUT INVOKED')
   return {
@@ -98,7 +96,7 @@ export const authLogin = formProps => dispatch => {
 
   return api.auth.login(formProps)
     .then((response) => {
-      console.log('RESPONSE  ----->  ',response)
+      console.log('RESPONSE  ----->  ', response)
 
       const profile = jwt_decode(response.data.access)
       console.log('PROFILE  ------> ', profile)
@@ -144,7 +142,7 @@ export const authSignup = formProps => dispatch => {
   return api.auth.signup(formProps)
     // console.log(formProps)
     .then((response) => {
-      console.log('RESPONSE  ----->  ',response)
+      console.log('RESPONSE  ----->  ', response)
 
       const profile = jwt_decode(response.data.tokens.access)
       console.log('PROFILE  ------> ', profile)
@@ -269,30 +267,30 @@ export const authCheckState = () => {
 };
 
 export const actionSignIn = () => dispatch => {
-    dispatch({ type: actionTypes.SIGN_IN })
+  dispatch({ type: actionTypes.SIGN_IN })
 }
 
 export const actionSignInSuccess = payload => dispatch => {
-    dispatch({ type: actionTypes.SIGN_IN_SUCCESS, payload })
+  dispatch({ type: actionTypes.SIGN_IN_SUCCESS, payload })
 }
 
 export const actionSignInError = error => dispatch => {
-    dispatch({ type: actionTypes.SIGN_IN_ERROR, error })
+  dispatch({ type: actionTypes.SIGN_IN_ERROR, error })
 }
 
 export const actionFetchUserProfile = () => dispatch => {
-    dispatch({ type: actionTypes.FETCH_USER })
+  dispatch({ type: actionTypes.FETCH_USER })
 }
 
 export const actionFetchUserProfileSuccess = payload => dispatch => {
-    dispatch({ type: actionTypes.FETCH_USER_SUCCESS, payload })
+  dispatch({ type: actionTypes.FETCH_USER_SUCCESS, payload })
 }
 
 export const actionFetchUserProfileError = error => dispatch => {
-    dispatch({ type: actionTypes.FETCH_USER_ERROR, error })
+  dispatch({ type: actionTypes.FETCH_USER_ERROR, error })
 }
 
 export const actionSignOut = error => dispatch => {
-    // console.log('actionSignOut INVOKED')
-    dispatch({ type: actionTypes.SIGN_OUT })
+  // console.log('actionSignOut INVOKED')
+  dispatch({ type: actionTypes.SIGN_OUT })
 }

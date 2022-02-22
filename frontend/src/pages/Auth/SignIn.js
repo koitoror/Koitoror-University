@@ -6,13 +6,11 @@ import { Typography } from 'antd';
 import get from 'lodash/get';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-// import jwt_decode from 'jwt-decode'
 
 import { authLogin } from '../../redux/actions/auth';
 
 const { Title } = Typography;
 
-// window.jwt_decode = jwt_decode
 
 export default function SignIn() {
     const [form] = Form.useForm();

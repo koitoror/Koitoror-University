@@ -5,11 +5,9 @@ import { Typography, message } from 'antd';
 import { Row, Col } from 'antd';
 import { get } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
 
 import SocialNetworks from './SocialNetworks';
 import SignUpSuccessModal from './SignUpSuccessModal';
-import api from '../../api/axios';
 import { authSignup } from '../../redux/actions/auth';
 
 const { Title } = Typography;
@@ -20,11 +18,10 @@ export default function SignUp() {
     const [loading, setLoading] = useState(false);
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const { auth } = useSelector(state => state)
     console.log('STATE LOGIN', auth)
 
-
+    
     const onFinish = async (values) => {
         const payload = {
             first_name: get(values, 'firstName'),
@@ -32,11 +29,11 @@ export default function SignUp() {
             email: get(values, 'email'),
             username: get(values, 'username'),
             password: get(values, 'password'),
-            password2: get(values, 'password'),
-            // password2: get(values, 'confirm'),
+            // password2: get(values, 'password'),
+            password2: get(values, 'confirm')
         }
+        console.log('SIGNUP PAYLOAD', payload)
 
-        console.log(payload)
         setLoading(true)
 
         dispatch(authSignup(payload))
@@ -53,12 +50,10 @@ export default function SignUp() {
         setChecked(e.target.checked);
     };
 
-
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
-    // const validation = (rule, value, callback) => {
     const validation = (rule, value) => {
         if (checked) {
             return Promise.resolve();
