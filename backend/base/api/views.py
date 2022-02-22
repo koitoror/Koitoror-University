@@ -8,27 +8,11 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
-from .serializers import NoteSerializer, RegisterUserSerializer, CreateUserSerializer
+from .serializers import NoteSerializer, RegisterUserSerializer, CreateUserSerializer, MyTokenObtainPairSerializer
+from profiles.serializers import GetCurrentUserProfileSerializer
 from base.models import User
 # from django.contrib.auth.models import User
-
-
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        
-        print('THIS IS THE USER   --->  ---->  ----->', user)
-
-        token = super().get_token(user)
-
-        # Add custom claims
-        token['username'] = user.username
-        token['first_name'] = user.first_name
-        token['last_name'] = user.last_name
-        token['email'] = user.email
-        # ...
-
-        return token
+from profiles.models import Profile
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -85,12 +69,26 @@ class CreateUserView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         serializer = CreateUserSerializer(data = request.data)
+        serializer_class = GetCurrentUserProfileSerializer
+
         if serializer.is_valid(raise_exception=True):
         # if serializer.is_valid():
             # serializer.save(request)
             serializer.save()
-            # print('SERIALIZER DATA  --------->',serializer.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+            current_user = serializer.data
+            # print('CURRENT USER   ----->  ', type(current_user['id']))
+            profile = Profile.objects.get(
+                user_id=current_user['id']
+            )
+            
+            user_profile = serializer_class(profile)
+            # user_profile = self.serializer_class(current_user.id)
+            return Response(
+                {"user": current_user,
+                "profile": user_profile.data},
+                status=status.HTTP_201_CREATED
+                )
         # print('SERIALIZER ERRORS  --------->',serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
