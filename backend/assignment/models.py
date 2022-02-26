@@ -18,6 +18,7 @@ class GradedAssignment(models.Model):
 
     def __str__(self):
         return self.student.username
+        # return self.student.email
 
 
 class Choice(models.Model):

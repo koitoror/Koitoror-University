@@ -11,8 +11,9 @@ import PrivateRoute, { PrivateWrapper } from '../routes/utils/PrivateRoute'
 import CustomLayout from "../containers/Layout";
 
 import Auth from '../pages/Auth';
-import Signup from "../pages/Signup";
-import Login from "../pages/Login";
+import Signup from "../pages/Auth/SignupOLD";
+import Login from "../pages/Auth/LoginOLD";
+
 // import LoginPage from '../pages/LoginPage'
 import Profile from "../pages/Profile";
 

@@ -32,9 +32,11 @@ class AssignmentSerializer(serializers.ModelSerializer):
 
     def create(self, request):
         data = request.data
+        print(data)
 
         assignment = Assignment()
         teacher = User.objects.get(username=data['teacher'])
+        # teacher = User.objects.get(email=data['teacher'])
         assignment.teacher = teacher
         assignment.title = data['title']
         assignment.save()
@@ -72,6 +74,7 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
 
         assignment = Assignment.objects.get(id=data['asntId'])
         student = User.objects.get(username=data['username'])
+        # student = User.objects.get(email=data['email'])
 
         graded_asnt = GradedAssignment()
         graded_asnt.assignment = assignment

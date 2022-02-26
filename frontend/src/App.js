@@ -13,7 +13,6 @@ import * as actions from "./redux/actions/auth";
 import CustomLayout from "./containers/Layout";
 
 
-
 export default function App(props) {
   console.log('PROPS APP ----> ', props)
 

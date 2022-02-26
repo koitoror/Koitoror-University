@@ -30,7 +30,7 @@ export default function SignIn() {
         dispatch(authLogin(payload))
 
         form.resetFields()
-        navigate('/')
+        // navigate('/')
 
     };
 
@@ -50,6 +50,7 @@ export default function SignIn() {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             // style={{padding: 0, height: 50}}
+            style={{padding: 20}}
             >
                 <Title level={2} className="text-center">Sign in</Title>
                 <SocialNetworks />

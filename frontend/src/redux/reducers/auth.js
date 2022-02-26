@@ -18,7 +18,7 @@ const initialState = {
 const authStart = (state, action) => {
   console.log('authStart   ---  CHANGING LOADING TO TRUE')
   return updateObject(state, {
-    // loading: true,
+    loading: true,
     token: null,
     error: null
   });
@@ -77,7 +77,7 @@ const reducer = (state = initialState, action) => {
         // console.log('SIGN_IN   ---  CHANGING LOADING TO TRUE')
         return {
             ...state,
-            // loading: true,
+            loading: true,
             token: null,
             error: null,
             profile: {}

@@ -13,10 +13,11 @@ urlpatterns = [
 
     path('api/', include('base.api.urls')),
     path('api/', include('profiles.urls', namespace='profiles')),
+
     path('assignments/', include('assignment.assignments.urls')),
     path('graded-assignments/', include('assignment.graded_assignments.urls')),
 
-    re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
+    # re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 ]
 
 
@@ -33,6 +34,12 @@ if settings.DEBUG:
         document_root=settings.STATIC_ROOT
     )
 
+    # import debug_toolbar
+    # urlpatterns = [
+    #     path('__debug__/', include(debug_toolbar.urls)),
+    # ] + urlpatterns
+
+
 # if not settings.DEBUG:
 #     # print('MEDIA_URL   for debug ---> ', settings.MEDIA_URL, 'DEBUG', settings.DEBUG, 'MEDIA_ROOT', settings.MEDIA_ROOT)
 #     urlpatterns += static(
@@ -47,3 +54,6 @@ if settings.DEBUG:
 #         settings.STATIC_URL,
 #         document_root=settings.STATIC_ROOT
 #     )
+
+urlpatterns += [re_path(r"^.*",
+                        TemplateView.as_view(template_name="index.html"))]

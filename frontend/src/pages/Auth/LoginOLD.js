@@ -7,7 +7,7 @@ import { UserOutlined, LockOutlined, Loading3QuartersOutlined } from '@ant-desig
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import * as actions from "../redux/actions/auth";
+import * as actions from "../../redux/actions/auth";
 
 const FormItem = Form.Item;
 

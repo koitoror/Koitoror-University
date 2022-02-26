@@ -87,6 +87,8 @@ export default function SignUp() {
             //     marginBottom: 0,
             //     height: 0
             //   }}
+                style={{padding: 20}}
+
             >
 
                 <Title level={2} className="text-center">Create Account</Title>

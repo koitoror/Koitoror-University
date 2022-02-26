@@ -35,7 +35,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     u'https://127.0.0.1:8000',
 # ]
 
-DEBUG = True
+# DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
 WSGI_APPLICATION = 'app.wsgi.dev.application'
 

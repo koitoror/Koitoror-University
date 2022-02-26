@@ -46,6 +46,7 @@ export const getASNTS = token => {
   };
 };
 
+
 const getASNTDetailStart = () => {
   return {
     type: actionTypes.GET_ASSIGNMENT_DETAIL_START
@@ -86,6 +87,7 @@ export const getASNTSDetail = (token, id) => {
       });
   };
 };
+
 
 const createASNTStart = () => {
   return {

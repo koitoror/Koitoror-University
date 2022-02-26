@@ -12,6 +12,8 @@ export const AuthContextProvider = ({ children }) => {
 
     const [isPanelRightActive, setIsPanelRightActive] = useState(false);
 
+    let [loading, setLoading] = useState(true)
+
     const handleClickSignIn = () => {
         setIsPanelRightActive(false)
     }
@@ -53,7 +55,6 @@ export const AuthContextProvider = ({ children }) => {
 
     console.log('user', user)
 
-    let [loading, setLoading] = useState(true)
 
     let loginUser = async (e) => {
         e.preventDefault()
@@ -87,23 +88,23 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     let updateToken = async () => {
-        console.log('updated token!')
-        let response = await fetch(`${uri}/api/token/refresh/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ 'refresh': authTokens?.refresh })
-            // body: JSON.stringify({ refresh: authTokens && authTokens.refresh }),
-        })
+        // console.log('updated token!')
+        // let response = await fetch(`${uri}/api/token/refresh/`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({ 'refresh': authTokens?.refresh })
+        //     // body: JSON.stringify({ refresh: authTokens && authTokens.refresh }),
+        // })
 
-        let data = await response.json()
+        // let data = await response.json()
 
-        if (response.status === 200) {
-            setAuthTokens(data)
-            setUser(jwt_decode(data.access))
-            localStorage.setItem('authTokens', JSON.stringify(data))
-        } 
+        // if (response.status === 200) {
+        //     setAuthTokens(data)
+        //     setUser(jwt_decode(data.access))
+        //     localStorage.setItem('authTokens', JSON.stringify(data))
+        // } 
         // else {
         //     logoutUser()
         // }

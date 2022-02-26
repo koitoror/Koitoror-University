@@ -311,8 +311,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     # def get_token(cls, user):
     def get_token(self, user):
         
-        print('THIS IS THE USER   --->  ---->  ----->', user)
-        print('THIS IS THE USER TYPE   --->  ---->  ----->', type(user) )
+        # print('THIS IS THE USER   --->  ---->  ----->', user)
+        # print('THIS IS THE USER TYPE   --->  ---->  ----->', type(user) )
 
         token = super().get_token(user)
 
@@ -327,6 +327,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         serializer_data = GetCurrentUserProfileSerializer(profile).data
         is_student = serializer_data.get('is_student')
         is_teacher = serializer_data.get('is_teacher')
+        
         token['is_student'] = is_student
         token['is_teacher'] = is_teacher
 
