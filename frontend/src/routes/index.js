@@ -13,12 +13,16 @@ import CustomLayout from "../containers/Layout";
 import Auth from '../pages/Auth';
 import Signup from "../pages/Auth/SignupOLD";
 import Login from "../pages/Auth/LoginOLD";
-
 // import LoginPage from '../pages/LoginPage'
+import Activate from "../pages/Auth/Activate";
+import ResetPassword from "../pages/Auth/ResetPassword";
+import ResetPasswordConfirm from "../pages/Auth/ResetPasswordConfirm";
+
 import Profile from "../pages/Profile";
 
 import Home from '../pages/Home';
 // import HomePage from '../pages/HomePage'
+
 import AssignmentList from "../pages/AssignmentList";
 import AssignmentDetail from "../pages/AssignmentDetail";
 import AssignmentCreate from "../pages/AssignmentCreate";
@@ -50,7 +54,10 @@ const BaseRouter = () => {
         <Route exact path="/login/" element={<Auth />} />
         <Route exact path="/login1/" element={<Login />} />
         {/* <Route exact path="/login2/" element={<LoginPage />} /> */}
-
+        <Route exact path='/reset_password' element={<ResetPassword />} />
+        <Route exact path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm />} />
+        <Route exact path="/activate/:uid/:token" element={<Activate />} />
+        
         // LAYOUT ROUTES
         <Route element={<CustomLayout {...hooksData} />}>
 
