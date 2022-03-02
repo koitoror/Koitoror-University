@@ -17,6 +17,8 @@
 	right: 0;
 	padding:10px;
 	max-height: 40px;
+  z-index: 102;
+
 }
 
 .ant-form-item-control-wrapper {

@@ -9,6 +9,7 @@ import SignUp from './SignUp';
 import { Typography } from 'antd';
 import './style.css';
 import AuthContext from '../../context/AuthContext';
+import FooterComponent from '../../components/Footer'
 
 
 const { Link } = Typography;
@@ -73,6 +74,9 @@ export default function Auth() {
                         <div className="text-center" onClick={switchMode}>Already have an account? <Link>Sign in now.</Link></div>
                     </>}
                 </div>}
+                
+                <FooterComponent />
+
             </div>
     )
 }
