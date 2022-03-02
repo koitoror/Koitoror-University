@@ -56,36 +56,36 @@ export const AuthContextProvider = ({ children }) => {
     console.log('user', user)
 
 
-    let loginUser = async (e) => {
-        e.preventDefault()
+    // let loginUser = async (e) => {
+    //     e.preventDefault()
 
-        let response = await fetch(`${uri}/api/token/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: e.target.username.value,
-                password: e.target.password.value,
-            }),
-        })
-        console.log('RESPONSE', response)
-        let data = await response.json()
+    //     let response = await fetch(`${uri}/api/token/`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             username: e.target.username.value,
+    //             password: e.target.password.value,
+    //         }),
+    //     })
+    //     console.log('RESPONSE', response)
+    //     let data = await response.json()
 
-        if (response.status === 200) {
-            setAuthTokens(data)
-            setUser(jwt_decode(data.access))
-            localStorage.setItem('authTokens', JSON.stringify(data))
-        } else {
-            alert('Something went wrong!')
-        }
-    }
+    //     if (response.status === 200) {
+    //         setAuthTokens(data)
+    //         setUser(jwt_decode(data.access))
+    //         localStorage.setItem('authTokens', JSON.stringify(data))
+    //     } else {
+    //         alert('Something went wrong!')
+    //     }
+    // }
 
-    let logoutUser = () => {
-        setAuthTokens(null)
-        setUser(null)
-        localStorage.removeItem('authTokens')
-    }
+    // let logoutUser = () => {
+    //     setAuthTokens(null)
+    //     setUser(null)
+    //     localStorage.removeItem('authTokens')
+    // }
 
     let updateToken = async () => {
         // console.log('updated token!')
@@ -117,8 +117,8 @@ export const AuthContextProvider = ({ children }) => {
     let contextData = {
         user,
         authTokens,
-        loginUser,
-        logoutUser,
+        // loginUser,
+        // logoutUser,
         handleClickSignIn,
         handleClickSignUp,
         switchMode,
