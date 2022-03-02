@@ -12,7 +12,8 @@ import { Form, Input, Button, Divider  } from "antd";
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import QuestionForm from "./QuestionForm";
 // import Hoc from "../hoc/hoc";
-import { createASNT as createASNTAction } from "../redux/actions/assignments";
+// import { createASNT as createASNTAction } from "../redux/actions/assignments";
+import { createASNT as createASNTAction } from "../redux";
 // import { createASNT } from "../redux";
 
 // const FormItem = Form.Item;

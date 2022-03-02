@@ -3,7 +3,8 @@ import { Form, Input, Button, Select } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import * as actions from "../../redux/actions/auth";
+// import * as actions from "../../redux/actions/auth";
+import { authLogin, authSignup } from "../../redux";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -27,12 +28,8 @@ export default function RegistrationForm(props) {
 
   const dispatch = useDispatch()
 
-  function onAuth(username, password) {
-    return () => dispatch(actions.authLogin(username, password))
-  };
-
   function onAuth(username, email, password, confirm, is_student) {
-    return () => dispatch(actionsauthSignup(username, email, password, confirm, is_student))
+    return () => dispatch(authSignup(username, email, password, confirm, is_student))
   };
 
   const handleSubmit = e => {

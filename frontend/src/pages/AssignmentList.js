@@ -3,7 +3,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { List, Skeleton } from "antd";
-import * as actions from "../redux/actions/assignments";
+// import * as actions from "../redux/actions/assignments";
+import { getASNTS as getASNTSAction } from "../redux";
 import Hoc from "../hoc/hoc";
 
 export default function AssignmentList(props) {
@@ -22,7 +23,8 @@ export default function AssignmentList(props) {
   const dispatch = useDispatch()
 
   function getASNTS(token) {
-    return () => dispatch(actions.getASNTS(token))
+    // return () => dispatch(actions.getASNTS(token))
+    return () => dispatch(getASNTSAction(token))
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Checkbox, message, notification } from 'antd';
 import { LoginOutlined } from '@ant-design/icons';
 import SocialNetworks from './SocialNetworks';
@@ -7,12 +7,15 @@ import get from 'lodash/get';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
-import { authLogin } from '../../redux/actions/auth';
+// import { authLogin } from '../../redux/actions/auth';
+import { authLogin } from '../../redux';
 
 const { Title } = Typography;
 
 
 export default function SignIn() {
+    const [loading, setLoading] = useState(true);
+
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -27,12 +30,26 @@ export default function SignIn() {
             password: get(values, 'password', '')
         }
 
+        // setLoading(true)
+        console.log('***SIGNUP LOADING ', loading)
+        
         dispatch(authLogin(payload))
-
+        
+        setLoading(auth.loading)
+        console.log('***SIGNUP LOADING ', loading)
+        
         form.resetFields()
         // navigate('/')
 
     };
+
+    useEffect(() => {
+        if (loading === false) {
+            navigate('/');
+            }
+        
+        }, [auth]);
+
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);

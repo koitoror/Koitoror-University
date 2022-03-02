@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import SocialNetworks from './SocialNetworks';
 import SignUpSuccessModal from './SignUpSuccessModal';
-import { authSignup } from '../../redux/actions/auth';
+// import { authSignup } from '../../redux/actions/auth';
+import { authSignup } from '../../redux';
 
 const { Title } = Typography;
 
@@ -101,7 +102,7 @@ export default function SignUp() {
                         <Form.Item
                             hasFeedback
                             name="firstName"
-                            label="First name"
+                            // label="First name"
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             rules={[
@@ -120,7 +121,7 @@ export default function SignUp() {
                         <Form.Item
                             hasFeedback
                             name="lastName"
-                            label="Last name"
+                            // label="Last name"
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             rules={[
@@ -140,7 +141,7 @@ export default function SignUp() {
 
                 <Form.Item
                     name="username"
-                    label="Username"
+                    // label="Username"
                     labelCol={{ span: 24 }}
                     wrapperCol={{ span: 24 }}
                     hasFeedback
@@ -156,7 +157,7 @@ export default function SignUp() {
 
                 <Form.Item
                     name="email"
-                    label="Email address"
+                    // label="Email address"
                     labelCol={{ span: 24 }}
                     wrapperCol={{ span: 24 }}
                     hasFeedback
@@ -178,7 +179,7 @@ export default function SignUp() {
                     <Col className="gutter-row" xs={{ span: 24 }} md={{ span: 12 }}>
                         <Form.Item
                             name="password"
-                            label="Password"
+                            // label="Password"
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             hasFeedback
@@ -197,7 +198,7 @@ export default function SignUp() {
                     <Col className="gutter-row" xs={{ span: 24 }} md={{ span: 12 }}>
                         <Form.Item
                             name="confirm"
-                            label="Confirm Password"
+                            // label="Confirm Password"
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             dependencies={['password']}

@@ -7,7 +7,8 @@ import { UserOutlined, LockOutlined, Loading3QuartersOutlined } from '@ant-desig
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import * as actions from "../../redux/actions/auth";
+// import * as actions from "../../redux/actions/auth";
+import { authLogin } from "../../redux";
 
 const FormItem = Form.Item;
 
@@ -47,11 +48,8 @@ export default function NormalLoginForm(props) {
   const dispatch = useDispatch()
 
   function onAuth(username, password) {
-    return () => dispatch(actions.authLogin(username, password))
-  };
-
-  function onAuth(username, email, password, confirm, is_student) {
-    return () => dispatch(actionsauthSignup(username, email, password, confirm, is_student))
+    // return () => dispatch(actions.authLogin(username, password))
+    return () => dispatch(authLogin(username, password))
   };
 
   let errorMessage = null;

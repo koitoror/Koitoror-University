@@ -4,9 +4,9 @@ import { List, Skeleton } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 
 import Result from "../components/Result";
-import { getGradedASNTS } from "../redux/actions/gradedAssignments";
+// import { getGradedASNTS } from "../redux/actions/gradedAssignments";
+import { getGradedASNTS } from "../redux";
 import Hoc from "../hoc/hoc";
-// import requireAuth from '../hoc/requireAuth';
 
 
 export default function Profile(props) {

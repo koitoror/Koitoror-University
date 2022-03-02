@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 // import FacebookLogin from 'react-facebook-login';
 import { useDispatch } from 'react-redux';
 
-import { actionSignInSuccess } from '../../redux/actions/auth';
+// import { actionSignInSuccess } from '../../redux/actions/auth';
+import { actionSignInSuccess } from '../../redux';
 // import config from '../../api/config'
 import api from '../../api/axios';
 

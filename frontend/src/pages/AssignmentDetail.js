@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Card, Skeleton, message } from "antd";
 import Questions from "./Questions";
 import Choices from "../components/Choices";
-import { getASNTSDetail as getASNTSDetailAction } from "../redux/actions/assignments";
-import { createGradedASNT as createGradedASNTAction } from "../redux/actions/gradedAssignments";
+// import { getASNTSDetail as getASNTSDetailAction } from "../redux/actions/assignments";
+// import { createGradedASNT as createGradedASNTAction } from "../redux/actions/gradedAssignments";
+import { getASNTSDetail as getASNTSDetailAction, createGradedASNT as createGradedASNTAction } from "../redux";
 import Hoc from "../hoc/hoc";
 
 const cardStyle = {
