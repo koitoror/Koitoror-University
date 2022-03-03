@@ -70,7 +70,7 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
 
     def create(self, request):
         data = request.data
-        print(data)
+        print('GRADED DATA  ======> ', data)
 
         assignment = Assignment.objects.get(id=data['asntId'])
         student = User.objects.get(username=data['username'])

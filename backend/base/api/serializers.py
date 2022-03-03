@@ -333,22 +333,22 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
-    def get_user_type(self, user):
-    # def get_user_type(self, obj):
-        # token = super().get_token(user)
+    # def get_user_type(self, user):
+    # # def get_user_type(self, obj):
+    #     # token = super().get_token(user)
 
-        profile = Profile.objects.get(
-                user_id=user.id
-            )
+    #     profile = Profile.objects.get(
+    #             user_id=user.id
+    #         )
             
-        serializer_data = GetCurrentUserProfileSerializer(profile).data
+    #     serializer_data = GetCurrentUserProfileSerializer(profile).data
             
-        is_student = serializer_data.get('is_student')
-        is_teacher = serializer_data.get('is_teacher')
-        return {
-            'is_student': is_student,
-            'is_teacher': is_teacher
-        }
+    #     is_student = serializer_data.get('is_student')
+    #     is_teacher = serializer_data.get('is_teacher')
+    #     return {
+    #         'is_student': is_student,
+    #         'is_teacher': is_teacher
+    #     }
 
     class Meta:
         model = User

@@ -153,9 +153,9 @@ class User(AbstractBaseUser, TimeStampModel):
         return token.decode('utf-8')
 
 
-class Student(models.Model):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.user.username
+# class Student(models.Model):
+#     # user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     user = models.OneToOneField(
+#         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     def __str__(self):
+#         return self.user.username

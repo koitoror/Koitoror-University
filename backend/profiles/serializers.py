@@ -20,7 +20,7 @@ class GetProfileSerializer(serializers.ModelSerializer):
 
         fields = (
             'username', 'first_name', 'last_name', 'bio', 'image', 'image_url',
-            'website', 'city', 'phone', 'country')
+            'website', 'city', 'phone_number', 'country')
 
         read_only_fields = ("created_at", "updated_at")
 
@@ -45,7 +45,7 @@ class GetCurrentUserProfileSerializer(serializers.ModelSerializer):
             # 'website', 'city', 'phone', 'country', 
         
             'birth_date', 'is_teacher', 'is_student', 'bio',
-            'website', 'phone', 'city', 'country', 
+            'website', 'phone_number', 'city', 'country', 
 
             # 'my_highlights', 'highlights_on_my_articles', 'my_follow_count'
             )

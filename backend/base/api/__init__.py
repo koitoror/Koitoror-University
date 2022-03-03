@@ -26,8 +26,8 @@ class MyJWTAuthentication(JWTAuthentication):  #pragma: no cover
         if not user.is_active:
             raise AuthenticationFailed(_('User is inactive'), code='user_inactive')
 
-        if not user.password[-10:] == validated_token['hash']:
-            raise AuthenticationFailed(_('User changed password'), code='user_inactive')
+        # if not user.password[-10:] == validated_token['hash']:
+        #     raise AuthenticationFailed(_('User changed password'), code='user_inactive')
 
         return user
 
