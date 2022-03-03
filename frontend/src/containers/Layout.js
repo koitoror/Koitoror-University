@@ -8,7 +8,7 @@ import FooterComponent from '../components/Footer'
 
 
 export default function CustomLayout(props) {
-  console.log('PROPS Layout ----> ', props)
+  // console.log('PROPS Layout ----> ', props)
 
   return (
     <Layout

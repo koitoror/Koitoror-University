@@ -31,13 +31,14 @@ export const getASNTS = token => {
     axios.defaults.headers = {
       "Content-Type": "application/json",
       // "Content-Length": "<calculated when request is sent>",
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       Authorization: `Bearer ${token}`
     };
     axios
       .get(`${uri}/assignments/`)
       .then(res => {
         const assignments = res.data;
+        console.log('ASSIGNMENT ===> ', assignments)
         dispatch(getASNTListSuccess(assignments));
       })
       .catch(err => {
@@ -73,7 +74,7 @@ export const getASNTSDetail = (token, id) => {
     axios.defaults.headers = {
       "Content-Type": "application/json",
       // "Content-Length": "<calculated when request is sent>",
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       Authorization: `Bearer ${token}`
     };
     axios
@@ -115,7 +116,7 @@ export const createASNT = (token, asnt) => {
     axios.defaults.headers = {
       "Content-Type": "application/json",
       // "Content-Length": "<calculated when request is sent>",
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       Authorization: `Bearer ${token}`
     };
     axios

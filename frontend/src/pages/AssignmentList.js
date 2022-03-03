@@ -8,9 +8,10 @@ import { getASNTS as getASNTSAction } from "../redux";
 import Hoc from "../hoc/hoc";
 
 export default function AssignmentList(props) {
+  // console.log('PROPS AssignmentList ------>', props)
 
   const hooksData = useSelector(state => {
-    // console.log('STATE ------>', state)
+    console.log('STATE ------>', state)
     return {
       token: state.auth.token,
       assignments: state.assignments.assignments,
@@ -18,13 +19,14 @@ export default function AssignmentList(props) {
     };
   });
 
-  console.log(hooksData)
+  console.log('ASSIGNMENT LIST HOOKS DATA', hooksData)
 
   const dispatch = useDispatch()
 
   function getASNTS(token) {
     // return () => dispatch(actions.getASNTS(token))
-    return () => dispatch(getASNTSAction(token))
+    // return () => dispatch(getASNTSAction(token))
+    return dispatch(getASNTSAction(token))
   };
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export default function AssignmentList(props) {
 
   return (
     <Hoc>
-      {props.loading ? (
+      {hooksData.loading ? (
         <Skeleton active />
       ) : (
         <div>
@@ -55,7 +57,7 @@ export default function AssignmentList(props) {
           <List
             size="large"
             bordered
-            dataSource={props.assignments}
+            dataSource={hooksData.assignments}
             renderItem={item => renderItem(item)}
           />
         </div>

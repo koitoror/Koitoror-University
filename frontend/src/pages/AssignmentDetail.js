@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Card, Skeleton, message } from "antd";
+import { Card, Skeleton, message } from "antd"
+import { useParams } from "react-router-dom"
+
 import Questions from "./Questions";
 import Choices from "../components/Choices";
 // import { getASNTSDetail as getASNTSDetailAction } from "../redux/actions/assignments";
@@ -13,8 +15,9 @@ const cardStyle = {
   marginBottom: "20px"
 };
 
-export default function AssignmentDetail(props) {
 
+export default function AssignmentDetail(props) {
+  const params = useParams()
 
   const [state, setState] = useState({
     usersAnswers: {}
@@ -32,17 +35,20 @@ export default function AssignmentDetail(props) {
   const dispatch = useDispatch()
 
   function getASNTSDetail(token, id) {
-    return () => dispatch(getASNTSDetailAction(token, id))
+    // return () => dispatch(getASNTSDetailAction(token, id))
+    return dispatch(getASNTSDetailAction(token, id))
   }
 
   function createGradedASNT(token, asnt) {
+    return dispatch(createGradedASNTAction(token, asnt))
     // return () => dispatch(createGradedASNTAction(token, asnt))
-    return () => dispatch(getASNTSDetail(createGradedASNTAction(token, asnt)))
+    // return () => dispatch(getASNTSDetail(createGradedASNTAction(token, asnt)))
   }
 
   useEffect(() => {
     if (hooksData.token !== undefined && hooksData.token !== null) {
-      getASNTSDetail(hooksData.token, hooksData.match.params.id);
+      // getASNTSDetail(hooksData.token, hooksData.match.params.id);
+      getASNTSDetail(hooksData.token, params.id);
     }
 
   }, []);
@@ -62,6 +68,8 @@ export default function AssignmentDetail(props) {
       answers: usersAnswers
     };
     createGradedASNT(hooksData.token, asnt);
+    console.log(asnt)
+
   }
 
   const { currentAssignment } = hooksData;
