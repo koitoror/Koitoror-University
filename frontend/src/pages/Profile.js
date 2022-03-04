@@ -27,7 +27,8 @@ export default function Profile(props) {
     const dispatch = useDispatch()
     
     function _getGradedASNTS(username, token) {
-      return () => dispatch(getGradedASNTS(username, token))
+      // return () => dispatch(getGradedASNTS(username, token))
+      return dispatch(getGradedASNTS(username, token))
     };
     
     useEffect(() => {

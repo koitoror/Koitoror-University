@@ -72,7 +72,7 @@ export const createGradedASNT = (token, asnt) => {
       dispatch(createASNTStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
-      "Content-Length": "<calculated when request is sent>",
+      // "Content-Length": "<calculated when request is sent>",
       // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       Authorization: `Bearer ${token}`
     };

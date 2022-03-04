@@ -1,5 +1,5 @@
-from rest_framework import viewsets
-# from rest_framework import viewsets, permissions
+# from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.response import Response
 from rest_framework.status import (
@@ -14,7 +14,7 @@ from .serializers import AssignmentSerializer, GradedAssignmentSerializer
 class AssignmentViewSet(viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
     queryset = Assignment.objects.all()
-    # permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny, )
 
     def create(self, request):
         serializer = AssignmentSerializer(data=request.data)
@@ -27,7 +27,7 @@ class AssignmentViewSet(viewsets.ModelViewSet):
 
 class GradedAssignmentListView(ListAPIView):
     serializer_class = GradedAssignmentSerializer
-    # permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny, )
 
     def get_queryset(self):
         queryset = GradedAssignment.objects.all()
@@ -40,6 +40,7 @@ class GradedAssignmentListView(ListAPIView):
 class GradedAssignmentCreateView(CreateAPIView):
     serializer_class = GradedAssignmentSerializer
     queryset = GradedAssignment.objects.all()
+    permission_classes = (permissions.AllowAny, )
 
     def post(self, request):
         print(request.data)

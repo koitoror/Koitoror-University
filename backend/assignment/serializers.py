@@ -32,21 +32,24 @@ class AssignmentSerializer(serializers.ModelSerializer):
 
     def create(self, request):
         data = request.data
-        print(data)
+        print('CREATE ASSIGNMENT DATA', data)
 
         assignment = Assignment()
         teacher = User.objects.get(username=data['teacher'])
-        # teacher = User.objects.get(email=data['teacher'])
         assignment.teacher = teacher
         assignment.title = data['title']
         assignment.save()
+        # print('CREATE ASSIGNMENT assignment  =====>  ', assignment)
 
         order = 1
         for q in data['questions']:
+            # print('CREATE ASSIGNMENT Q', q)
             newQ = Question()
             newQ.question = q['title']
             newQ.order = order
             newQ.save()
+            # print('CREATE ASSIGNMENT newQ-1', newQ)
+            # print('CREATE ASSIGNMENT Q', q)
 
             for c in q['choices']:
                 newC = Choice()
@@ -56,9 +59,12 @@ class AssignmentSerializer(serializers.ModelSerializer):
 
             newQ.answer = Choice.objects.get(title=q['answer'])
             newQ.assignment = assignment
+            # print('CREATE ASSIGNMENT newQ-2', newQ)
             newQ.save()
             order += 1
+        # print('CREATE ASSIGNMENT assignment  =====>  ', assignment)
         return assignment
+
 
 
 class GradedAssignmentSerializer(serializers.ModelSerializer):

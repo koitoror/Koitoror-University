@@ -42,12 +42,14 @@ export default function AssignmentCreate(props) {
 
     const dispatch = useDispatch()
 
-    function getASNTSDetail(token, id) {
-      return () => dispatch(getASNTSDetailAction(token, id))
-    }
+    // function getASNTSDetail(token, id) {
+    // //   return () => dispatch(getASNTSDetailAction(token, id))
+    //   return dispatch(getASNTSDetailAction(token, id))
+    // }
 
     function createASNT(token, asnt) {
-      return () => dispatch(createASNTAction(token, asnt))
+    //   return () => dispatch(createASNTAction(token, asnt))
+      return dispatch(createASNTAction(token, asnt))
     }
 
 

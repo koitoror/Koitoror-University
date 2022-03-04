@@ -122,6 +122,7 @@ export const createASNT = (token, asnt) => {
     axios
       .post(`${uri}/assignments/`, asnt)
       .then(res => {
+        console.log('CREATED ASSIGNMENT RESPONSE   =====>  ', res)
         dispatch(createASNTSuccess());
       })
       .catch(err => {
