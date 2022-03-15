@@ -37,3 +37,6 @@ USER app
 # USER root
 
 CMD ["release.sh"]
+
+# ENTRYPOINT ["sh", "./app.sh"]
+# ENTRYPOINT ["sh", "./data.sh"]

@@ -89,17 +89,23 @@ export const checkAuthTimeout = (expirationTime) => {
 // };
 
 
-export const authLogin = formProps => dispatch => {
+// export const authLogin = formProps => dispatch => {
+export const authLogin = formProps => async dispatch => {
 
   dispatch(authStart());
   dispatch(actionSignIn()) //###
 
-  return api.auth.login(formProps)
-    .then((response) => {
-      console.log('RESPONSE  ----->  ', response)
+  // return api.auth.login(formProps)
+  // .then((response) => {
+
+  //     console.log('RESPONSE LOGIN ----->  ', response)
+  try {
+      const response = await api.auth.login(formProps)
+    
+
 
       const profile = jwt_decode(response.data.access)
-      console.log('PROFILE  ------> ', profile)
+      console.log('PROFILE LOGIN ------> ', profile)
 
       const user = {
         token: response.data.access,
@@ -120,11 +126,14 @@ export const authLogin = formProps => dispatch => {
       dispatch(checkAuthTimeout(3600));
 
 
-    })
-    .catch((err) => {
+  } catch (err) {
+    // .catch((err) => {
       dispatch(authFail(err));
 
-      dispatch(actionSignInError(err))  //###
+      dispatch(actionSignInError(err))  //###    
+  }
+        // })
+
 
       // if (error.response && error.response.data) {
       //   const { responseErrorsObject } = getResponseErrors(error.response.data);
@@ -133,7 +142,7 @@ export const authLogin = formProps => dispatch => {
       //   dispatch(failureMessage({ errors: 'Something went wrong when signing you in.' }));
       // }
 
-    });
+    // });
 };
 
 export const authSignup = formProps => dispatch => {

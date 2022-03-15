@@ -7,6 +7,7 @@ import React from 'react';
 import { Form, Input, Button, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
+// const FormItem = Form.Item;
 const QuestionForm = props => {
   return (
     <Form.List name='questions'>
@@ -69,7 +70,6 @@ const QuestionForm = props => {
 
 export default QuestionForm;
 
-// const FormItem = Form.Item;
 
 // let id = 0;
 

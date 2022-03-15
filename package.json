@@ -6,7 +6,7 @@
     "npm": "8.3.2"
   },
   "private": true,
-  "proxy": "https://koitoror-university.herokuapp.com",
+  "proxy": "https://koitororuniversity.ml",
   "dependencies": {
     "antd": "^4.18.5",
     "axios": ">=0.25.0",
@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "redux-devtools-extension": "^2.13.9"
   }
 }

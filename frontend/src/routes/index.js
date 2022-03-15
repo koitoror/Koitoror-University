@@ -51,7 +51,8 @@ const BaseRouter = () => {
         // AUTH ROUTES
         <Route exact path="/signup/" element={<Signup />} />
         {/* <Route exact path="/auth/" element={<Auth/>} /> */}
-        <Route exact path="/login/" element={<Auth />} />
+        {/* <Route exact path="/login/" element={<Auth />} /> */}
+        <Route exact path="/login" element={<Auth />} />
         <Route exact path="/login1/" element={<Login />} />
         {/* <Route exact path="/login2/" element={<LoginPage />} /> */}
         <Route exact path='/reset_password' element={<ResetPassword />} />
