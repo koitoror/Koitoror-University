@@ -16,6 +16,8 @@ urlpatterns = [
 
     path('assignments/', include('assignment.assignments.urls')),
     path('graded-assignments/', include('assignment.graded_assignments.urls')),
+    
+    path('', include('django_prometheus.urls')),
 
     # re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 ]
