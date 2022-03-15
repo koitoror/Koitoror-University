@@ -49,3 +49,29 @@ npm run build
  
  ( PROD: docker compose -f docker-compose.yml up -d )
 ```
+
+## Prometheus 
+### How to Run?
+using Docker Compose. 
+
+```
+docker-compose -f docker-compose.yml up
+```
+### Description
+
+A setup to run 6 Docker containers 
+
+    1 React frontend app
+    2 POSTGRESQL db services
+    2 Django services and  - port 8000/1.
+    1 Prometheus service - port 9090.
+
+The Prometheus container is used to monitor the 2 Django apps mainly.
+
+For Prometheus:
+
+Go to ```status``` then ```targets``` to find the Django services.
+
+## AWS Deployment
+
+- Read the [requirements](aws/README.md) guide HERE and run AWS deploy.

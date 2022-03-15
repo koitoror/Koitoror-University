@@ -9,3 +9,6 @@ scrape_configs:
       - targets:
         - frontend-react:5000
         - backend-django-app:8000
+        - backend-django-app2:8001
+        - db:8001
+        - db2:8001

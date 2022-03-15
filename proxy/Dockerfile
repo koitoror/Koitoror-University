@@ -1,7 +1,10 @@
 FROM nginxinc/nginx-unprivileged:1-alpine
-LABEL maintainer="londonappdeveloper.com"
+# FROM nginx:1.19.0-alpine
+
+LABEL maintainer="koitororuniversity.ml"
 
 COPY ./default.conf.tpl /etc/nginx/default.conf.tpl
+# COPY ./default.conf /etc/nginx/conf.d/default.conf
 COPY ./uwsgi_params /etc/nginx/uwsgi_params
 COPY ./run.sh /run.sh
 
@@ -22,3 +25,5 @@ VOLUME /vol/static
 USER nginx
 
 CMD ["/run.sh"]
+# CMD ["run.sh"]
+# ENTRYPOINT ["sh", "./run.sh"]
