@@ -66,14 +66,14 @@ const BaseRouter = () => {
           {/* <Route exact path="/profile" element={<Profile />} /> */}
 
           // ASSIGNMENTS ROUTES
-          <Route exact path="/" element={<AssignmentList />} />
+          <Route path="/" element={<Home />} />
+          <Route exact path="/assignment" element={<AssignmentList />} />
           <Route exact path="/create/" element={<AssignmentCreate />} />
           <Route exact path="/assignments/:id" element={<AssignmentDetail />} />
 
           // PROTECTED ROUTES
           {/* <Route exact path='/home2' element={<PrivateRoute element={HomePage}/>}/> */}
           {/* <Route element={<PrivateWrapper />}> */}
-          <Route path="/home1" element={<Home />} />
           {/* <Route path="/home2" element={<HomePage />} /> */}
           {/* </Route>  */}
 
